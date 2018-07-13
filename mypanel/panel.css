@@ -1,0 +1,203 @@
+html {background-color: #fff;}
+body {min-height: 100vh; max-height: 100%; font-family: -apple-system, SanFranciscoDisplay, Roboto, sans-serif; overflow: hidden;}
+
+body.grey {background-color: #f2f2f2;}
+
+.uip-WindowSpace {
+	width: 100%;
+	max-width: 768px;
+}
+
+.uip-TopPart {
+	background-color: #313636;
+	background-color: #f2f2f2;
+	color: #444;
+	height: 44px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.uip-TopPart > .uip-ScreenName {
+	font-size: 18px;
+	font-weight: 700;
+	letter-spacing: -.02em;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.uip-Background {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+}
+
+.uip-AppsList {
+	height: 100vw;
+	max-height: 736px;
+	box-sizing: border-box;
+/*	padding-top: 32px;
+	padding-top: calc((100vw - (64px * 4)) / 5);*/
+}
+
+.uip-AppsRow {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	padding-top: calc((100vw - (64px * 4)) / 5);
+}
+
+.uip-AppShortcut {
+	position: relative;
+	width: 64px;
+	padding-bottom: 36px;
+}
+
+.uip-AppShortcut.disabled {opacity: 0.5;}
+
+.uip-AppIcon {
+	background-image: url('/./res/ui/no-photo-lighter.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-color: #fff;
+	width: 64px;
+	height: 64px;
+	border-radius: 6pt;
+	border-radius: 8px;
+}
+
+.uip-AppName {
+	font-size: 13px;
+	letter-spacing: -.02em;
+	padding: 2px 0;
+	line-height: 16px;
+	max-height: 28px;
+	text-align: center;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #fff;
+	position: absolute;
+	width: 24vw;
+	left: calc(50% - 12vw);
+	top: 64px;
+}
+
+.PageHeader {
+	padding: 32px 16px 16px 16px;
+	background-color: #fff;
+}
+
+.KV-Table {
+	margin-top: 16px;
+	background-color: #fff;
+	border-bottom: 1px solid var(--grey-bg);
+}
+
+.KV-Step {
+	display: flex;
+	justify-content: space-between;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: -.02em;
+	border-top: 1px solid var(--grey-bg);
+}
+
+.KV-Step > .KV-Row {
+	padding: 8px;
+	color: #333;
+	line-height: 1.2;
+	font-size: 17px;
+}
+
+.KV-Row:first-child {
+	color: #a5a5a5;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.KV-Row:nth-child(2) {
+	padding-left: 0;
+	white-space: nowrap;
+}
+
+a .KV-Step .KV-Row:only-child {
+	box-sizing: border-box;
+	padding-right: 24px;
+	flex: 1;
+	color: #333;
+	white-space: nowrap;
+	position: relative;
+	background-image: url('/./res/ui/shadowed-arrow-right.png');
+	background-size: 7px 13px;
+	background-repeat: no-repeat;
+	background-position: calc(100% - 8px) center;
+	transition: 200ms background linear;
+}
+
+a:hover .KV-Step .KV-Row:only-child {
+	background-color: #e1e1e1;
+}
+
+@media screen and (min-width: 414px) {
+	.uip-WindowSpace {margin: 0 auto;}
+
+
+	.uip-AppShortcut {padding-bottom: 32px;}
+	.uip-AppName {
+		letter-spacing: -.002em;
+		width: calc(414px / 4);
+		left: calc(50% - (414px / 8));
+		line-height: 16px;
+		max-height: 32px;
+		padding: 6px 0;
+	}
+}
+
+.uip-Sidebars {
+	width: 100%;
+	max-width: 414px;
+}
+
+@media screen and (min-width: 768px) {
+	
+	.uip-WindowSpace {
+		width: 100%;
+		max-width: 100%;
+	}
+
+
+	.uip-Background {
+		background-image: radial-gradient(circle farthest-corner at 50% 100%, #212121, #28333f) !important;
+		background-color: #28333f;
+	}
+
+	.uip-AppsList {
+		height: auto;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+	.uip-AppsRow {
+		flex: 1;
+		justify-content: space-around;
+		min-width: 50vw;
+		padding-top: 0;
+	}
+
+	.uip-Sidebars {
+		background-color: #f2f2f2;
+		border-right: 1px solid var(--grey-bg);
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.uip-AppsRow {
+		flex: 1;
+		justify-content: space-around;
+		min-width: 33vw;
+	}
+}

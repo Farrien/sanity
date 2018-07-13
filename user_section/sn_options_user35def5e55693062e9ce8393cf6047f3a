@@ -1,0 +1,6 @@
+{
+	"root":true,
+	"view_options":{
+		"hide_completed_quests":true
+	}
+}

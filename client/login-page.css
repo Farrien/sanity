@@ -1,0 +1,93 @@
+.LoginSingle {
+	background-image: url('../res/ui/pexels-photo-886465.jpeg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 100vh;
+	width: 100%;
+	position: relative;
+}
+
+.LoginSingle ._wrapper {
+	background: rgba(0,0,0,0.5);
+	padding: 16pt 8pt;
+	box-sizing: border-box;
+	height: 100%;
+	min-height: 100vh;
+}
+
+.LoginForm {
+	background: rgba(255,255,255,0.95);
+	width: 100%;
+	box-sizing: border-box;
+	padding: 16pt 24pt;
+	margin: 0 auto;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.24), 0 16px 32px rgba(0,0,0,0.16);
+}
+
+.LoginForm ._formIcon {
+	padding: 16pt;
+}
+
+.LoginForm ._formIcon img {
+	display: block;
+	width: 100%;
+}
+
+.LoginForm form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+}
+
+.LoginForm form button {
+	max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	.LoginSingle {
+		min-height: 100vh;
+		height: 100%;
+	}
+
+	.LoginSingle ._wrapper {
+		background: rgba(0,0,0,0.5);
+		padding: 24px 0;
+		box-sizing: border-box;
+		height: 100%;
+		min-height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.LoginForm {
+		background: rgba(255,255,255,0.95);
+		max-width: 320px;
+		box-sizing: border-box;
+		padding: 24px 40px;
+		margin: 0 auto;
+		box-shadow: 0 4px 24px rgba(0,0,0,0.24), 0 16px 32px rgba(0,0,0,0.16);
+	}
+
+	.LoginForm ._formIcon {
+		padding: 40px;
+	}
+
+	.LoginForm ._formIcon img {
+		display: block;
+		width: 100%;
+	}
+
+	.LoginForm form {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: stretch;
+	}
+
+	.LoginForm form button {
+		max-width: 100%;
+	}
+}
