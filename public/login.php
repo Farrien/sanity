@@ -44,10 +44,10 @@ defined('SN_Start') or die('Access denied.');
 								<input class="xver adaptScreen" type="password" name="authPass" placeholder="Пароль" required />
 							</div>
 							<div class="littleSpace">
-								<label class="toRight">Показать вводимые знаки<input class="" type="checkbox" onchange="UfaEyesInterface.LoginPage.togglePasswordVisibility();"></label>
+								<label class="toRight">Показать вводимые знаки<input class="" type="checkbox" onchange="SN.LoginPage.togglePasswordVisibility();"></label>
 							</div>
 							<div class="littleSpace">
-								<button class="xver adaptScreen" onclick="return UEI.Signin();">Войти</button>
+								<button class="xver adaptScreen" onclick="return SN.LoginPage.Signin();">Войти</button>
 							</div>
 						</form>
 					</div>
@@ -61,7 +61,7 @@ defined('SN_Start') or die('Access denied.');
 								<input class="xver adaptScreen" type="text" placeholder="Имя" name="regName" required />
 							</div>
 							<div class="littleSpace">
-								<button class="xver adaptScreen" onclick="return UEI.Signup();">Зарегистрироваться</button>
+								<button class="xver adaptScreen" onclick="return SN.LoginPage.Signup();">Зарегистрироваться</button>
 							</div>
 						</form>
 					</div>
@@ -70,10 +70,7 @@ defined('SN_Start') or die('Access denied.');
 							<button id="FramesToggleBtn" class="xsimple" onclick="return ToggleFormFrames();">Регистрация</button>
 						</div>
 						<div class="littleSpace">
-							<button id="" class="xsimple" onclick="location.href = '/performer-verification/';">Стать исполнителем</button>
-						</div>
-						<div class="littleSpace">
-							<button id="RestorePassBtn" class="xsimple" onclick="return UEI.RestorePassword();">Восстановить пароль</button>
+							<button id="RestorePassBtn" class="xsimple" onclick="return SN.LoginPage.RestorePassword();">Восстановить пароль</button>
 						</div>
 					</div>
 				</div>

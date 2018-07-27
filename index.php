@@ -25,8 +25,6 @@ include_once './forso.php';
 $globalTime = time();
 $globalMT = microtime(true);
 
-$TemplatesPath = DESIGN_TEMPLATE;
-
 # Simple routing
 $PageTitle = 'Главная';
 if (!empty($_REQUEST['p']) && (isset($_REQUEST['p']) || isset($_REQUEST['page']))) {
@@ -49,9 +47,9 @@ if (isset($_GET['ownp'])) {
 $vc_path = './vc/' . $_REQUEST['p'] . '-vc.php';
 $vc = file_exists($vc_path);
 
-if ($vc) include_once $vc_path;
+if ($vc) require_once $vc_path;
 
-if (!$OwnOrigin) include_once './templates/' . $TemplatesPath . '/top-template.php';
+if (!$OwnOrigin) include_once './templates/' . DESIGN_TEMPLATE . '/' . TPL_PAGE_HEADER;
 
 if (!$SN->GetErrors()) {
 	if (is_file($requestPage)) {
@@ -64,7 +62,7 @@ if (!$SN->GetErrors()) {
 	$SN->PrintErrors();
 }
 
-if (!$OwnOrigin) include_once './templates/' . $TemplatesPath . '/bottom-template.php';
+if (!$OwnOrigin) include_once './templates/' . DESIGN_TEMPLATE . '/' . TPL_PAGE_FOOTER;
 
 $SN->RegisterScriptDuration();
 ?>

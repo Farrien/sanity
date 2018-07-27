@@ -14,7 +14,7 @@ Class SN_Management {
 		global $USER;
 		global $pdo_db;
 		$wn = mb_strtolower($moduleName) . '.php';
-		$path = __DIR__ . '/' . $wn;
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/' . $wn;
 		if (!file_exists($path)) return false;
 		return require_once $path;
 	}
@@ -23,7 +23,7 @@ Class SN_Management {
 		global $USER;
 		global $pdo_db;
 		$wn = mb_strtolower($templateName) . '.php';
-		$path = __DIR__ . '/templates/' . DESIGN_TEMPLATE . '/' . $wn;
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/templates/' . DESIGN_TEMPLATE . '/' . $wn;
 		if (!file_exists($path)) return false;
 		return require_once $path;
 	}
@@ -31,7 +31,7 @@ Class SN_Management {
 	public function helper($helperName) {
 		global $USER;
 		global $pdo_db;
-		$path = __DIR__ . '/server/Helper' . $helperName . '.php';
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/server/Helper' . $helperName . '.php';
 		if (!file_exists($path)) return false;
 		include_once $path;
 	}
@@ -40,7 +40,7 @@ Class SN_Management {
 		global $USER;
 		global $pdo_db;
 		$wn = mb_strtolower($widgetName) . '.php';
-		$path = __DIR__ . '/templates/' . DESIGN_TEMPLATE . '/widgets/' . $wn;
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/templates/' . DESIGN_TEMPLATE . '/widgets/' . $wn;
 		if (!file_exists($path)) return false;
 		require_once $path;
 	}

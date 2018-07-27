@@ -1,6 +1,7 @@
 var sideBar = 0;
 var bottomPopup = 1;
 
+
 mr.Dom(function() {
 	if (mr.Dom('.BottomPopupWindow').Object == null) {
 		Popups.CreateBottomPopup();
@@ -144,101 +145,6 @@ Popups.ShowSearchInBottom = function (id) {
 	mr.Dom('form.Student-Search-Popup input[name="text_query"]').FocusOn();
 }
 
-var ug = {
-	SearchUsersComp : function(qs, explain) {
-		mr.Dom('.studentsListing').ClearSelf();
-		mr.Query('server/control.php', {text_query: qs, operation: 3}, function(response) {
-			if (response == '[]') {
-				if (explain) {
-					var explanation = {els:[{attr:'explanation',inner:[{inner:explain}]}]};
-					mr.Dom('.studentsListing').CreateDOMbyRules(explanation);
-				}
-			} else {
-				var els = {els:[]};
-				var r = JSON.parse(response);
-				for (var k in r) {
-					var namespace = r[k].b,
-						iden = r[k].iden,
-						sg = r[k].e,
-						edu = r[k].c,
-						img_res = 'res/userdata/'+r[k].d;
-					var preparedModel = {
-						attr:{'class':'newStudentRow','onclick':'return Popups.ShowUserInfoInBottom('+iden+');'},
-						inner:[{attr:'c1 studentAvatar',inner:[{tag:'img',attr:{'src':img_res,'width':50,'height':50}}]},{attr:'c2',inner:[{attr:'c2-1',inner:[{inner:namespace}]},{attr:'c2-2',inner : [{inner:sg}]}]}]
-					};
-					els.els.push(preparedModel);
-				};
-				mr.Dom('.studentsListing').CreateDOMbyRules(els);
-			}
-		});
-	}
-};
-ug.SearchUsers = function(a) {
-	var a = a;
-	mr.Dom(a).NewClass('loading');
-	mr.SendForm('server/control.php', '.Student-Search-Popup', function(response) {
-	//	console.log(response);
-		mr.Timers.CreateTimer(0.3, function() {
-			mr.Dom(a).DelClass('loading');
-			if (bottomPopup == 1) Popups.clsBttmPpp();
-			if (response == '[]') {
-				var explanation = {els:[{attr:'explanation',inner:[{inner:'Поиск не дал результатов.\nПопробуйте снова.'}]}]};
-				mr.Dom('.studentsListing').ClearSelf().CreateDOMbyRules(explanation);
-			} else {
-				mr.Dom('.studentsListing').ClearSelf();
-				var els = {els:[]};
-				var r = JSON.parse(response);
-				for (var k in r) {
-					var namespace = r[k].b,
-						iden = r[k].iden,
-						sg = r[k].e,
-						edu = r[k].c,
-						img_res = 'res/userdata/'+r[k].d;
-					var preparedModel = {
-						attr:{'class':'newStudentRow','onclick':'return Popups.ShowUserInfoInBottom('+iden+');'},
-						inner:[{attr:'c1 studentAvatar',inner:[{tag:'img',attr:{'src':img_res,'width':50,'height':50}}]},{attr:'c2',inner:[{attr:'c2-1',inner:[{inner:namespace}]},{attr:'c2-2',inner : [{inner:sg}]}]}]
-					};
-					els.els.push(preparedModel);
-				};
-				mr.Dom('.studentsListing').CreateDOMbyRules(els);
-			}
-		});
-	});
-	return false;
-}
-ug.ShowTopUsers = function(cc, count) {
-	mr.Dom(cc).NewClass('loading');
-	Miracle.Query('get/RatingList/GetTopUsers', {count : count}, function(response) {
-		mr.Timers.CreateTimer(0.3, function() {
-			mr.Dom(cc).DelClass('loading');
-			var r = JSON.parse(response);
-			if (response == '[]' || r.result == false) {
-				var explanation = {els:[{attr:'explanation',inner:[{inner:'Список еще видимо не составлен.'}]}]};
-				mr.Dom('.studentsListing').ClearSelf().CreateDOMbyRules(explanation);
-			} else {
-				mr.Dom('.studentsListing').ClearSelf();
-				var els = {els:[]};
-				var data = r.result.data;
-				for (var k in data) {
-					var namespace = data[k].b,
-						iden = data[k].iden,
-						sg = data[k].e,
-						edu = data[k].c,
-						img_res = 'res/userdata/'+data[k].d,
-						numberInTop = String(parseInt(k)+1);
-					var preparedModel = {
-						attr:{'class':'newStudentRow','onclick':'return Popups.ShowUserInfoInBottom('+iden+');'},
-						inner:[{attr:'c1 studentAvatar',inner:[{tag:'img',attr:{'src':img_res,'width':50,'height':50}}]},{attr:'c2',inner:[{attr:'c2-1',inner:[{inner:namespace}]},{attr:'c2-2',inner : [{inner:sg}]}]},{attr:'userNumber',inner:[{inner:numberInTop}]}]
-					};
-					els.els.push(preparedModel);
-				};
-				mr.Dom('.studentsListing').CreateDOMbyRules(els);
-			}
-		});
-	});
-	return false;
-}
-
 mr.CreateDialogWindow = function(name) {
 	if (this.Dom('#Dialog').i()) this.DestroyDialogWindow();
 	var a = {els:[
@@ -274,6 +180,78 @@ mr.ScrollDownChat = function(id) {
 	});
 }
 
-mr.Scroll = function(q) {
-	
+SN.CheckLogin = function(res) {
+	if (res.tagName.toLowerCase() === 'input') {
+		str = res.value;
+	}
+	if (str.length < 10) return;
+	mr.Query('/', {shared_login : str}, function(response) {
+		console.log(response);
+		var r = JSON.parse(response);
+		if (!r.correct) {
+			SN.ShowTooltip('Неверно указан номер.', res);
+			return;
+		}
+		if (r.exist && r.correct) SN.ShowTooltip('Указанный Вами номер телефона уже зарегистрирован.\n<br />Если это были Вы, <a href="../login/?ownp=origin">Войдите</a> сперва на сайт.', res);
+	});
+}
+
+
+SN.ShowTooltip = function(html, elem) {
+	if (elem instanceof Manipulation) {
+		elem = elem.Object;
+	}
+	var br = elem.getBoundingClientRect();
+	var a = {els:[
+		{attr:'SN_Tooltip',inner:[
+			{inner:html}
+		]}
+	]};
+	var TooltipBody = mr.Dom('body').CreateDOMbyRules(a).Object;
+	SN.TooltipIsPresent = true;
+	TooltipBody.style.left = br.left + 'px';
+	if (elem.offsetWidth < 180) {
+		TooltipBody.style.left =	br.left - 90 + elem.offsetWidth / 2 + 'px';
+	}
+	var top = br.top + pageYOffset + elem.offsetHeight;
+	TooltipBody.style.top = top + 'px';
+	var width = br.right - br.left;
+	TooltipBody.style.width = width + 'px';
+	mr.Timers.CreateTimer(3.14, function() {
+		if (SN.TooltipIsPresent) mr.Dom(TooltipBody).RemoveSelf();
+	});
+}
+
+SN.DestroyTooltips = function() {
+	var x = document.querySelectorAll('.UE_Tooltip');
+	for (i = 0; i < x.length; i++) {
+		mr.Dom(x[i]).RemoveSelf();
+	}
+	SN.TooltipIsPresent = false;
+}
+
+sn.PostVoid = function(rel, formID, handler) {
+	let t = event.target;
+	var nrel = '../get/' + rel;
+	mr.SendForm(nrel, formID, function(response) {
+		if (handler && typeof handler === 'function') {
+			handler(JSON.parse(response).result);
+		}
+	});
+	return false;
+}
+
+function timeConverter(UNIX_timestamp){
+	var a = new Date(UNIX_timestamp * 1000);
+//	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+	var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+	var year = a.getFullYear().toString().substr(-2);
+	var month = months[a.getMonth()];
+	var date = a.getDate();
+	var hour = a.getHours();
+	var min = a.getMinutes();
+	if (min.toString().length == 1) min = '0'+min;
+	var sec = a.getSeconds();
+	var time = date + '.' + month + '.' + year + ' ' + hour + ':' + min;
+	return time;
 }

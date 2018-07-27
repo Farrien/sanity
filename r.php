@@ -10,13 +10,15 @@ $SN->ext('database');
 $SN->ext('util');
 
 # Exceptions for non-logged users
-if ($sanityACT == 'CustomRequests/PerformerRequest' || $sanityACT == 'Userdata/Signup' || $sanityACT == 'Userdata/Signin' || $sanityACT == 'Userdata/Restore' || $sanityACT == 'ChatMessages/StartDiscussion' || $sanityACT == 'ChatMessages/GetMessageHistory'  || $sanityACT == 'ChatMessages/SendMessage' ) {
+if ($sanityACT == 'ShopCatalog/GetProducts' || $sanityACT == 'CustomRequests/PerformerRequest' || $sanityACT == 'Userdata/Signup' || $sanityACT == 'Userdata/Signin' || $sanityACT == 'Userdata/Restore' || $sanityACT == 'ChatMessages/StartDiscussion' || $sanityACT == 'ChatMessages/GetMessageHistory'  || $sanityACT == 'ChatMessages/SendMessage' ) {
 	
 } else {
 	$SN->ext('permission-control');
 }
 
-error_reporting(E_ALL);
+if (DEBUG_R_CLASS) {
+	error_reporting(E_ALL);
+}
 
 $SN->helper('Userthings');
 $SN->helper('Data');

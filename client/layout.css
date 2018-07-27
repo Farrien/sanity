@@ -1,0 +1,41 @@
+:root {
+	--siteWidth: 1140px;
+}
+
+.pageWrap {
+	width: 100%;
+	position: relative;
+}
+
+.pageWrap .header {
+	width: 100%;
+	max-width: var(--siteWidth);
+	margin: 0 auto;
+	padding-top: 16px;
+}
+
+.pageWrap .header .header-logo-text {
+	white-space: nowrap;
+	font-size: 40px;
+	font-weight: 500;
+	letter-spacing: .02em;
+	color: #333;
+}
+
+.pageWrap .layout {
+	width: 100%;
+	max-width: var(--siteWidth);
+	margin: 0 auto;
+}
+
+.pageWrap .footer {
+	margin-top: 16px;
+}
+
+.pageWrap .footer .footer-body {
+	width: 100%;
+	max-width: var(--siteWidth);
+	margin: 0 auto;
+	padding: 48px 0;
+}
+

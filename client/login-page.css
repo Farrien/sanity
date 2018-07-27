@@ -1,5 +1,6 @@
 .LoginSingle {
-	background-image: url('../res/ui/pexels-photo-886465.jpeg');
+	background-color: #181b2e;
+	background-image: radial-gradient(circle farthest-corner at 50% 50%, #13141e, #383577);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;

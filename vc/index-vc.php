@@ -4,22 +4,56 @@ defined('SN_Start') or die('Access denied.');
 
 $PageTitle = 'Главная';
 
-$p = &$USER['privileges'];
-if ($p == 0) $linkToCabinet = 'private';
-if ($p == 1) $linkToCabinet = 'panel';
-if ($p == 2) $linkToCabinet = 'admin';
-if ($p == 3) $linkToCabinet = 'inspector';
-if ($p == 4) $linkToCabinet = 'worker';
-unset($p);
+$q = $pdo_db->query('SELECT * FROM subjects ORDER BY parent_subject');
+$Categories = [];
+/*
+while ($f = $q->fetch(2)) {
+	$Categories[] = $f;
+}
+*/
 
-if (empty($USER['id'])) {
-	if (empty($_GET['ownp'])) {
-		RedirectTo('index/?ownp=origin');
-		die('Redirecting...');
+	$q = $pdo_db->query('SELECT * FROM subjects');
+	$raw = array(); 
+	while($item = $q->fetch(2)) {
+		$item['subitems'] = array();
+		$raw[$item['id']] = $item;
 	}
-	include_once dirname(__DIR__) . '/templates/' . DESIGN_TEMPLATE . '/unauth-index.php';
-	die;
-} else {
-	RedirectTo($linkToCabinet . '/');
-	die('Redirecting...');
+
+	$CategoriesTree = array(); 
+	foreach($raw as $id=>&$item) {
+		if(array_key_exists($item['parent_subject'], $raw))
+			$raw[$item['parent_subject']]['subitems'][$id] = &$item;
+		else
+			$CategoriesTree[$id] = &$item;
+	}
+
+
+function ShowCategories( &$tree, $sub = false ) {
+	if ($sub) echo '<div class="shop-sidebar-items hidden">';
+	else echo '<div class="shop-sidebar-items">';
+	
+	foreach($tree AS &$v) {
+		echo '<div class="shop-sidebar-item">';
+		echo '<div class="shop-sidebar-item-name" onclick="sn.shop.SelectCategory(' . $v['id'] . ');">' . $v['subject_name'] . '</div>';
+		if(!empty($v['subitems'])) {
+			echo '<div class="shop-sidebar-plus" onclick="sn.shop.toggleCatVisibility(this);">+</div>';
+			ShowCategories($v['subitems'], true);
+		}
+		echo '</div>';
+	}
+	echo '</div>';
+}
+
+$q = $pdo_db->query('SELECT * FROM shop_goods ORDER BY added_time ASC, product_name ASC LIMIT ' . SHOP_MAX_SHOWN_ITEMS_PAGINATION);
+$Products = [];
+while ($f = $q->fetch(2)) {
+	if ($f['cover_image'] == '') {
+		$f['cover_image'] = 'ui/no-photo-big.png';
+	} else {
+		$f['cover_image'] = 'shop/' . $f['cover_image'];
+	}
+	if ($f['quantity'] < 1) {
+		$f['unavailable'] = true;
+	}
+	$Products[] = $f;
 }
