@@ -16,10 +16,10 @@
 
 	<!-- Basic Styles -->
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/fonts.css">
-	<link rel="stylesheet" type="text/css" media="all" href="//ufaeyes.ru/client/first.css">
+	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/first.css">
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/layout.css">
 	<!-- App Styles -->
-	<link rel="stylesheet" type="text/css" media="all" href="//ufaeyes.ru/client/sn-design.css">
+	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/sn-design.css">
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/application.css">
 
 
@@ -29,7 +29,7 @@
 
 	<!-- JS -->
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/sanity/sanity.0.1.8.js"></script>
-	<script type="text/javascript" src="//ufaeyes.ru/client/sn-design.js"></script>
+	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/sn-design.js"></script>
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/app.js"></script>
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/lil-lib.js"></script>
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/app-shop.js"></script>

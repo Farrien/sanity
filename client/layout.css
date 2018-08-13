@@ -1,5 +1,6 @@
 :root {
 	--siteWidth: 1140px;
+	--logoResLink: url('/res/ui/app-logo.png');
 }
 
 .pageWrap {
@@ -11,7 +12,6 @@
 	width: 100%;
 	max-width: var(--siteWidth);
 	margin: 0 auto;
-	padding-top: 16px;
 }
 
 .pageWrap .header .header-logo-text {
@@ -20,6 +20,50 @@
 	font-weight: 500;
 	letter-spacing: .02em;
 	color: #333;
+}
+
+.pageWrap .header .logo-image {
+	background-image: var(--logoResLink);
+	background-size: cover;
+	background-position: center;
+	width: 128px;
+	height: 128px;
+	float: left;
+}
+
+.pageWrap .header > .header-body {
+	clear: both;
+}
+
+.pageWrap .header > .header-body.compact {
+	height: 44px;
+}
+
+.pageWrap .header > .header-body.compact .logo-image {
+	height: 44px;
+	width: 44px;
+	background-size: 40px 40px;
+}
+
+.pageWrap .header > .header-body.compact > .menu-list {
+	float: right;
+	white-space: nowrap;
+}
+
+.pageWrap .header > .header-body > .menu-list > .san-link > a {
+	white-space: nowrap;
+}
+
+.pageWrap .header > .header-body > .menu-list > .san-link {
+	float: left;
+	margin: 0 8px;
+}
+.pageWrap .header > .header-body > .menu-list > .san-link:last-child {
+	margin-right: 0;
+}
+
+.pageWrap .header > .header-body.compact > .menu-list > .san-link > a {
+	line-height: 44px;
 }
 
 .pageWrap .layout {

@@ -64,7 +64,7 @@ class Rout {
 	
 	private function EnableController() {
 		$s1 = 'server/'.$this->R_CONTROLLER.'Controller.php';
-	if ($this->DEBUG_MODE) echo "Controller's path: {$_SERVER['HTTP_HOST']}/{$s1}", "<br />\n";
+		if ($this->DEBUG_MODE) echo "Controller's path: {$_SERVER['HTTP_HOST']}/{$s1}", "<br />\n";
 		
 		
 		if (is_file($s1)) {
@@ -79,7 +79,7 @@ class Rout {
 			exit();
 		}
 		
-		require $s1;
+		require_once $s1;
 		
 		$c1 = $this->R_CONTROLLER.'Class';
 		global $_REQUEST;

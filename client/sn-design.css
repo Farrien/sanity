@@ -301,7 +301,7 @@ label {
 	text-align: left;
 }
 
-label + label {
+label + :not(.xverCheckboxBody) label {
 	margin-top: 4pt;
 }
 
@@ -449,13 +449,13 @@ label.toRight input[type="checkbox"].switcher {
 	background-color: #f2f2f2;
 	border: 1px solid var(--grey-bg);
 	color: #444;
-	padding-right: 32px;
-	border-radius: 16px;
-	height: 32px;
-	line-height: 32px;
+	padding: 0 40px 0 20px;
+	border-radius: 20px;
+	height: 40px;
+	line-height: 38px;
 	box-sizing: border-box;
-	font-size: 14px;
-	letter-spacing: -0.0144em;
+	font-size: 16px;
+	letter-spacing: -.01em;
 	white-space: nowrap;
 	transition: 100ms linear all;
 	text-overflow: ellipsis;
@@ -561,7 +561,7 @@ label.toRight input[type="checkbox"].switcher {
 	background-color: transparent;
 	box-sizing: border-box;
 	padding: 0 4px 0 16px;
-	border: 1px solid transparent;
+	border: none;
 	border-color: transparent;
 	cursor: pointer;
 	user-select: none;
@@ -594,12 +594,12 @@ label.toRight input[type="checkbox"].switcher {
 }
 
 .DropdownMenu.fromRight .Header:before {
-	right: calc(1px + 7px);
+	right: calc(1px + 5px);
 	left: auto;
 }
 
 .DropdownMenu.fromRight .Header:after {
-	right: 5px;
+	right: 3px;
 	left: auto;
 }
 
@@ -930,8 +930,8 @@ a.dashBorderBox {
 	display: inline-block;
 	height: 32px;
 	line-height: 32px;
-	border: 1px dashed #4f63ff;
-	color: #4f63ff;
+	border: 1px dashed var(--snBlue-color);
+	color: var(--snBlue-color);
 	padding: 0 8px;
 	font-size: 12px;
 }
@@ -948,11 +948,11 @@ a.dashBorderBox {
 }
 
 .xverCheckboxBody label.xver:first-child {
-	border-radius: 20px 0 0 20px;
+	border-radius: 8px 0 0 8px;
 }
 
 .xverCheckboxBody label.xver:last-child {
-	border-radius: 0 20px 20px 0;
+	border-radius: 0 8px 8px 0;
 	border-right-width: 1px;
 }
 
@@ -995,6 +995,7 @@ input[type="checkbox"].xver:after {
 }
 
 label.xver input[type="checkbox"].xver:checked {
+	
 }
 
 label.xver input[type="checkbox"].xver:checked + span.for-xver {
@@ -1009,6 +1010,10 @@ label.xver span.for-xver {
 	height: 100%;
 	line-height: 38px;
 	transition: 100ms linear all;
+	line-height: 40px;
+	border: 1px solid var(--snBlue-color);
+	border-width: 1px 0 1px 1px;
+	color: var(--snBlue-color);
 }
 
 .xverCheckboxBody label.xver {
@@ -1017,22 +1022,16 @@ label.xver span.for-xver {
 }
 
 .xverCheckboxBody label.xver:last-child {
-	border-radius: 0;
-	border-right-width: 0;
-}
-
-label.xver span.for-xver {
-	line-height: 40px;
-	border: 1px solid var(--snBlue-color);
-	border-width: 1px 0 1px 1px;
+/*	border-radius: 0;
+	border-right-width: 0;*/
 }
 
 label.xver:first-child span.for-xver {
-	border-radius: 20px 0 0 20px;
+	border-radius: 8px 0 0 8px;
 }
 
 label.xver:last-child span.for-xver {
-	border-radius: 0 20px 20px 0;
+	border-radius: 0 8px 8px 0;
 	border-right-width: 1px;
 }
 
@@ -1202,10 +1201,37 @@ button.whiteBlue {
 	max-height: 24px;
 }
 
+.Breadcrumbs {
+	
+}
+
 @media screen and (min-width: 768px) {
 
+	.Breadcrumbs {
+		line-height: 14px;
+		height: 17px;
+		font-size: 14px;
+		color: #999;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	.Breadcrumbs > span {
+		width: 7px;
+		height: 13px;
+		display: inline-block;
+		margin: 0 7px;
+		position: relative;
+		bottom: -2px;
+		background-color: transparent;
+		background-image: url('../res/ui/shadowed-arrow-right.png');
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
 	button.whiteBlue:active {background-color: #e1e1e1;}
-	label + label {margin-top: 8px;}
+	
+	label + :not(.xverCheckboxBody) label {margin-top: 8px;}
 	
 	.sn-policy-form {padding: 16px;}
 	.sn-policy-form .sn-icon-place {margin-bottom: 8px;}

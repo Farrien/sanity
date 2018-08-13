@@ -63,7 +63,7 @@ defined('SN_Start') or die('Access denied.');?>
 <script>
 /* Скроллинг меню */
 if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-	var hwH = mr.Dom('.header').Object.offsetHeight;
+	var hwH = mr.Dom('.header').Object.offsetHeight + 16;
 	var rsbmE = mr.Dom('.shop-sidebar-categories');
 	rsbmE.Object.style.width = rsbmE.Object.offsetWidth + 'px';
 	mr.Dom('body').Event.Scroll(function(e) {

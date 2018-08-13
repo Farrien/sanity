@@ -1,5 +1,9 @@
+:root {
+	--brandColor: #4ba4ff;
+}
+
 html {background-color: #fff;}
-body {min-height: 100vh; max-height: 100%; font-family: -apple-system, SanFranciscoDisplay, Roboto, sans-serif; overflow: hidden;}
+body {min-height: 100vh; max-height: 100%; font-family: -apple-system, SanFranciscoDisplay, Roboto, sans-serif; overflow-x: hidden;}
 
 body.grey {background-color: #f2f2f2;}
 
@@ -158,6 +162,165 @@ a:hover .KV-Step .KV-Row:only-child {
 .uip-Sidebars {
 	width: 100%;
 	max-width: 414px;
+}
+
+.ui-mypanel-mapper {
+	height: 44px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 8px;
+}
+
+.ui-mypanel-link {
+	display: inline-block;
+	color: var(--brandColor);
+	background: none;
+	letter-spacing: -.01em;
+	font-size: 18px;
+	font-weight: 400;
+	text-transform: initial;
+	text-decoration: underline;
+	padding: 0 14px 0 0;
+	overflow: visible !important;
+	position: relative;
+}
+.ui-mypanel-link:hover {
+	color: var(--brandColor);
+}
+
+.ui-mypanel-link.flag-back {padding: 0 0 0 14px;}
+
+.ui-mypanel-link:before, .ui-mypanel-link:after {
+	content: '';
+	position: absolute;
+	right: 4px;
+	bottom: 10px;
+	background: var(--brandColor);
+	height: 2px;
+	width: 6px;
+	transform: rotate(50deg);
+}
+.ui-mypanel-link:after {
+	transform: rotate(-50deg);
+	bottom: 6px;
+}
+.ui-mypanel-link.flag-back:before, .ui-mypanel-link.flag-back:after {
+	right: unset;
+	left: 4px;
+	transform: rotate(-50deg);
+}
+.ui-mypanel-link.flag-back:after {transform: rotate(50deg);}
+
+.data-box-field {
+	background-color: #fff;
+	border: 1px solid var(--grey-bg);
+	border-width: 1px 0;
+	position: relative;
+	height: 38px;
+}
+
+.data-box-field + .data-box-field {
+	border-top: none;
+}
+
+.data-box-field .data-box-value {
+	font-size: 100%;
+	font-weight: 400;
+	line-height: 38px;
+	color: #444;
+	white-space: nowrap;
+	padding: 0 16px;
+}
+
+.data-box-field .input-placeholder {
+	pointer-events: none;
+	user-select: none;
+	font-size: 100%;
+	font-weight: 600;
+	position: absolute;
+	left: 16px;
+	top: 0;
+	line-height: 38px;
+	color: #444;
+}
+
+.data-box-field a {
+	display: block;
+	font-size: 100%;
+	font-weight: 400;
+	text-decoration: none;
+	padding: 0 16px;
+	position: relative;
+	line-height: 38px;
+	white-space: nowrap;
+}
+.data-box-field a:before {right: 16px; bottom: calc(50% + 2px);}
+.data-box-field a:after {right: 16px; bottom: calc(50% - 2px);}
+
+.data-box-field input[type="text"] {
+	line-height: 38px;
+	height: 38px;
+	border: none;
+	max-width: 100%;
+	padding: 0 16px 0 40%;
+	font-size: 100%;
+	font-family: 'SanFranciscoText', 'SanFranciscoDisplay';
+	font-weight: 400;
+	letter-spacing: -.02em;
+	text-align: right;
+}
+
+.data-box-field input[type="text"]:focus {background-color: #f2f2f2;}
+
+.data-box-field input[type="checkbox"] {
+	position: absolute;
+	right: 16px;
+	top: calc(50% - 12px);
+}
+
+.field-space {
+	margin-bottom: 32px;
+}
+
+.data-box-explanation {
+	font-size: 87.5%;
+	color: #999;
+	padding: 8px 16px;
+	line-height: 1.25;
+	margin-bottom: 16px;
+}
+.data-box-product-info {
+	padding: 8px 16px;
+	background-color: #fff;
+	border: 1px solid var(--grey-bg);
+	border-width: 1px 0;
+}
+
+.data-box-product-info + .data-box-product-info, .data-box-product-info + .data-box-field, .data-box-field + .data-box-product-info {
+	border-top: none;
+}
+
+.data-box-product-info .product-info-title {
+	font-size: 100%;
+	font-family: SanFranciscoText;
+	letter-spacing: -.01em;
+	line-height: 1.125;
+}
+
+.data-box-product-info .product-info-numbers {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.product-info-cost {
+	background-color: var(--brandColor);
+	color: #fff;
+	font-weight: 700;
+	border-radius: 4px;
+	line-height: 24px;
+	padding: 0 4px;
 }
 
 @media screen and (min-width: 768px) {

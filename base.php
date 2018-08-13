@@ -33,7 +33,7 @@ Class SN_Management {
 		global $pdo_db;
 		$path = $_SERVER['DOCUMENT_ROOT'] . '/server/Helper' . $helperName . '.php';
 		if (!file_exists($path)) return false;
-		include_once $path;
+		require_once $path;
 	}
 	
 	public function widget($widgetName) {

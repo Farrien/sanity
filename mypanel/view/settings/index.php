@@ -1,8 +1,8 @@
-<?
+<?# Destroy the call if this file called directly
+defined('SN_Start') or die('Access denied.');?>
 
+<div class="PageHeader"><?=$PageTitle?></div>
 
-
-?>
 <div>
 <div class="PageHeader">Настройки</div>
 <div class="uip-Sidebars">

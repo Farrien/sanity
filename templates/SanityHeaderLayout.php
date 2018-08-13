@@ -1,8 +1,9 @@
-	<title>Панель управления Sanity</title>
+	<title><?=$PageTitle?> | Панель управления Sanity</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no, user-scalable=no">
 	
 	<!-- Basic Styles -->
+	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/fonts.css">
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/first.css">
 	<!-- App Styles -->
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/sn-design.css">

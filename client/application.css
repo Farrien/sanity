@@ -26,12 +26,22 @@ button.xver:hover {
 }
 
 .pageWrap .layout {
-	margin-top: 0;
+	margin-top: 16px;
 }
 
 .pageWrap .header {
 	border-bottom: 1px solid #d3d3d3;
-	padding-bottom: 16px;
+}
+
+.pageWrap .header > .header-body.compact .logo-image {
+	width: 24px;
+}
+
+.pageWrap .header > .header-body > .menu-list > .san-link {
+	font-weight: 300;
+	font-size: 14px;
+	letter-spacing: -.01em;
+	color: #444;
 }
 
 .pageWrap .footer {
@@ -86,6 +96,7 @@ button.xver:hover {
 .shop-sidebar-block-title {
 	color: #66c0f4;
 	font-size: 11px;
+	line-height: 12px;
 	text-transform: uppercase;
 	margin: 8px 0;
 }
@@ -98,7 +109,7 @@ button.xver:hover {
 }
 
 .shop-sidebar-categories > .shop-sidebar-items > .shop-sidebar-item > .shop-sidebar-item-name {
-	font-weight: 500;
+	color: #111;
 }
 
 .shop-sidebar-items .shop-sidebar-items {
@@ -113,6 +124,7 @@ button.xver:hover {
 
 .shop-sidebar-items .shop-sidebar-item .shop-sidebar-item-name {
 	font-weight: 300;
+	color: #444;
 }
 
 .shop-sidebar-items .shop-sidebar-item .shop-sidebar-plus {
@@ -228,17 +240,16 @@ button.xver:hover {
 .shop-shopping-goods .shop-shipping-goods-item:nth-child(4n) {
 }
 
-.shop-listing-control {height: 72px;}
+.shop-listing-control {height: 57px;}
 .shop-listing-control #shop-listing-control {
 	background-color: #fff;
-	padding: 16px 0;
+	padding: 8px 0;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid #d3d3d3;
-	box-sizing: border-box;
-	height: 72px;
+	height: 40px;
 }
 
 .shop-sort-toggle-wrapper {
