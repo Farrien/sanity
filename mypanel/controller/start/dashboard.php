@@ -1,8 +1,13 @@
 <?
-$q = $pdo_db->query('SELECT IFNULL(app_icon_img, "ui/no-photo-lighter.png") AS app_icon_img, IFNULL(app_tech_path, false) AS fFlag, app_name FROM sanity_prop_apps ORDER BY sort DESC, app_name ASC');
-$AllApps = [];
-while ($f = $q->fetch(2)) {
-	$AllApps[] = $f;
+# Destroy the call if this file called directly
+defined('SN_Start') or die('Access denied.');
+
+class StartDashboardController extends MyPanelController {
+	public function start() {
+		$this->SetTitle('Главная');
+		$this->Model('Start/Dashboard');
+		$this->data['apps'] = $this->model->getApps();
+	}
 }
 
 /*

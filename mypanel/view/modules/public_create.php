@@ -29,6 +29,8 @@ defined('SN_Start') or die('Access denied.');?>
 	</form>
 </div>
 
+<div class="field-space"></div>
+
 <script>
 function local_action_1() {
 	mr.SendForm('?act=core/modules/add', '#modules-main-add', function() {

@@ -19,12 +19,7 @@ defined('SN_Start') or die('Access denied.');?>
 				<div class="product-info-price"><?=$Product['cost']?> ₽</div>
 				<div class="product-info-order">
 					<div class="order-by-phone">
-						<input class="xver" style="width: 200px;" type="text" id="callbackRequestPhone" placeholder="Телефон">
-						<div class="littleSpace">
-							<button class="xver" style="width: 200px;" onclick="sn.shop.CreateCallbackRequest(<?=$productID?>);">Заказать обратный звонок</button>
-						</div>
-						<div class="l_amp">— или —</div>
-						<div class="l_ph"><?=SHOP_CONTACT_PHONE?></div>
+						<button class="xver" style="width: 200px;" onclick="addToBasket(<?=$productID?>);">Добавить в корзину</button>
 					</div>
 				</div>
 			</div>
@@ -92,3 +87,14 @@ defined('SN_Start') or die('Access denied.');?>
 	</div>
 	<?}?>
 </div>
+
+<script>
+function addToBasket(product_id) {
+	let t = event.target;
+	mr.Dom(t).SetTxt('Добавлено');
+	sn.shop.addToOrder(product_id);
+	mr.Timers.CreateTimer(1.0, function() {
+		mr.Dom(t).SetTxt('Добавить в корзину');
+	});
+}
+</script>

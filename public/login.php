@@ -1,11 +1,9 @@
-<?
-# Destroy the call if this file called directly
-defined('SN_Start') or die('Access denied.');
-?>
+<?# Destroy the call if this file called directly
+defined('SN_Start') or die('Access denied.');?>
 <!DOCTYPE html>
 <html lang="<?=SITE_LANG?>">
 <head>
-	<?include STANDARD_HEADER_LAYER?>
+	<?include_once TEMPLATES_DIR . DESIGN_TEMPLATE . 'page_parts/head.tpl'?>
 
 	<script type="text/javascript">
 		var _cLocation = 'login';
@@ -27,12 +25,14 @@ defined('SN_Start') or die('Access denied.');
 
 		<div class="LoginSingle">
 			<div class="_wrapper">
+				<div class="back-button-block">
+					<a href="/" class="handle-parent">на главную</a>
+				</div>
 				<div class="LoginForm">
-					<div>
-						<a href="/"><div class="tempLogo"></div></a>
+					<div class="logo-position">
+						<div class="logo-image"></div>
 					</div>
 					<div class="_formIcon">
-						<img src="../res/ui/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman-999.png" alt="UfaEyes">
 					</div>
 					<div id="FrameLoginForm">
 						<form id="AuthForm" method="POST">
@@ -47,7 +47,7 @@ defined('SN_Start') or die('Access denied.');
 								<label class="toRight">Показать вводимые знаки<input class="" type="checkbox" onchange="SN.LoginPage.togglePasswordVisibility();"></label>
 							</div>
 							<div class="littleSpace">
-								<button class="xver adaptScreen" onclick="return SN.LoginPage.Signin();">Войти</button>
+								<button class="xver adaptScreen" style="width: 100%;" onclick="return SN.LoginPage.Signin();">Войти</button>
 							</div>
 						</form>
 					</div>
@@ -61,7 +61,7 @@ defined('SN_Start') or die('Access denied.');
 								<input class="xver adaptScreen" type="text" placeholder="Имя" name="regName" required />
 							</div>
 							<div class="littleSpace">
-								<button class="xver adaptScreen" onclick="return SN.LoginPage.Signup();">Зарегистрироваться</button>
+								<button class="xver adaptScreen" style="width: 100%;" onclick="return SN.LoginPage.Signup();">Зарегистрироваться</button>
 							</div>
 						</form>
 					</div>

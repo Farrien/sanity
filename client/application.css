@@ -21,8 +21,22 @@ button.xver {
 	margin: 0;
 }
 
+button.xver:disabled {
+	background-image: none;
+	background-color: #e3e3e3;
+	color: #999;
+}
+
 button.xver:hover {
 	box-shadow: 0 8px 16px rgba(0,0,0,.08), 0 4px 24px rgba(0,0,0,.08);
+}
+
+.logo-image {
+	background-image: var(--logoResLink);
+	background-size: cover;
+	background-position: center;
+	width: 36px;
+	height: 36px;
 }
 
 .pageWrap .layout {
@@ -527,6 +541,46 @@ button.xver:hover {
 	justify-content: flex-end;
 	background-color: #f4f4f4;
 	padding: 8px 16px;
+}
+
+.shop-basket {
+	
+}
+
+.shop-basket-list {
+	padding-top: 8px;
+}
+
+.shop-basket-list .shop-basket-item {
+	display: flex;
+	justify-content: flex-start;
+	font-size: 100%;
+	padding: 8px 0;
+	line-height: 100%;
+}
+
+.shop-basket-list .shop-basket-item .product-title {
+	flex: 3;
+}
+
+.shop-basket-list .shop-basket-item .product-single-cost, .shop-basket-list .shop-basket-item .product-total-cost, .shop-basket-list .shop-basket-item .product-count {
+	flex: 1;
+	padding-right: 16px;
+}
+
+.shop-basket-control-buttons {
+	background-color: #f4f4f4;
+	padding: 16px;
+	margin-top: 8px;
+	display: flex;
+	justify-content: space-between;
+}
+
+button.xver.white {
+	background-image: none;
+	background-color: #fff;
+	border: 1px solid #d3d3d3;
+	color: #444;
 }
 
 @media screen and (min-width: 768px) {

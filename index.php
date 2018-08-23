@@ -32,8 +32,6 @@ $OwnOrigin = false;
 if (isset($_GET['ownp'])) {
 	$OwnOrigin = true;
 	define('OwnOrigin', true);
-} else {
-	define('OwnOrigin', false);
 }
 
 # Checking VC-part file
@@ -42,7 +40,7 @@ $vc_path = CONTROLLER_DIR . $CONTROLLER_FILE_NAME;
 if (file_exists($vc_path)) require_once $vc_path;
 
 if ($SN->GetErrors()) $PageTitle = 'Ошибка';
-if (!OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_HEADER;
+if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_HEADER;
 
 if ($SN->GetErrors()) {
 	$SN->PrintErrors();
@@ -54,6 +52,6 @@ if ($SN->GetErrors()) {
 	}
 }
 
-if (!OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_FOOTER;
+if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_FOOTER;
 
 $SN->RegisterScriptDuration();

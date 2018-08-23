@@ -1,7 +1,5 @@
-<?
-# Destroy the call if this file called directly
-defined('SN_Start') or die('Access denied.');
-?>
+<?# Destroy the call if this file called directly
+defined('SN_Start') or die('Access denied.');?>
 <!DOCTYPE html>
 <html lang="<?=SITE_LANG?>">
 <head>
@@ -30,8 +28,7 @@ defined('SN_Start') or die('Access denied.');
 					} else {
 						if ($name[0] != 1) echo $html;
 					}
-				}
-				?>
+				}?>
 				</div>
 			</div>
 			

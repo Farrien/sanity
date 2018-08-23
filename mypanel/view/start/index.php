@@ -1,7 +1,10 @@
+<?# Prevent access from direct calls
+defined('SN_Start') or header('HTTP/1.1 404 Not Found');?>
+
 <div class="uip-Background" style="background-image: url('/./res/ui/rIH860Hxws4.jpg');">
 	<div class="uip-AppsList">
 		<?$i = 0;
-		foreach ($AllApps as $v) {
+		foreach ($apps as $v) {
 		if ($i == 0) echo '<div class="uip-AppsRow">';?>
 		<a href="?act=<?=$v['fFlag']?>">
 			<div class="uip-AppShortcut <?if(!$v['fFlag']) echo 'disabled';?>">
