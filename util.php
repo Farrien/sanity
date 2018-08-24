@@ -1,4 +1,4 @@
-<?
+<?php
 # Stop if this is direct call
 defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 

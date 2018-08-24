@@ -2,15 +2,28 @@
 const SN_Start = true;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/base.php';
-$SN = new SN_Management;
+use SN\Management;
+$SN = new Management;
 
 $SN->ext('settings');
 $SN->ext('database');
 $SN->ext('util');
+$SN->ext('permission-control');
+
+$SN->ext('server/load/controller');
+$SN->ext('server/load/model');
+
+$lang = $SN->ext('support/lang/ru-RU');
+
+# Checking access permissions
+$SN->ext('server/load/permission');
+Permission::init($USER['privileges']);
+$SN->ext('web/access');
 
 $ScreenTitle = APP_NAME;
 
 if (empty($_REQUEST['act'])) $_REQUEST['act'] = 'start/dashboard';
+
 
 # $RequestOptions ---> $RO
 $RO = [];
@@ -20,58 +33,6 @@ $RO['SECTION'] = ucfirst($a1[0]);
 $RO['SCRIPT']= ucfirst($a1[1]);
 $RO['ACTION']= $a1[2] ?: 'start';
 
-Abstract class MyPanelController {
-	protected $data = [];
-	protected $request = [];
-	public $pageTitle = 'Default title';
-	protected $output = 'index';
-	protected $model;
-	function __construct($req) {
-		$this->request = $req;
-	}
-	
-	public function data() {
-		return $this->data;
-	}
-	
-	public function view() {
-		return $this->output;
-	}
-	
-	protected function Model($model_name) {
-		$modelSOURCE	= __DIR__ . '/model/' . $model_name . '.php';
-		if (file_exists($modelSOURCE)) {
-			$a = explode('/', $model_name);
-			require_once $modelSOURCE;
-			$m = $a[0] . $a[1] . 'Model';
-			$this->model = new $m();
-		}
-	}
-	
-	protected function SetTitle($str = 'Missing title') {
-		$this->pageTitle = $str;
-	}
-	
-	protected function SetOutput($view_name) {
-		$this->output = $view_name;
-	}
-	
-	protected function Relocate($target) {
-		header('Location: ../mypanel/?act=' . $target);
-	}
-	
-	public function getTitle() {
-		return $this->pageTitle;
-	}
-}
-
-Abstract class MyPanelModel {
-	protected $pdo;
-	function __construct() {
-		global $pdo_db;
-		$this->pdo = $pdo_db;
-	}
-}
 
 $conSOURCE_		= __DIR__ . '/controller/' . $RO['SECTION'] . '/' . $RO['SCRIPT'] . '.php';
 

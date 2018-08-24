@@ -1,16 +1,18 @@
-<?
+<?php
 $sanityACT = $_REQUEST['r'];
 
 const SN_Start = true;
 
 require_once './base.php';
-$SN = new SN_Management;
+use SN\Management;
+
+$SN = new Management;
 $SN->ext('settings');
 $SN->ext('database');
 $SN->ext('util');
 
 # Exceptions for non-logged users
-if ($sanityACT == 'ShopCatalog/GetProducts' || $sanityACT == 'CustomRequests/PerformerRequest' || $sanityACT == 'Userdata/Signup' || $sanityACT == 'Userdata/Signin' || $sanityACT == 'Userdata/Restore' || $sanityACT == 'ChatMessages/StartDiscussion' || $sanityACT == 'ChatMessages/GetMessageHistory'  || $sanityACT == 'ChatMessages/SendMessage' ) {
+if ($sanityACT == 'ShopBasket/ConvertProducts' || $sanityACT == 'ShopCatalog/GetProducts' || $sanityACT == 'CustomRequests/PerformerRequest' || $sanityACT == 'Userdata/Signup' || $sanityACT == 'Userdata/Signin' || $sanityACT == 'Userdata/Restore' || $sanityACT == 'ChatMessages/StartDiscussion' || $sanityACT == 'ChatMessages/GetMessageHistory'  || $sanityACT == 'ChatMessages/SendMessage' ) {
 	
 } else {
 	$SN->ext('permission-control');

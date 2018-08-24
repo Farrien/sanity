@@ -1,7 +1,10 @@
-<?
-defined('SN_Start') or header('Location: //' . $_SERVER['HTTP_HOST'] . '/');
+<?php
+# Prevent access from direct calls
+defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
-Class SN_Management {
+namespace SN;
+
+class Management {
 	private $errorsCount;
 	private $errorExplanations;
 	
@@ -13,9 +16,14 @@ Class SN_Management {
 	public function ext($moduleName) {
 		global $USER;
 		global $pdo_db;
+		global $SN;
 		$wn = mb_strtolower($moduleName) . '.php';
 		$path = $_SERVER['DOCUMENT_ROOT'] . '/' . $wn;
-		if (!file_exists($path)) return false;
+		if (!file_exists($path)) {
+			$this->AddErr();
+			$this->ExplaneLastError(__CLASS__ . ': Extension "' . basename($moduleName) . '" can not be found.');
+			return false;
+		}
 		return require_once $path;
 	}
 	
@@ -31,7 +39,7 @@ Class SN_Management {
 	public function helper($helperName) {
 		global $USER;
 		global $pdo_db;
-		$path = $_SERVER['DOCUMENT_ROOT'] . '/server/Helper' . $helperName . '.php';
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/support/' . $helperName . '.php';
 		if (!file_exists($path)) return false;
 		require_once $path;
 	}
@@ -63,7 +71,7 @@ Class SN_Management {
 		global $ScriptStartTime;
 		$mt = microtime(true);
 		$d = $mt - $ScriptStartTime;
-		if ($d >= 0.75) {
+		if ($d >= 0.75 && $pdo_db) {
 			$q = $pdo_db->prepare('INSERT INTO app_script_length_stats (s_request, s_mt, i_request_time) VALUES(?, ?, ?)');
 			$q->execute(array(
 				$_SERVER['PHP_SELF'] . ' -- ' . $_SERVER['QUERY_STRING'],
@@ -83,7 +91,7 @@ Class SN_Management {
 		$this->errorsCount += 1;
 	}
 	
-	public function ExplaneLastError($str = 'Имя ошибки не указана') {
+	public function ExplainLastError($str = 'Undeclared explanation.') {
 		$this->errorExplanations[$this->errorsCount] = $str;
 	}
 	

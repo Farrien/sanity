@@ -1,13 +1,12 @@
-<?
+<?php
 # Stop if this is direct call
-defined('SN_Start') or header('Location: //' . $_SERVER['HTTP_HOST'] . '/');
+defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
-if (is_null($pdo_db)) die(__FILE__ . ' can not run.');
 session_start();
 global $perm;
 if (CheckAccount()) {
-	$USER['id'] = $_SESSION['id'];
-	$USER['privileges'] = $_SESSION['privileges'];
+	$USER['id'] = (int) $_SESSION['id'];
+	$USER['privileges'] = (int) $_SESSION['privileges'];
 	$perm = true;
 } else {
 	if (isset($_POST['sign_in']) && $_POST['sign_in'] == 1) {
