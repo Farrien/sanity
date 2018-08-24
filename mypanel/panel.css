@@ -290,6 +290,11 @@ a:hover .KV-Step .KV-Row:only-child {
 	line-height: 1.25;
 	margin-bottom: 16px;
 }
+.data-box-explanation.lane {
+	padding-left: 0;
+	padding-right: 0;
+}
+
 .data-box-product-info {
 	padding: 8px 16px;
 	background-color: #fff;

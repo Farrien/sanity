@@ -221,24 +221,24 @@ function makeShort($str, $l = 100) {
 // FROM https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
 function time_elapsed($time, $full = false) {
 	date_default_timezone_set('UTC');
-    $now = new DateTime;
-    $ago = new DateTime($time);
-    $diff = $now->diff($ago);
+	$now = new DateTime;
+	$ago = new DateTime($time);
+	$diff = $now->diff($ago);
 
-    $diff->w = floor($diff->d / 7);
-    $diff->d -= $diff->w * 7;
+	$diff->w = floor($diff->d / 7);
+	$diff->d -= $diff->w * 7;
 
-    $string = array(
-        'y' => ' год',
-        'm' => ' месяц',
-        'w' => ' недел',
-        'd' => ' дн',
-        'h' => ' час',
-        'i' => ' минут',
-        's' => ' секунд',
-    );
-    foreach ($string as $k => &$v) {
-        if ($diff->$k) {
+	$string = array(
+		'y' => ' год',
+		'm' => ' месяц',
+		'w' => ' недел',
+		'd' => ' дн',
+		'h' => ' час',
+		'i' => ' минут',
+		's' => ' секунд',
+	);
+	foreach ($string as $k => &$v) {
+		if ($diff->$k) {
 			$d = $diff->$k;
 			if ($k == 's' || $k == 'i') {
 				if ($d == 1): $v = $v . 'у';
@@ -273,13 +273,13 @@ function time_elapsed($time, $full = false) {
 			} else {
 				$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
 			}
-        } else {
-            unset($string[$k]);
-        }
-    }
+		} else {
+			unset($string[$k]);
+		}
+	}
 
-    if (!$full) $string = array_slice($string, 0, 1);
-    return $string ? implode(', ', $string) . ' назад' : 'только что';
+	if (!$full) $string = array_slice($string, 0, 1);
+	return $string ? implode(', ', $string) . ' назад' : 'только что';
 }
 
 function makeINI(array $a, array $parent = array()) {
@@ -293,10 +293,39 @@ function makeINI(array $a, array $parent = array()) {
 			$out .= '[' . join('.', $sec) . ']' . PHP_EOL;
 			//recursively traverse deeper
 			$out .= makeINI($v, $sec);
-        } else {
+		} else {
 			//plain key->value case
 			$out .= "$k=$v" . PHP_EOL;
 		}
 	}
 	return $out;
+}
+
+function rus2translit($string) {
+	$converter = array(
+		'а' => 'a',   'б' => 'b',   'в' => 'v',
+		'г' => 'g',   'д' => 'd',   'е' => 'e',
+		'ё' => 'e',   'ж' => 'zh',  'з' => 'z',
+		'и' => 'i',   'й' => 'y',   'к' => 'k',
+		'л' => 'l',   'м' => 'm',   'н' => 'n',
+		'о' => 'o',   'п' => 'p',   'р' => 'r',
+		'с' => 's',   'т' => 't',   'у' => 'u',
+		'ф' => 'f',   'х' => 'h',   'ц' => 'c',
+		'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
+		'ь' => '\'',  'ы' => 'y',   'ъ' => '\'',
+		'э' => 'e',   'ю' => 'yu',  'я' => 'ya',
+		
+		'А' => 'A',   'Б' => 'B',   'В' => 'V',
+		'Г' => 'G',   'Д' => 'D',   'Е' => 'E',
+		'Ё' => 'E',   'Ж' => 'Zh',  'З' => 'Z',
+		'И' => 'I',   'Й' => 'Y',   'К' => 'K',
+		'Л' => 'L',   'М' => 'M',   'Н' => 'N',
+		'О' => 'O',   'П' => 'P',   'Р' => 'R',
+		'С' => 'S',   'Т' => 'T',   'У' => 'U',
+		'Ф' => 'F',   'Х' => 'H',   'Ц' => 'C',
+		'Ч' => 'Ch',  'Ш' => 'Sh',  'Щ' => 'Sch',
+		'Ь' => '\'',  'Ы' => 'Y',   'Ъ' => '\'',
+		'Э' => 'E',   'Ю' => 'Yu',  'Я' => 'Ya',
+	);
+	return strtr($string, $converter);
 }

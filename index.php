@@ -49,30 +49,37 @@ if (isset($_GET['ownp'])) {
 	define('OwnOrigin', true);
 }
 
-if ($SN->GetErrors()) $SN->PrintErrors(); $PageTitle = $lang['error'];
-
 # Checking VC-part file
 $CONTROLLER_FILE_NAME = $ROUT_P . '-vc.php';
 $vc_path = CONTROLLER_DIR . $CONTROLLER_FILE_NAME;
-if (file_exists($vc_path)) require_once $vc_path;
-
-header('Content-Type: text/html; charset=utf-8');
-
-if ($SN->GetErrors()) $PageTitle = $lang['error'];
-
-if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_HEADER;
-
-if ($SN->GetErrors()) {
-	$SN->PrintErrors();
-} else {
-	if (is_file($requestPage)) {
-		require_once $requestPage;
-	} else {
-		include VIEW_DIR . 'standard/404.php';
-	}
+if (file_exists($vc_path)) {
+	$vc_result = require_once $vc_path;
 }
 
-if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_FOOTER;
 
-$SN->RegisterScriptDuration();
+if (is_array($vc_result)) {
+	header('Content-Type: application/json; charset=utf-8');
+	
+	echo json_encode($vc_result);
+	exit;
+} else {
+	header('Content-Type: text/html; charset=utf-8');
+
+	if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_HEADER;
+
+	if ($SN->GetErrors()) {
+		$PageTitle = $lang['error'];
+		$SN->PrintErrors();
+	} else {
+		if (is_file($requestPage)) {
+			require_once $requestPage;
+		} else {
+			include VIEW_DIR . 'standard/404.php';
+		}
+	}
+
+	if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_FOOTER;
+
+	$SN->RegisterScriptDuration();
+}
 #echo (microtime(true) - $ScriptStartTime);

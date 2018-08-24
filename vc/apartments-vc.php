@@ -2,7 +2,11 @@
 # Prevent access from direct calls
 defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
+$PageTitle = 'Arthas';
+
 $wtf = DB::getPDO()->query('SELECT * FROM people LIMIT 1')->fetch(2);
+
+return $wtf;
 
 /*
 $data = [];

@@ -139,9 +139,8 @@ input[type="text"], input[type="number"], input[type="password"] {
 	max-width: 240px;
 	height: 32px;
 	user-select: text;
-	
 }
-
+	
 input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus {
 	/*border-bottom-width: 3px;*/
 }
@@ -440,9 +439,9 @@ body.popbox-opened-state {
 
 .PageHeader {
 	font-size: 24px;
-    font-weight: 700;
-    text-align: left;
-    word-wrap: break-word;
+	font-weight: 700;
+	text-align: left;
+	word-wrap: break-word;
 	min-height: 24px;
 	line-height: 24px;
 }
@@ -553,7 +552,7 @@ input.xver.asSearch {
 	background-position: calc(0% + 12px) center;
 	background-size: 16px;
 	background-repeat: no-repeat;
-    border: 1px solid var(--grey-bg);
+	border: 1px solid var(--grey-bg);
 	padding-left: 36px;
 }
 
@@ -574,6 +573,17 @@ input.xver.asSearch:disabled::-webkit-input-placeholder {
 }
 input.xver.asSearch:disabled::placeholder {
 	color: var(--grey-bg);
+}
+
+input[type="text"].xver.normal {
+	border-radius: 4px;
+}
+
+input[type="text"].xver.lane {
+	width: 100%;
+	max-width: 100%;
+	margin: unset;
+	padding: 0 8px;
 }
 
 label.xver {
@@ -680,8 +690,8 @@ button.xver.outline.loading:before { border-color: #4f63ff;}
 button.xver.outline.loading:after { background-color: #4f63ff; }
 
 @keyframes OrbitaLoop {
-    from { transform: rotate(180deg)  translateX(10px); }
-    to   { transform: rotate(540deg)  translateX(10px); }
+	from { transform: rotate(180deg)  translateX(10px); }
+	to   { transform: rotate(540deg)  translateX(10px); }
 }
 
 button.xsimple {
@@ -1041,10 +1051,10 @@ button.xsimple:disabled:hover {color: #999;}
 		padding-top: 16px;
 	}
 	.littleSpace {
-	    padding: 8px 0 0 !important;
+		padding: 8px 0 0 !important;
 	}
 	.littleSpace.double {
-	    padding: 16px 0 0 !important;
+		padding: 16px 0 0 !important;
 	}
 	.sidePads {
 		box-sizing: border-box;
