@@ -4,6 +4,8 @@ defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
 namespace SN;
 
+use Exception;
+
 class Management {
 	private $errorsCount;
 	private $errorExplanations;
@@ -37,11 +39,26 @@ class Management {
 	}
 	
 	public function helper($helperName) {
-		global $USER;
-		global $pdo_db;
-		$path = $_SERVER['DOCUMENT_ROOT'] . '/support/' . $helperName . '.php';
-		if (!file_exists($path)) return false;
-		require_once $path;
+		try {
+			$file = $this->FindHelper($helperName);
+			if ($file) {
+				global $USER;
+				global $pdo_db;
+				require_once $file;
+			}
+		} catch (Exception $e) {
+			$this->AddErr();
+			$this->ExplainLastError($e->getMessage());
+		}
+	}
+	
+	private function FindHelper($SupportName) {
+		$SupportName = mb_strtolower($SupportName);
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/support/' . $SupportName . '.php';
+		if (!file_exists($path)) {
+			throw new Exception(__CLASS__ . ' — Support file "' . basename($SupportName) . '" not found.');
+		}
+		return $path;
 	}
 	
 	public function widget($widgetName) {
@@ -100,6 +117,8 @@ class Management {
 	}
 	
 	public function PrintErrors() {
+		global $lang;
+		echo $lang['#SN_Errors_TotalCount'] . ' — ' . $this->errorsCount, "\n\r<br>";
 		foreach ($this->errorExplanations as $k=>$v) {
 			echo $v, "\n\r<br>";
 		}

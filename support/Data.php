@@ -1,7 +1,9 @@
-<?
-namespace Helper\Database;
+<?php
+# Prevent access from direct calls
+defined('SN_Start') or header('HTTP/1.1 404 Not Found');
+namespace Helper;
 
-class SN_Database {
+class Database {
 	
 	static public function rowExists($table, $conditions) {
 		global $pdo_db;

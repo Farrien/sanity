@@ -6,6 +6,7 @@
 .pageWrap {
 	width: 100%;
 	position: relative;
+	font-size: 16px;
 }
 
 .pageWrap .header {
@@ -83,3 +84,163 @@
 	padding: 48px 0;
 }
 
+.FloatingSidebar {
+}
+
+
+.SectionBlock {
+	box-sizing: border-box;
+	width: 100%;
+	background: #f8f8f8;
+	border-radius: 4px;
+	padding: 16px;
+	margin-bottom: 16px;
+}
+
+.SectionBlock .SectionHeader {
+	font-size: 150%;
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: 16px;
+}
+
+.SectionBlock .SectionContent {
+	
+}
+
+.SectionBlock .Section-ui-option-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	line-height: 1;
+	font-size: 100%;
+	padding: 0 0 16px;
+	margin: 0 0 16px;
+	box-sizing: border-box;
+	max-width: 100vw;
+	border-bottom: 1px solid var(--grey-bg);
+}
+
+.SectionBlock .Section-ui-option-row:last-child {
+	border-bottom: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.SectionBlock .Section-ui-option-row .__title {
+	padding-right: 8px;
+	box-sizing: border-box;
+	text-align: left;
+	color: #a5a5a5;
+}
+
+.SectionBlock .Section-ui-option-row .__val {
+	text-align: right;
+}
+
+.SectionBlock .Section-ui-option-row .__val label {
+	margin-bottom: 4px;
+}
+
+.SectionBlock .Section-ui-option-row .__val form input {
+	margin: unset;
+}
+
+.ui-paper-options-hidden-spoiler {}
+
+.ui-paper-options-hidden-spoiler {
+	max-height: 0;
+	overflow: hidden;
+	transition: 100ms linear all;
+}
+
+.ui-paper-options-hidden-spoiler.visible {
+	max-height: 1000px;
+}
+
+.ui-paper-options-hidden-spoiler.visible#for-changePass {
+	max-height: 300px;
+}
+
+ul.ui-par-pages-last-pages-ul {
+	
+	font-family: SanFranciscoText;
+}
+
+ul.ui-par-pages-last-pages-ul li {
+}
+
+ul.ui-par-pages-last-pages-ul li a {
+	padding: 8px 0;
+	display: block;
+	line-height: 1;
+	font-size: 100%;
+	font-weight: 400;
+	letter-spacing: -.016em;
+}
+
+.sn-policy-form {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.sn-policy-form .sn-icon-place {margin-bottom: 8pt;}
+
+.sn-policy-form .sn-policy-form-innerText {
+	font-family: SanFranciscoText;
+	font-size: 100%;
+	font-weight: 400;
+	line-height: 1.125;
+	letter-spacing: -.02em;
+	color: #444;
+}
+
+.sn-policy-form .sn-policy-actions {margin-top: 8px;}
+
+/* 
+|
+| MEDIA SCREEN 768
+|
+*/
+@media screen and (min-width: 768px) {
+.SectionBlock .Section-ui-option-row {
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
+.SectionBlock .Section-ui-option-row .__title {
+	width: auto;
+	padding-right: 8px;
+	text-align: left;
+	flex: 3;
+}
+
+.SectionBlock .Section-ui-option-row .__val {
+	text-align: left;
+	flex: 7;
+}
+
+ul.ui-par-pages-last-pages-ul li {}
+ul.ui-par-pages-last-pages-ul li a {
+	transition: 100ms background linear;
+	border-left: 1px solid #ccc;
+	padding: 5px 16px;
+	font-size: 87.5%;
+}
+ul.ui-par-pages-last-pages-ul li a:hover {background-color: #f8f8f8;}
+
+.FloatingSidebar.fix_scroll {
+	position: fixed;
+	top: 16px;
+}
+
+.sn-policy-form .sn-policy-form-innerText {
+	font-size: 75%;
+	line-height: 135%;
+}
+
+}

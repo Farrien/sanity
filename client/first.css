@@ -11,6 +11,8 @@ html {
 	-webkit-text-size-adjust: 100%;
 	cursor: default !important;
 	background-color: #f2f2f2;
+	line-height: 100%;
+	font-size: 16px;
 }
 
 body {
@@ -710,6 +712,22 @@ button.xsimple {
 	padding: 0;
 	height: auto;
 	cursor: pointer;
+}
+
+button.xsimple.inline {
+	display: inline-block;
+	margin: unset;
+	text-align: inherit;
+	width: auto;
+	max-width: fit-content;
+}
+
+button.xsimple.inline.inText {
+	font-size: inherit;
+	font-weight: 400;
+	text-transform: inherit;
+	letter-spacing: inherit;
+	color: var(--snBlue-color);
 }
 
 button.xver.light {

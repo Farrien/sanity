@@ -28,9 +28,10 @@
 	<link rel="shortcut icon" href="//<?=$_SERVER['HTTP_HOST']?>/res/ui/favicon.ico" type="image/x-icon">
 
 	<!-- JS -->
-	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/sanity/sanity.0.1.8.js"></script>
+	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/sanity/sanity.0.1.9.js"></script>
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/sn-design.js"></script>
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/app.js"></script>
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/lil-lib.js"></script>
+	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/app-ui.js"></script>
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/app-shop.js"></script>
 	<script type="text/javascript" src="//<?=$_SERVER['HTTP_HOST']?>/client/app-shop-catalog.js"></script>

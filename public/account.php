@@ -1,10 +1,9 @@
-<?# Destroy the call if this file called directly
-defined('SN_Start') or die('Access denied.');
+<?
 if (empty($USER['id'])) die('Access denied.');
 
 $id = $USER['id'];
-use Helper\Users\Users;
-use Helper\Userthings\Userthings;
+use Helper\Users;
+use Helper\Userthings;
 $uName = Users::getName($id);
 $uLogin = Users::getLogin($id);
 $tcons = Userthings::GetPasswordChangeTime($id);
@@ -12,13 +11,11 @@ $passwordChangeString = $tcons ? 'Обновлен ' . time_elapsed('@' . $tcons
 
 $userSettings = Users::getPrivateSettings($USER['id']);
 ?>
-<script type="text/javascript" src="../client/settings-page.js"></script>
-
 <div class="primary">
 	<div class="clearFix">
 		<div class="floatContainer">
 			<div class="fl bs20 sidePads">
-				<div class="sn-policy-form">
+				<div class="SectionBlock sn-policy-form">
 					<div class="sn-icon-place">
 						<div class="sn-icons medium-well i-cloud"></div>
 					</div>
@@ -31,67 +28,55 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 				</div>
 			</div>
 			<div class="fl bs60 sidePads">
-				<div class="WhitePaper noShadow">
-					<div class="PageHeader">Аккаунт</div>
-					<div class="PageInner ui-account-settings-paper">
-						<div class="ui-paper-sets-row">
-							<div class="ui-paper-set-name">
-								ID
-							</div>
-							<div class="ui-paper-set-options">
+				<div class="SectionBlock">
+					<div class="SectionHeader">Аккаунт</div>
+					<div class="SectionContent">
+						<div class="Section-ui-option-row">
+							<div class="__title">ID</div>
+							<div class="__val">
 								<div class="ui-set-constant">
 									<?=$USER['id']?>
 								</div>
 							</div>
 						</div>
-						<div class="ui-paper-sets-row">
-							<div class="ui-paper-set-name">
-								Логин
-							</div>
-							<div class="ui-paper-set-options">
+						<div class="Section-ui-option-row">
+							<div class="__title">Логин</div>
+							<div class="__val">
 								<div class="ui-set-constant">
 									<?=$uLogin?>
 								</div>
 							</div>
 						</div>
-						<div class="ui-paper-sets-row">
-							<div class="ui-paper-set-name">
-								Имя
-							</div>
-							<div class="ui-paper-set-options">
+						<div class="Section-ui-option-row">
+							<div class="__title">Имя</div>
+							<div class="__val">
 								<div class="ui-set-constant">
 									<?=$uName?>
 								</div>
 							</div>
 						</div>
-						<div class="ui-paper-sets-row">
-							<div class="ui-paper-set-name">
-								Фамилия
-							</div>
-							<div class="ui-paper-set-options">
+						<div class="Section-ui-option-row">
+							<div class="__title">Фамилия</div>
+							<div class="__val">
 								<div class="ui-set-constant">
 									Не указана
 								</div>
 							</div>
 						</div>
-						<div class="ui-paper-sets-row">
-							<div class="ui-paper-set-name">
-								Электронная почта
-							</div>
-							<div class="ui-paper-set-options">
+						<div class="Section-ui-option-row">
+							<div class="__title">Электронная почта</div>
+							<div class="__val">
 								<div class="ui-set-constant">
 									Не указана
 								</div>
 							</div>
 						</div>
-						<div class="ui-paper-sets-row">
-							<div class="ui-paper-set-name">
-								Пароль
-							</div>
-							<div class="ui-paper-set-options">
+						<div class="Section-ui-option-row">
+							<div class="__title">Пароль</div>
+							<div class="__val">
 								<div>
 									<?=$passwordChangeString?><br>
-									<button class="xsimple ui-link-in-paper inline" onclick="UEI.ChangePassword();">Изменить</button>
+									<button class="xsimple ui-link-in-paper inline inText" onclick="SN.UI.ChangePassword();">Изменить</button>
 								</div>
 								<div id="for-changePass" class="ui-paper-options-hidden-spoiler">
 									<form id="ChangePasswordForm" method="POST">
@@ -107,7 +92,7 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 									</form>
 									<div>
 										<div class="littleSpace">
-											<button class="xver" onclick="UEI.SendChangePasswordForm();">Изменить пароль</button>
+											<button class="xver" onclick="SN.UI.SendChangePasswordForm();">Изменить пароль</button>
 										</div>
 									</div>
 								</div>
@@ -115,12 +100,12 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 						</div>
 					</div>
 				</div>
-				<div class="WhitePaper noShadow">
-					<div class="PageHeader">Общее</div>
-					<div class="PageInner ui-account-settings-paper">
-						<div class="ui-paper-sets-row">
-							<div class="ui-paper-set-name">Настройки отображения</div>
-							<div class="ui-paper-set-options">
+				<div class="SectionBlock">
+					<div class="SectionHeader">Общее</div>
+					<div class="SectionContent">
+						<div class="Section-ui-option-row">
+							<div class="__title">Настройки отображения</div>
+							<div class="__val">
 								<div class="ui-set-constant">
 									<label>
 										<input disabled class="switcher" type="checkbox" <?if ($userSettings['view_options']['hide_completed_quests']) echo 'checked'?>>Скрывать блок завершенных заданий
@@ -133,12 +118,12 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 						</div>
 					</div>
 				</div>
-				<div class="WhitePaper noShadow">
-					<div class="PageHeader">Приватность</div>
-					<div class="PageInner ui-account-settings-paper">
-						<div class="ui-paper-sets-row">
-							<div class="ui-paper-set-name">Скрывать мой телефон от менеджера</div>
-							<div class="ui-paper-set-options">
+				<div class="SectionBlock">
+					<div class="SectionHeader">Приватность</div>
+					<div class="SectionContent">
+						<div class="Section-ui-option-row">
+							<div class="__title">Скрывать мой телефон</div>
+							<div class="__val">
 								<div class="ui-set-constant">
 									<input disabled class="switcher" type="checkbox">
 								</div>
@@ -148,7 +133,7 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 				</div>
 			</div>
 			<div class="fl bs20 sidePads">
-				<div id="right_sidebar_menu" class="ui-par-pages-last-pages-block desktop_only">
+				<div id="right_sidebar_menu" class="FloatingSidebar desktop_only">
 					<ul class="v-menu ui-par-pages-last-pages-ul">
 						<li class="ui-par-pages-last-pages-block-element"><a href="" onclick="return false;">Аккаунт</a></li>
 						<li class="ui-par-pages-last-pages-block-element"><a href="" onclick="return false;">Общее</a></li>
@@ -157,22 +142,37 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 				</div>
 			</div>
 		</div>
-		<emi style="display: none;">
-			<?var_dump(Users::getPrivateSettings($USER['id']))?>
-		</emi>
 	</div>
 </div>
 <script>
-	/* Скроллинг меню */
-	if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-		var hwH = mr.Dom('.HeaderWrap').Object.offsetHeight;
-		var rsbmE = mr.Dom('#right_sidebar_menu');
-		mr.Dom('body').Event.Scroll(function(e) {
-			if (mr.Dom(window).CurrentScroll() > hwH) {
-				rsbmE.NewClass('floatingMenu');
-			} else {
-				rsbmE.DelClass('floatingMenu');
-			}
-		});
+SN.UI.ChangePassword = function() {
+	var t = mr.Dom(event.target);
+	var d = mr.Dom('#for-changePass');
+	if (!d.OwnsClass('visible')) {
+		t.SetTxt('Отмена');
+		d.NewClass('visible');
+	} else {
+		t.SetTxt('Изменить');
+		d.DelClass('visible');
 	}
+}
+
+SN.UI.SendChangePasswordForm = function() {
+	var t = mr.Dom(event.target);
+	mr.SendForm('../get/Userdata/ChangePassword', '#ChangePasswordForm', function(response) {
+		console.log(response);
+		var r = JSON.parse(response).result;
+		if (r) {
+			t.SetTxt('Пароль изменен');
+			mr.Timers.CreateTimer(1.314, function() {
+				t.SetTxt('Изменить пароль');
+				mr.Dom('#for-changePass').GetParent().GetChild('button.xsimple').SetTxt('Изменить');
+				mr.Dom('#for-changePass').GetParent().GetChild('#for-changePass').DelClass('visible');
+			});
+		} else {
+			t.SetTxt('Что-то пошло не так');
+			mr.Timers.CreateTimer(1.314, function() {t.SetTxt('Изменить пароль')});
+		}
+	});
+}
 </script>

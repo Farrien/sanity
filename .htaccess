@@ -1,10 +1,8 @@
 AddDefaultCharset utf-8
 
 <FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
- Require all denied
-## For apache 2.2 and older, replace "Require all denied" with these two lines :
-# Order deny,allow
-# Deny from all
+	Order deny,allow
+	Deny from all
 </FilesMatch>
 
 RewriteEngine On

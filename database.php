@@ -44,4 +44,8 @@ class DB {
 	static public function getPDO() {
 		return self::$db;
 	}
+	
+	static public function PDO() {
+		return self::$db;
+	}
 }

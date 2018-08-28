@@ -3,6 +3,7 @@
 defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
 return [
-	'error' => 'Ошибка'
-
+	'error' => 'Ошибка',
+	
+	'#SN_Errors_TotalCount' => 'Количество ошибок'
 ];

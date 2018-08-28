@@ -7,6 +7,12 @@ body {min-height: 100vh; max-height: 100%; font-family: -apple-system, SanFranci
 
 body.grey {background-color: #f2f2f2;}
 
+.PanelPageWrap {
+	
+}
+	
+.PanelSidebarNav {display: none;}
+
 .uip-WindowSpace {
 	width: 100%;
 	max-width: 768px;
@@ -34,7 +40,7 @@ body.grey {background-color: #f2f2f2;}
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	height: 100vh;
+	height: calc(100vh - 44px);
 }
 
 .uip-AppsList {
@@ -90,7 +96,6 @@ body.grey {background-color: #f2f2f2;}
 
 .PageHeader {
 	padding: 32px 16px 16px 16px;
-	background-color: #fff;
 }
 
 .KV-Table {
@@ -280,7 +285,8 @@ a:hover .KV-Step .KV-Row:only-child {
 }
 
 .field-space {
-	margin-bottom: 32px;
+	height: 32px;
+	background-color: #fff;
 }
 
 .data-box-explanation {
@@ -328,7 +334,36 @@ a:hover .KV-Step .KV-Row:only-child {
 	padding: 0 4px;
 }
 
+.data-box-textareas {
+	padding: 0 16px;
+}
+.data-box-textareas .data-box-key {
+	margin: 8px 0;
+	line-height: 150%;
+	font-size: 100%;
+}
+.data-box-textareas .data-box-textbox {
+	margin: 8px 0;
+}
+
 @media screen and (min-width: 768px) {
+	
+	.data-box-textareas {
+		box-sizing: border-box;
+		padding: 8px;
+		width: 100%;
+		display: flex;
+		
+	}
+	.data-box-textareas .data-box-key {
+		margin: 0 8px;
+		flex: 2;
+		padding: 4px 0;
+	}
+	.data-box-textareas .data-box-textbox {
+		margin: 0 8px;
+		flex: 3;
+	}
 	
 	.uip-WindowSpace {
 		width: 100%;
@@ -363,6 +398,79 @@ a:hover .KV-Step .KV-Row:only-child {
 }
 
 @media screen and (min-width: 992px) {
+	
+	.PanelPageWrap {
+		display: flex;
+		flex-direction: row;
+		height: 100vh;
+		max-height: 100%;
+	}
+	
+	.PanelSidebarNav {
+		display: block;
+		background-color: #313636;
+		color: #fff;
+		width: 224px;
+	}
+	
+	.LogoSpace {
+		padding: 16px 0;
+	}
+	
+	.SanityLogo {
+		background-image: url('/res/ui/app-logo.png');
+		background-size: cover;
+		background-position: center;
+		
+		width: 64px;
+		height: 64px;
+		margin: 0 auto;
+	}
+	
+	.SanityVersion {
+		font-size: 87.5%;
+		line-height: 18px;
+		text-align: center;
+	}
+	
+	.uip-TopPart {display: none;}
+	
+	.PageContent {
+		background-color: #f8f8f8;
+		display: flex;
+		padding: 16px;
+		box-sizing: border-box;
+		height: 100vh;
+	}
+	
+	.PageContent .ContentLayout {
+		width: 100%;
+		max-width: 720px;
+	}
+	
+	.PageContent .ContentLayout .PageHeader {
+		padding-top: 16px;
+	}
+	
+	.PageContent .ContentLayout .WhiteBlock {
+		background-color: #fff;
+		border-radius: 4px;
+		box-shadow: 0 2px 8px rgba(65,90,120,0.12);
+	}
+	
+	.PageContent .ContentLayout .WhiteBlock + .PageHeader, .PageContent .ContentLayout .WhiteBlock + .WhiteBlock {
+		margin-top: 16px;
+	}
+	
+	.PageContent .ContentLayout .WhiteBlock.VerticalSpaces {
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
+	
+	.PageContent .ContentLayout .WhiteBlock.VerticalSpaces .field-space:last-child {
+		display: none;
+	}
+	
 	.uip-AppsRow {
 		flex: 1;
 		justify-content: space-around;

@@ -77,33 +77,6 @@ span.sn-icons {
 	background-image: url('../res/ui/cloud_icon_res.png');
 }
 
-.sn-policy-form {
-	background-color: #fff;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 16pt;
-}
-
-.sn-policy-form .sn-icon-place {
-	margin-bottom: 8pt;
-}
-
-.sn-policy-form .sn-policy-form-innerText {
-	font-family: SanFranciscoText;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -.02em;
-	color: #313636;
-}
-
-.sn-policy-form .sn-policy-actions {
-	margin-top: 8pt;
-}
-
 .DesignElementBox {
 	width: 280px;
 	height: 280px;
@@ -1233,13 +1206,7 @@ button.whiteBlue {
 	
 	label + :not(.xverCheckboxBody) label {margin-top: 8px;}
 	
-	.sn-policy-form {padding: 16px;}
-	.sn-policy-form .sn-icon-place {margin-bottom: 8px;}
-	.sn-policy-form .sn-policy-form-innerText {
-		font-size: 13px;
-		line-height: 16px;
-	}
-	.sn-policy-form .sn-policy-actions {margin-top: 8px;}
+
 	
 	.ContentOverlay {border-radius: 8px;}
 	.ContentOverlay.nicePads {padding: 16px;}
