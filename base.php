@@ -23,7 +23,7 @@ class Management {
 		$path = $_SERVER['DOCUMENT_ROOT'] . '/' . $wn;
 		if (!file_exists($path)) {
 			$this->AddErr();
-			$this->ExplaneLastError(__CLASS__ . ': Extension "' . basename($moduleName) . '" can not be found.');
+			$this->ExplainLastError(__CLASS__ . ': Extension "' . basename($moduleName) . '" can not be found.');
 			return false;
 		}
 		return require_once $path;

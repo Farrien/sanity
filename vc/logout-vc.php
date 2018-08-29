@@ -8,4 +8,4 @@ setcookie("pw", "", time() - 360000, '/');
 unset($_SESSION);
 session_destroy();
 
-RedirectToHome();
+RedirectTo('/');

@@ -198,7 +198,14 @@ function RedirectToHome() {
 }
 
 function RedirectTo($page) {
-	die('<script type="text/javascript">window.location = "http://' . $_SERVER['HTTP_HOST'] . '/' . $page . '";</script>Redirecting...');
+	if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||  isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+		$protocol = 'https://';
+	} else {
+		$protocol = 'http://';
+	}
+	header('HTTP/1.1 301 Moved Permanently');
+	header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . $page);
+	exit;
 }
 
 function makeShort($str, $l = 100) {

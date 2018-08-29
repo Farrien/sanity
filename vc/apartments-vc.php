@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || true) {
 	$backupExpireTime = 3600;
 	
 	$requireSource = false;
-	
+
 	if ($hasBackup) {
 		if (($_SERVER['REQUEST_TIME'] - $backupExpireTime) < filemtime($backupPath)) {
 			$backup = file_get_contents($backupPath);
@@ -31,9 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || true) {
 	if ($requireSource) {
 		$sourceURL = 'http://pb4850.profitbase.ru/export/profitbase_xml/f1f41fb5c65a9d873f7d4c5986f42423';
 		$source = Parser::GetSourceFromURL($sourceURL);
-		$backupFile = fopen($backupPath, 'w');
-		fwrite($backupFile, $source);
-		fclose($backupFile);
+		Parser::SaveContent($source, $backupPath);
 	}
 	
 	$xml = simplexml_load_string($source);
@@ -43,35 +41,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || true) {
 	if ($requestType == 1) {
 		# apartments sort selection
 		$chosenSections = [];
-		if ($_REQUEST['param_sections']) $chosenSections = explode(',', $_REQUEST['param_sections']);
+		
+	/*	if ($_REQUEST['param_sections']) $chosenSections = $_REQUEST['param_sections'];
 		if (is_array($chosenSections) && count($chosenSections) > 0) {
 			$chosenSection = [];
 			foreach ($chosenSections AS $k=>$v) {
 				$chosenSection[$v] = true;
 			}
-		}
+		}*/
+		if ($_REQUEST['param_sections']) $chosenSection = (int) $_REQUEST['param_sections'];
 		
-		$paramFloorsRange = explode(',', $_REQUEST['param_floors_range'][0]);
+		
+	#	$paramFloorsRange = explode(',', $_REQUEST['param_floors_range']);
+		$paramFloorsRange = $_REQUEST['param_floors_range'];
+	#	var_dump($paramFloorsRange);
 		$chosenFloorsMin = (int) $paramFloorsRange[0] ?: 1;
 		$chosenFloorsMax = (int) $paramFloorsRange[1] ?: (int) $xml->offer->house->{'floors-total'};
 		
-		$paramRoomsRange = explode(',', $_REQUEST['param_rooms_range'][0]);
+	#	echo 'Мин этаж ' . $chosenFloorsMin;
+	#	echo 'Макс этаж ' . $chosenFloorsMax;
+		
+	#	$paramRoomsRange = explode(',', $_REQUEST['param_rooms_range']);
+		$paramRoomsRange = $_REQUEST['param_rooms_range'];
 		$chosenRoomsMin = (int) $paramRoomsRange[0] ?: 1;
 		$chosenRoomsMax = (int) $paramRoomsRange[1] ?: $maxRooms;
 		
-		$paramAreaRange = explode(',', $_REQUEST['param_area_range'][0]);
+	#	$paramAreaRange = explode(',', $_REQUEST['param_area_range']);
+		$paramAreaRange = $_REQUEST['param_area_range'];
 		$chosenAreaMin = (int) $paramAreaRange[0] ?: 25;
 		$chosenAreaMax = (int) $paramAreaRange[1] ?: 70;
 		
-		$paramCostRange = explode(',', $_REQUEST['param_cost_range'][0]);
-		$chosenCostMin = (int) $paramCostRange[0] ?: 1000000;
-		$chosenCostMax = (int) $paramCostRange[1] ?: 5000000;
+	#	$paramCostRange = explode(',', $_REQUEST['param_cost_range']);
+		$paramCostRange = $_REQUEST['param_cost_range'];
+		$chosenCostMin = (float) $paramCostRange[0] ?: 1000000;
+		$chosenCostMax = (float) $paramCostRange[1] ?: 5000000;
+		
+		$chosenCostMin *= 1000000;
+		$chosenCostMax *= 1000000;
+		
+	#	print_r($_REQUEST);
 		
 		foreach ($xml->offer as $offer) {
 			$status = (string) $offer->status;
 			if ($status == 'SOLD') continue;
+		#	Using 'explode' because this row is a string value that couldn't be converted to integer. idk why
 			$section = (int) explode(' ', $offer->{'building-section'})[1];
-			if ($chosenSection && !$chosenSection[$section]) continue;
+		#	Old
+		#	if ($chosenSection && !$chosenSection[$section]) continue;
+			if ($chosenSection && $chosenSection != $section) continue;
 			
 			$floor = (int) $offer->{'floor'};
 			if ($floor < $chosenFloorsMin) continue;
@@ -94,10 +111,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || true) {
 				'floor' => $floor,
 				'rooms' => $rooms,
 				'area' => $area,
-				'price' => $price,
+				'price' => number_format($price, 0, '', ' ' ),
 				'number' => (int) $offer->number
 			];
 		}
+	#	$data['count'] = count($data);
 	}
 	/*
 	#$data['floors_count'] = (int) $xml->offer->house->{'floors-total'};

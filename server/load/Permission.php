@@ -2,6 +2,11 @@
 # Prevent access from direct calls
 defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
+#namespace Superior;
+
+#use Closure;
+use Superior\Http\Queries;
+
 class Permission {
 	static private $permission_group;
 	static private $has_permission = false;
@@ -66,7 +71,7 @@ class Permission {
 		#--------------------------------------------------------------------------
 		
 		if (!self::$has_permission && $callback) {
-			$query_vars = self::Query2Array($_SERVER['REQUEST_URI']);
+			$query_vars = Queries::Query2Array($_SERVER['REQUEST_URI']);
 			$imp = $callback($query_vars);
 			if ($imp == false) {
 				header('HTTP/1.0 403 Forbidden');
@@ -111,7 +116,7 @@ class Permission {
 		#--------------------------------------------------------------------------
 		
 		if (!self::$has_permission && $callback) {
-			$query_vars = self::Query2Array($_SERVER['REQUEST_URI']);
+			$query_vars = Queries::Query2Array($_SERVER['REQUEST_URI']);
 			$imp = $callback($query_vars);
 			if ($imp == false) {
 				header('HTTP/1.0 403 Forbidden');
@@ -120,10 +125,11 @@ class Permission {
 		}
 	}
 	
+	/*
 	static private function Query2Array($query_string) {
 		$cleanURI = preg_replace('/^\/([a-zA-Z]+)\/\?/i', '', $query_string);
 		parse_str($cleanURI, $parsed_query);
 		if ($parsed_query['id']) $parsed_query['id'] = (int) $parsed_query['id'];
 		return $parsed_query;
-	}
+	}*/
 }

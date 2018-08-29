@@ -4,9 +4,19 @@ $sanityACT = $_REQUEST['r'];
 const SN_Start = true;
 
 require_once './base.php';
-use SN\Management;
 
+use SN\Management;
 $SN = new Management;
+
+$SN->helper('Userthings');
+$SN->helper('Data');
+$SN->helper('Tasks');
+$SN->helper('Users');
+$SN->helper('Wallet');
+$SN->helper('Parser');
+$SN->helper('JSON');
+$SN->helper('Configurator');
+
 $SN->ext('settings');
 $SN->ext('database');
 $SN->ext('util');
@@ -22,11 +32,6 @@ if (DEBUG_R_CLASS) {
 	error_reporting(E_ALL);
 }
 
-$SN->helper('Userthings');
-$SN->helper('Data');
-$SN->helper('Tasks');
-$SN->helper('Users');
-$SN->helper('Wallet');
 
 require_once './server/model/ModelSource.php';
 
@@ -141,8 +146,8 @@ $Router = new Rout($sanityACT, $pdo_db, false);
 $Result = $Router->Send();
 if ($Result) {
 	print_r(cyrJson(json_encode(array("result"=>$Result))));
-	exit();
+	exit;
 }
 print_r(json_encode(array("result"=>false)));
-exit();
+exit;
 ?>

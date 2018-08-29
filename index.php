@@ -1,4 +1,11 @@
 <?php
+header('Content-Type: application/json;');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true");
+header("Cache-Control: no-cache, no-store, no-transform");
+header("Access-Control-Max-Age: 10");
+header("Access-Control-Allow-Methods: POST, GET");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With");
 if ($_GET['show_errors']) {
 	ini_set('display_errors', '1');
 	error_reporting(E_ALL);
@@ -22,11 +29,18 @@ $SN->helper('Parser');
 $SN->helper('JSON');
 $SN->helper('Configurator');
 
+$SN->ext('server/load/request');
+$SN->ext('server/load/request/constructor');
+$SN->ext('server/load/http/queries');
+$SN->ext('server/load/response');
+
+$request = new Superior\Request;
+$get = $request::Data();
+
 $SN->ext('settings');
 $SN->ext('database');
 $SN->ext('util');
 $SN->ext('permission-control');
-
 
 $lang = $SN->ext('support/lang/ru-RU');
 
@@ -52,7 +66,6 @@ if (!is_file($requestPage)) {
 
 # Checking access permissions
 $SN->ext('server/load/permission');
-Permission::init($USER['privileges']);
 $SN->ext('web/access');
 
 $OwnOrigin = false;
@@ -70,12 +83,6 @@ if (file_exists($vc_path)) {
 
 
 if (is_array($vc_result)) {
-	header('Content-Type: application/json;');
-	header("Access-Control-Allow-Credentials: true");
-	header("Access-Control-Allow-Origin: *");
-	header('Access-Control-Max-Age: 10');
-	header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-	header("Access-Control-Allow-Headers: Origin, X-Requested-With");
 	echo json_encode($vc_result);
 	exit;
 } else {
