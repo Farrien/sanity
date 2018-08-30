@@ -8,16 +8,22 @@
 	<div class="PanelSidebarNav">
 		<div class="LogoSpace">
 			<div class="SanityLogo"></div>
+		</div>
+		<div class="PanelUI-Menu">
+			<div class="">
+				<nav class="PanelUI-Navigation">
+					<a class="selected" href="/mypanel/">Главная</a>
+					<a href="/mypanel/">Статистика</a>
+					<a href="/mypanel/">Настройки</a>
+				</nav>
+			</div>
+		</div>
 			<div class="SanityVersion">
 				ver. <?=PATCH_VER?><br>
 				<?=PATCH_NAME?><br>
 				<?=$_SERVER['HTTP_HOST']?><br>
 				<?=APP_NAME?><br>
 			</div>
-		</div>
-		<div class="MenuList">
-			<a href="/mypanel/">Главная</a>
-		</div>
 	</div>
 	<div class="uip-WindowSpace">
 		<div class="uip-TopPart">

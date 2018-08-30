@@ -469,7 +469,7 @@ label.toRight input[type="checkbox"].switcher {
 	top: calc(50% - 2px);
 }
 
-.SelectForm .select-items div, .selected {
+.SelectForm .select-items div, .SelectForm .select-items div.selected {
 	color: #ffffff;
 	padding: 0 16px;
 	border: 1px solid transparent;

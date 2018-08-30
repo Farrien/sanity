@@ -4,14 +4,30 @@ const SN_Start = true;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/base.php';
 use SN\Management;
 $SN = new Management;
+$SN->helper('Userthings');
+$SN->helper('Data');
+$SN->helper('Tasks');
+$SN->helper('Users');
+$SN->helper('Wallet');
+$SN->helper('Parser');
+$SN->helper('JSON');
+$SN->helper('Configurator');
+
+$SN->ext('server/load/controller');
+$SN->ext('server/load/model');
+$SN->ext('server/load/request');
+$SN->ext('server/load/request/constructor');
+$SN->ext('server/load/http/queries');
+$SN->ext('server/load/response');
+
+$request = new Superior\Request;
+$get = $request::Data();
 
 $SN->ext('settings');
 $SN->ext('database');
 $SN->ext('util');
 $SN->ext('permission-control');
 
-$SN->ext('server/load/controller');
-$SN->ext('server/load/model');
 
 $lang = $SN->ext('support/lang/ru-RU');
 

@@ -2,13 +2,11 @@
 # Prevent access from direct calls
 defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
-#$PageTitle = 'Arthas';
-
 use Helper\Parser;
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' || true) {
+if (true) {
 	$requestType = (int) $_REQUEST['request_type'];
-	if (empty($requestType) || $requestType == '' || $requestType > 10) return [false];
+	if (empty($requestType) || $requestType == '' || $requestType > 10) return [];
 	
 	$backupPath = $_SERVER['DOCUMENT_ROOT'] . '/res/cache/apartments/crm.xml';
 	$hasBackup = file_exists($backupPath);
@@ -115,8 +113,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || true) {
 				'number' => (int) $offer->number
 			];
 		}
-	#	$data['count'] = count($data);
 	}
+	if ($requestType == 2) {
+		if ($_REQUEST['param_number']) $chosenApartment = (int) $_REQUEST['param_number'];
+		if (!$chosenApartment) return [];
+		
+		foreach ($xml->offer as $offer) {
+			$apartment = (int) $offer->number;
+			if ($apartment == $chosenApartment) {
+				$data = [
+					'section' => (int) explode(' ', $offer->{'building-section'})[1],
+					'floor' => (int) $offer->{'floor'},
+					'rooms' => (int) $offer->rooms,
+					'area' => (string) $offer->area->value,
+					'price' => number_format((int) $offer->price->value, 0, '', ' ' ),
+					'number' => $apartment
+				];
+				break;
+			} else {
+				continue;
+			}
+		}
+	}
+	
 	/*
 	#$data['floors_count'] = (int) $xml->offer->house->{'floors-total'};
 	#$data['offers_count'] = count($xml->offer);
@@ -139,6 +158,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || true) {
 	#	$json = $this->FriendlyJson($data);
 	return $data;
 }
-	
-	
-	

@@ -9,3 +9,11 @@ vendor/composer/ClassLoader.php
 vendor/composer/installed.json
 vendor/composer/LICENSE
 composer.lock
+public/apartments.php
+public/selection.php
+vc/apartments-vc.php
+vc/selection-vc.php
+sanity_origin.sql
+_custom_app_bigd_strings.sql
+vc/apartments-vc.php
+sanity_origin (1).sql

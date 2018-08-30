@@ -398,39 +398,66 @@ a:hover .KV-Step .KV-Row:only-child {
 }
 
 @media screen and (min-width: 992px) {
+	.uip-Background {
+		background: none !important;
+	}
+	
+	.uip-AppShortcut {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding-bottom: 0;
+	}
+	
+	.uip-AppIcon {
+		box-shadow: 0 1px 6px 2px rgba(0,0,0,0.1);
+	}
+	
+	.uip-AppName {
+		box-sizing: border-box;
+		height: 48px;
+		max-height: 48px;
+		padding: 8px 0;
+		font-size: 87.5%;
+		color: #666;
+		position: static;
+	}
 	
 	.PanelPageWrap {
 		display: flex;
 		flex-direction: row;
-		height: 100vh;
+		min-height: 100vh;
 		max-height: 100%;
 	}
 	
 	.PanelSidebarNav {
 		display: block;
-		background-color: #313636;
-		color: #fff;
-		width: 224px;
+		background-color: #f8f8f8;
+		color: #444;
+		width: 320px;
+		font-family: SanFranciscoDisplay, SanFranciscoText, Roboto, sans-serif;
 	}
 	
 	.LogoSpace {
-		padding: 16px 0;
+		padding: 24px 0 0 32px;
+		margin-bottom: 64px;
 	}
 	
 	.SanityLogo {
-		background-image: url('/res/ui/app-logo.png');
+		background-image: url('/res/ui/app-logo-solid-dark.png');
 		background-size: cover;
 		background-position: center;
-		
-		width: 64px;
-		height: 64px;
-		margin: 0 auto;
+		width: 24px;
+		height: 32px;
 	}
 	
 	.SanityVersion {
-		font-size: 87.5%;
-		line-height: 18px;
-		text-align: center;
+		font-size: 75%;
+		line-height: 24px;
+		text-align: left;
+		padding-left: 32px;
+		color: #999;
 	}
 	
 	.uip-TopPart {display: none;}
@@ -438,9 +465,9 @@ a:hover .KV-Step .KV-Row:only-child {
 	.PageContent {
 		background-color: #f8f8f8;
 		display: flex;
-		padding: 16px;
+		padding: 16px 16px 64px 48px;
 		box-sizing: border-box;
-		height: 100vh;
+		min-height: 100vh;
 	}
 	
 	.PageContent .ContentLayout {
@@ -456,6 +483,7 @@ a:hover .KV-Step .KV-Row:only-child {
 		background-color: #fff;
 		border-radius: 4px;
 		box-shadow: 0 2px 8px rgba(65,90,120,0.12);
+		box-shadow: 0 1px 6px 2px rgba(0,0,0,0.1);
 	}
 	
 	.PageContent .ContentLayout .WhiteBlock + .PageHeader, .PageContent .ContentLayout .WhiteBlock + .WhiteBlock {
@@ -475,5 +503,30 @@ a:hover .KV-Step .KV-Row:only-child {
 		flex: 1;
 		justify-content: space-around;
 		min-width: 33vw;
+	}
+	
+	.PanelUI-Menu {
+		margin-bottom: 64px;
+	}
+	
+	nav.PanelUI-Navigation {
+		
+	}
+	
+	nav.PanelUI-Navigation a {
+		box-sizing: border-box;
+		padding-left: 32px;
+		display: block;
+		font-size: 75%;
+		font-weight: 600;
+		line-height: 24px;
+		letter-spacing: .02em;
+		text-transform: uppercase;
+		margin-bottom: 8px;
+	}
+	
+	nav.PanelUI-Navigation a.selected {
+		background-color: #f2f2f2;
+		color: var(--brandColor);
 	}
 }
