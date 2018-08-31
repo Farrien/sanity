@@ -7,12 +7,12 @@ namespace SN;
 use Exception;
 
 class Management {
-	private $errorsCount;
-	private $errorExplanations;
+	private static $errorsCount;
+	private static $errorExplanations;
 	
 	function __construct() {
-		$this->errorsCount = 0;
-		$this->errorExplanations = [];
+		static::$errorsCount = 0;
+		static::$errorExplanations = [];
 	}
 	
 	public function ext($moduleName) {
@@ -105,23 +105,33 @@ class Management {
 	}
 	
 	public function AddErr() {
-		$this->errorsCount += 1;
+		static::NewErr();
+	}
+	
+	static public function NewErr() {
+		static::$errorsCount += 1;
 	}
 	
 	public function ExplainLastError($str = 'Undeclared explanation.') {
-		$this->errorExplanations[$this->errorsCount] = $str;
+		static::ExplainLast();
+	}
+	
+	static public function ExplainLast($str = 'Undeclared explanation.') {
+		static::$errorExplanations[static::$errorsCount] = $str;
 	}
 	
 	public function GetErrors() {
-		return $this->errorsCount;
+		return static::$errorsCount;
 	}
 	
 	public function PrintErrors() {
 		global $lang;
-		echo $lang['#SN_Errors_TotalCount'] . ' — ' . $this->errorsCount, "\n\r<br>";
-		foreach ($this->errorExplanations as $k=>$v) {
-			echo $v, "\n\r<br>";
+		echo '<div style="font-family: monospace;">';
+		echo $lang['#SN_Errors_TotalCount'] . ' — ' . static::$errorsCount, "\n\r<br>";
+		foreach (static::$errorExplanations as $k=>$v) {
+			echo "[$k] ", $v, "\n\r<br>";
 		}
+		echo '</div>';
 		return;
 	}
 }

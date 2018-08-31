@@ -6,6 +6,7 @@ namespace Superior;
 
 use Exception;
 use Superior\Http\Queries;
+use Superior\Http\Constructor;
 
 class Request {
 	static public $constructor;
@@ -48,5 +49,9 @@ class Request {
 	
 	static public function Data() {
 		return static::$constructor->get();
+	}
+	
+	public function augments() {
+		return static::$constructor->getAugments();
 	}
 }

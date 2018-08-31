@@ -1,11 +1,12 @@
 <?php
-header('Content-Type: application/json;');
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Credentials: true");
-header("Cache-Control: no-cache, no-store, no-transform");
-header("Access-Control-Max-Age: 10");
-header("Access-Control-Allow-Methods: POST, GET");
-header("Access-Control-Allow-Headers: Origin, X-Requested-With");
+header('HTTP/1.1 200 OK');
+header('Content-Type: text/html');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Credentials: true');
+header('Cache-Control: no-cache, no-store, no-transform');
+header('Access-Control-Max-Age: 10');
+header('Access-Control-Allow-Methods: POST, GET');
+header('Access-Control-Allow-Headers: Origin, X-Requested-With');
 if ($_GET['show_errors']) {
 	ini_set('display_errors', '1');
 	error_reporting(E_ALL);
@@ -30,7 +31,7 @@ $SN->helper('JSON');
 $SN->helper('Configurator');
 
 $SN->ext('server/load/request');
-$SN->ext('server/load/request/constructor');
+$SN->ext('server/load/http/constructor');
 $SN->ext('server/load/http/queries');
 $SN->ext('server/load/response');
 
@@ -81,11 +82,14 @@ if (file_exists($vc_path)) {
 	$vc_result = require_once $vc_path;
 }
 
-
 if (is_array($vc_result)) {
-	echo json_encode($vc_result);
-	exit;
-} else {
+	header('Content-Type: application/json');
+	if (!$SN->GetErrors()) {
+		echo json_encode($vc_result);
+		exit;
+	}
+}
+if (true) {
 	header('Content-Type: text/html; charset=utf-8');
 	if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_HEADER;
 

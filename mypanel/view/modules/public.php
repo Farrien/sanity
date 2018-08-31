@@ -2,7 +2,6 @@
 defined('SN_Start') or die('Access denied.');?>
 
 <div class="PageHeader"><?=$PageTitle?></div>
-
 <div class="WhiteBlock VerticalSpaces">
 	<div class="data-box-field">
 		<a class="ui-mypanel-link" href="?act=modules/main/add">Добавить новый</a>

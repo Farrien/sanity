@@ -7,29 +7,30 @@ defined('SN_Start') or die('Access denied.');?>
 </div>
 
 <div class="PageHeader"><?=$PageTitle?></div>
-
-<div>
-	<form id="modules-main-add">
-		<div class="data-box-field">
-			<div class="input-placeholder">Название</div>
-			<input type="text" name="module_name">
-		</div>
-		<div class="data-box-field">
-			<div class="input-placeholder">Автор</div>
-			<input type="text" name="module_author" value="<?=OWNER_NAME?>">
-		</div>
-		<div class="field-space"></div>
-		<div class="data-box-field">
-			<div class="input-placeholder">Обработчик</div>
-			<input type="checkbox" class="switcher" name="has_vc">
-		</div>
-		<div class="data-box-explanation">
-			Включить обработчик (middleware). Это позволяет манипулировать данными до их вывода.
-		</div>
-	</form>
+<div class="WhiteBlock VerticalSpaces">
+	<div>
+		<form id="modules-main-add">
+			<div class="data-box-field">
+				<div class="input-placeholder">Название</div>
+				<input type="text" name="module_name">
+			</div>
+			<div class="data-box-field">
+				<div class="input-placeholder">Автор</div>
+				<input type="text" name="module_author" value="<?=OWNER_NAME?>">
+			</div>
+			<div class="field-space"></div>
+			<div class="data-box-field">
+				<div class="input-placeholder">Обработчик</div>
+				<input type="checkbox" class="switcher" name="has_vc">
+			</div>
+			<div class="data-box-explanation">
+				Включить обработчик (middleware). Это позволяет манипулировать данными до их вывода.
+			</div>
+		</form>
+	</div>
+	<div class="field-space"></div>
 </div>
 
-<div class="field-space"></div>
 
 <script>
 function local_action_1() {
