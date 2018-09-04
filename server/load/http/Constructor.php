@@ -12,9 +12,9 @@ class Constructor {
 	public $request;
 	public $augments = NULL;
 	
-	function __construct(Request $object, Array $request_array) {
+	function __construct(Request $request, Array $request_array) {
 	#	remove a router's helper
-		unset($request_array['p']);
+	#	unset($request_array['p']);
 		
 		$this->request = (object) $request_array;
 	}
@@ -37,16 +37,29 @@ class Constructor {
 		return $this->augments;
 	}
 	
+	public function isAugmentsPresent() {
+		if (is_null($this->augments)) {
+			try {
+				$this->BuildAugmentation();
+				return true;
+			} catch (Exception $e) {
+				return false;
+			}
+		}
+		return false;
+	}
+	
 	private function BuildAugmentation() {
+		$errorMsg = 'Request augmentation is missing. Trying to get properties will provide an error. Please use special methods to verify augmentation before using it.';
 		if (isset($_REQUEST['augmentation']) && $_REQUEST['augmentation']!='') {
 			$aug = explode('/', trim($_REQUEST['augmentation'], '/'));
 			if (count($aug) < 1) {
-				throw new Exception('Augmented request is missing. Trying to get properties will provide an error.');
+				throw new Exception($errorMsg);
 			}
 			$this->augments = (object) $aug;
 			unset($request_array['augmentation']);
 			return;
 		}
-		throw new Exception('Augmented request is missing. Trying to get properties will provide an error.');
+		throw new Exception($errorMsg);
 	}
 }

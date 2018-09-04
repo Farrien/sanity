@@ -113,7 +113,7 @@ class Management {
 	}
 	
 	public function ExplainLastError($str = 'Undeclared explanation.') {
-		static::ExplainLast();
+		static::ExplainLast($str);
 	}
 	
 	static public function ExplainLast($str = 'Undeclared explanation.') {

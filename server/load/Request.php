@@ -10,11 +10,13 @@ use Superior\Http\Constructor;
 
 class Request {
 	static public $constructor;
+	static public $requested_page = 'index';
 	private $method;
 	
 	function __construct() {
 		$this->method = strtolower($_SERVER['REQUEST_METHOD']);
 		static::$constructor = $this->reg();
+		static::$requested_page = self::$constructor->get()->p;
 	}
 	
 	private function reg() {
@@ -42,7 +44,8 @@ class Request {
 				$answer = static::$constructor->get()->$row;
 			}
 		} catch (Exception $e) {
-			$SN->AddErr();
+			SN::NewErr();
+			SN::ExplainLast($e->getMessage());
 		}
 		return $answer;
 	}
@@ -53,5 +56,13 @@ class Request {
 	
 	public function augments() {
 		return static::$constructor->getAugments();
+	}
+	
+	public function hasAugments() {
+		return static::$constructor->isAugmentsPresent();
+	}
+	
+	public function getCurrentPage() {
+		return static::$requested_page;
 	}
 }

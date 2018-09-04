@@ -1,19 +1,18 @@
+outsource/
+vendor/
+res/cache/apartments/
+res/docs/
+res/docs/apartments/
+res/shop/
+user_section/
 
-vendor/autoload.php
-vendor/composer/autoload_classmap.php
-vendor/composer/autoload_namespaces.php
-vendor/composer/autoload_psr4.php
-vendor/composer/autoload_real.php
-vendor/composer/autoload_static.php
-vendor/composer/ClassLoader.php
-vendor/composer/installed.json
-vendor/composer/LICENSE
 composer.lock
 public/apartments.php
 public/selection.php
+public/new_module.php
+public/documents.php
 vc/apartments-vc.php
 vc/selection-vc.php
-user_section/
+vc/documents-vc.php
 _custom_app_bigd_strings.sql
 sanity_origin (1).sql
-public/new_module.php

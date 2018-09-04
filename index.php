@@ -18,32 +18,20 @@ $perm = false;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/base.php';
 
-use SN\Management;
-$SN = new Management;
+$SN = new SN\Management;
 
-$SN->helper('Userthings');
-$SN->helper('Data');
-$SN->helper('Tasks');
-$SN->helper('Users');
-$SN->helper('Wallet');
-$SN->helper('Parser');
-$SN->helper('JSON');
-$SN->helper('Configurator');
-
-$SN->ext('server/load/request');
-$SN->ext('server/load/http/constructor');
-$SN->ext('server/load/http/queries');
-$SN->ext('server/load/response');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/general_classes.php';
 
 $request = new Superior\Request;
 $get = $request::Data();
+
+$router = new Superior\Router($request);
+$SN->ext('web/routes');
 
 $SN->ext('settings');
 $SN->ext('database');
 $SN->ext('util');
 $SN->ext('permission-control');
-
-$lang = $SN->ext('support/lang/ru-RU');
 
 require_once './forso.php';
 
