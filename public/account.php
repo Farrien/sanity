@@ -72,6 +72,14 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 							</div>
 						</div>
 						<div class="Section-ui-option-row">
+							<div class="__title">Уровень доступа</div>
+							<div class="__val">
+								<div class="ui-set-constant">
+									<?=$USER['privileges']?>
+								</div>
+							</div>
+						</div>
+						<div class="Section-ui-option-row">
 							<div class="__title">Пароль</div>
 							<div class="__val">
 								<div>

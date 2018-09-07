@@ -1,6 +1,4 @@
 <?php
-# Prevent access from direct calls
-defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
 namespace SN;
 
@@ -19,8 +17,7 @@ class Management {
 		global $USER;
 		global $pdo_db;
 		global $SN;
-		$wn = mb_strtolower($moduleName) . '.php';
-		$path = $_SERVER['DOCUMENT_ROOT'] . '/' . $wn;
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/' . $moduleName . '.php';
 		if (!file_exists($path)) {
 			$this->AddErr();
 			$this->ExplainLastError(__CLASS__ . ': Extension "' . basename($moduleName) . '" can not be found.');
@@ -32,8 +29,7 @@ class Management {
 	public function template($templateName) {
 		global $USER;
 		global $pdo_db;
-		$wn = mb_strtolower($templateName) . '.php';
-		$path = $_SERVER['DOCUMENT_ROOT'] . '/templates/' . DESIGN_TEMPLATE . '/' . $wn;
+		$path = $_SERVER['DOCUMENT_ROOT'] . '/templates/' . DESIGN_TEMPLATE . '/' . $templateName . '.php';
 		if (!file_exists($path)) return false;
 		return require_once $path;
 	}
@@ -53,7 +49,6 @@ class Management {
 	}
 	
 	private function FindHelper($SupportName) {
-		$SupportName = mb_strtolower($SupportName);
 		$path = $_SERVER['DOCUMENT_ROOT'] . '/support/' . $SupportName . '.php';
 		if (!file_exists($path)) {
 			throw new Exception(__CLASS__ . ' — Support file "' . basename($SupportName) . '" not found.');

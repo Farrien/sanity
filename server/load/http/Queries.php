@@ -1,14 +1,11 @@
 <?php
-# Prevent access from direct calls
-defined('SN_Start') or header('HTTP/1.1 404 Not Found');
-
 namespace Superior\Http;
 
 class Queries {
-	static public function QueryString($query = '') {
+	static public function QueryString($query = null) {
+		if (is_null($query)) $query = $_SERVER['REQUEST_URI'];
 		$cleanURI = preg_replace('/^\/([a-zA-Z]+)\/\?/i', '', $query);
 		return $cleanURI;
-		
 	}
 	
 	static public function Query2Array($query = '') {

@@ -21,7 +21,7 @@ Abstract class MyPanelController {
 	}
 	
 	protected function Model($model_name) {
-		$modelSOURCE = $_SERVER['DOCUMENT_ROOT'] . '/mypanel/model/' . $model_name . '.php';
+		$modelSOURCE = $_SERVER['DOCUMENT_ROOT'] . '/mypanel/model/' . strtolower($model_name) . '.php';
 		if (file_exists($modelSOURCE)) {
 			$a = explode('/', $model_name);
 			require_once $modelSOURCE;

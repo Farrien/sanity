@@ -8,6 +8,7 @@ header('Access-Control-Max-Age: 10');
 header('Access-Control-Allow-Methods: POST, GET');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With');
 if ($_GET['show_errors']) {
+	ini_set('display_startup_errors', '1');
 	ini_set('display_errors', '1');
 	error_reporting(E_ALL);
 }
@@ -18,7 +19,8 @@ $perm = false;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/base.php';
 
-$SN = new SN\Management;
+use SN\Management as SN;
+$SN = new SN;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/general_classes.php';
 
@@ -34,9 +36,6 @@ $SN->ext('util');
 $SN->ext('permission-control');
 
 require_once './forso.php';
-
-$globalTime = time();
-$globalMT = microtime(true);
 
 $PageTitle = $lang['error'];
 
@@ -54,7 +53,7 @@ if (!is_file($requestPage)) {
 }
 
 # Checking access permissions
-$SN->ext('server/load/permission');
+Permission::init($USER['privileges']);
 $SN->ext('web/access');
 
 $OwnOrigin = false;

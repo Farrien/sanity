@@ -1,7 +1,15 @@
 
-	<title><?=$PageTitle?> | <?=SITE_NAME?></title>
 	<meta charset="utf-8">
 	<meta name="Description" content="<?=SITE_NAME?>">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<base href="/" />
+	<meta property="og:image" content="" />
+	<meta property="og:title" content="" />
+	<meta property="og:description" content="" />
+	
+	<title><?=$PageTitle?> | <?=SITE_NAME?></title>
 
 	<!-- Manifest -->
 	<!--<link rel="manifest" href="manifest.json">-->

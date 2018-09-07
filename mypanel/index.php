@@ -1,40 +1,62 @@
 <?php
+header('HTTP/1.1 200 OK');
+header('Content-Type: text/html');
+header('Access-Control-Allow-Origin: Origin');
+header('Access-Control-Allow-Credentials: true');
+header('Cache-Control: no-cache, no-store, no-transform');
+header('Access-Control-Max-Age: 10');
+header('Access-Control-Allow-Methods: POST, GET');
+header('Access-Control-Allow-Headers: Origin');
+if ($_GET['show_errors']) {
+	ini_set('display_startup_errors', '1');
+	ini_set('display_errors', '1');
+	error_reporting(E_ALL);
+}
+$ScriptStartTime = microtime(true);
 const SN_Start = true;
+$perm = false;
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/base.php';
-$SN = new SN\Management;
 
-$SN->ext('server/load/controller');
-$SN->ext('server/load/model');
+use SN\Management as SN;
+$SN = new SN;
+
+$SN->ext('server/load/Controller');
+$SN->ext('server/load/Model');
 require_once $_SERVER['DOCUMENT_ROOT'] . '/general_classes.php';
 
 $request = new Superior\Request;
 $get = $request::Data();
+
+
+
 
 $SN->ext('settings');
 $SN->ext('database');
 $SN->ext('util');
 $SN->ext('permission-control');
 
-# Checking access permissions
-$SN->ext('server/load/permission');
-Permission::init($USER['privileges']);
-$SN->ext('web/access');
+
 
 $ScreenTitle = APP_NAME;
 
-if (empty($_REQUEST['act'])) $_REQUEST['act'] = 'start/dashboard';
+# Checking access permissions
+Permission::init($USER['privileges']);
+$SN->ext('web/access');
 
+
+if (empty($_REQUEST['act'])) $_REQUEST['act'] = 'start/dashboard';
 
 # $RequestOptions ---> $RO
 $RO = [];
-$RO['ACT'] = trim(prepareString($_REQUEST['act']), '/\\');
+$RO['ACT'] = trim(prepareString($_REQUEST['act']), '/');
 $a1 = explode('/', $RO['ACT']);
-$RO['SECTION'] = ucfirst($a1[0]);
-$RO['SCRIPT']= ucfirst($a1[1]);
+$RO['SECTION'] = strtolower($a1[0]);
+$RO['SCRIPT']= strtolower($a1[1]);
 $RO['ACTION']= $a1[2] ?: 'start';
 
-$conSOURCE_		= __DIR__ . '/controller/' . $RO['SECTION'] . '/' . $RO['SCRIPT'] . '.php';
+$conSOURCE_ = $_SERVER['DOCUMENT_ROOT'] . '/mypanel/controller/' . $RO['SECTION'] . '/' . $RO['SCRIPT'] . '.php';
 if (file_exists($conSOURCE_)) {
 	require_once $conSOURCE_;
 	$classname = $RO['SECTION'] . $RO['SCRIPT'] . 'Controller';

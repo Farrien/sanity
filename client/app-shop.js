@@ -6,9 +6,8 @@ let temp_bin = new Array();
 let bin = sn.shop.orders.getItem('bin');
 if (!bin) {
 	sn.shop.orders.setItem('bin', JSON.stringify(temp_bin));
-	console.log('temp_bin set');
 }
-console.log(sn.shop.orders);
+
 
 sn.shop.addToOrder = function(product_id) {
 	let json_bin = sn.shop.orders.getItem('bin');
@@ -19,7 +18,6 @@ sn.shop.addToOrder = function(product_id) {
 
 sn.shop.clearOrder = function() {
 	sn.shop.orders.setItem('bin', JSON.stringify(temp_bin));
-	console.log('bin is clean.');
 }
 
 sn.shop.completeOrder = function() {

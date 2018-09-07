@@ -1,7 +1,4 @@
 <?php
-# Prevent access from direct calls
-defined('SN_Start') or header('HTTP/1.1 404 Not Found');
-
 namespace Superior;
 
 use Exception;
@@ -16,7 +13,9 @@ class Request {
 	function __construct() {
 		$this->method = strtolower($_SERVER['REQUEST_METHOD']);
 		static::$constructor = $this->reg();
-		static::$requested_page = self::$constructor->get()->p;
+		if (isset($_REQUEST['p'])) {
+			static::$requested_page = $_REQUEST['p'];
+		}
 	}
 	
 	private function reg() {
@@ -33,7 +32,7 @@ class Request {
 	}
 	
 	public function url() {
-		$cleanURI = Queries::QueryString($_SERVER['REQUEST_URI']);
+		$cleanURI = Queries::QueryString();
 		return $cleanURI;
 	}
 	

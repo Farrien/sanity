@@ -567,12 +567,12 @@ label.toRight input[type="checkbox"].switcher {
 }
 
 .DropdownMenu.fromRight .Header:before {
-	right: calc(1px + 5px);
+	right: calc(1px + 3px);
 	left: auto;
 }
 
 .DropdownMenu.fromRight .Header:after {
-	right: 3px;
+	right: 1px;
 	left: auto;
 }
 

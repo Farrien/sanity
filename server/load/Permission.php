@@ -4,7 +4,6 @@ defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
 #namespace Superior;
 
-#use Closure;
 use Superior\Http\Queries;
 
 class Permission {
@@ -37,50 +36,50 @@ class Permission {
 	}
 	
 	static public function allow($group, String $path = '/', Closure $callback = NULL) {
+		#	at first nobody has access to this path
+		self::$has_permission = false;
+		
 		$comparing_path = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
 		if ($path != $comparing_path) return;
+		
 		
 		if (is_int($group) && !is_array($group)) {
 			$temp_value = $group;
 			$group = [];
 			$group[] = $temp_value;
-			
 		}
-		foreach ($group AS $single) {
-			if (self::$permission_group == $single) {
+		
+		foreach ($group AS $k=>$v) {
+			if (self::$permission_group == $v) {
 				self::$has_permission = true;
 				break;
 			}
 		}
 		
-		/*
-		|--------------------------------------------------------------------------
-		| Prepared often useful functions
-		|--------------------------------------------------------------------------
-		*/
-		function redirect($str = '/') {
-			if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||  isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
-				$protocol = 'https://';
+		if (!self::$has_permission) {
+			if ($callback) {
+				$query_vars = Queries::Query2Array($_SERVER['REQUEST_URI']);
+				$imp = $callback($query_vars);
+				if ($imp == false) {
+					header('HTTP/1.0 403 Forbidden');
+					exit;
+				}
 			} else {
-				$protocol = 'http://';
-			}
-			header('HTTP/1.1 301 Moved Permanently');
-			header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . $str);
-			exit;
-		}
-		#--------------------------------------------------------------------------
-		
-		if (!self::$has_permission && $callback) {
-			$query_vars = Queries::Query2Array($_SERVER['REQUEST_URI']);
-			$imp = $callback($query_vars);
-			if ($imp == false) {
 				header('HTTP/1.0 403 Forbidden');
 				exit;
 			}
 		}
+		/*
+		==========================================================
+		======================= ALLOW END ========================
+		==========================================================
+		*/
 	}
 	
 	static public function exclude($group, String $path = '/', Closure $callback = NULL) {
+		#	at first all groups have access to this path
+		self::$has_permission = true;
+		
 		# MAYBE NEED FIX?
 		$comparing_path = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
 		if ($path != $comparing_path) return;
@@ -89,40 +88,54 @@ class Permission {
 			$temp_value = $group;
 			$group = [];
 			$group[] = $temp_value;
-			
 		}
-		foreach ($group AS $single) {
-			if (self::$permission_group != $single) {
-				self::$has_permission = true;
+		
+		foreach ($group AS $k=>$v) {
+			if (self::$permission_group == $v) {
+				self::$has_permission = false;
 				break;
 			}
 		}
 		
-		/*
-		|--------------------------------------------------------------------------
-		| Prepared often useful functions
-		|--------------------------------------------------------------------------
-		*/
-		function redirect($str = '/') {
-			if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||  isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
-				$protocol = 'https://';
+		if (!self::$has_permission) {
+			if ($callback) {
+				$query_vars = Queries::Query2Array($_SERVER['REQUEST_URI']);
+				$imp = $callback($query_vars);
+				if ($imp == false) {
+					header('HTTP/1.0 403 Forbidden');
+					exit;
+				}
 			} else {
-				$protocol = 'http://';
+				header('HTTP/1.0 403 Forbidden');
+				exit;
 			}
-			header('HTTP/1.1 301 Moved Permanently');
-			header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . $str);
-			exit;
 		}
-		#--------------------------------------------------------------------------
+		/*
+		==========================================================
+		====================== EXCLUDE END =======================
+		==========================================================
+		*/
+		
+		/* backup
+		foreach ($group AS $k=>$single) {
+			echo 'Group  #' . $single;
+			if (self::$permission_group != $single) {
+				self::$has_permission = true;
+				echo ' - orientir has permission', "<br/>";
+				break;
+			}
+			echo ' - orientir fail', "<br/>";
+		}
 		
 		if (!self::$has_permission && $callback) {
+			echo ' - doing callback', "<br/>";
 			$query_vars = Queries::Query2Array($_SERVER['REQUEST_URI']);
 			$imp = $callback($query_vars);
 			if ($imp == false) {
 				header('HTTP/1.0 403 Forbidden');
 				exit;
 			}
-		}
+		}*/
 	}
 	
 	/*

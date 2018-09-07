@@ -18,7 +18,6 @@ defined('SN_Start') or die('Access denied.');?>
 mr.Query('../get/ShopBasket/ConvertProducts', {items : sn.shop.orders.getItem('bin')}, function(response) {
 	var r = JSON.parse(response);
 	var a = {els:[]};
-	console.log(r);
 	if (r.result.length > 0) {
 		document.getElementById('basket-complete-btn').disabled = false;
 	}

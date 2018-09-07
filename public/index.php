@@ -5,10 +5,12 @@ defined('SN_Start') or die('Access denied.');?>
 	g_sortType = <?=SHOP_SORT_VALUE?>;
 </script>
 <div>
-	<div class="flexContainer">
-		<div class="fl bs20">
+	<div class="StaticContainer">
+		<div class="st rows3">
 			<div class="shop-sidebar-categories">
-				<div class="shop-sidebar-block-title">Категории</div>
+				<div class="shop-sidebar-block-title">
+					<div class="text-bl">Категории</div>
+				</div>
 				
 				<?=ShowCategories( $CategoriesTree );?>
 				
@@ -19,11 +21,12 @@ defined('SN_Start') or die('Access denied.');?>
 				</div>
 			</div>
 		</div>
-		<div class="fl bs80">
+		<div class="st singlePad"></div>
+		<div class="st rows15">
 			<div class="shop-listing-control">
 				<div id="shop-listing-control">
 					<div>
-						<input type="text" class="xver asSearch" placeholder="Поиск по товарам">
+						<input type="text" class="xver asSearch clean" placeholder="Поиск по товарам">
 					</div>
 					<div class="shop-sort-toggle-wrapper">
 						<div class="helper-text">Сортировка:</div>

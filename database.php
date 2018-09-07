@@ -1,6 +1,5 @@
 <?php
-# Prevent access from direct calls
-defined('SN_Start') or header('HTTP/1.1 404 Not Found');
+use SN\Management as SN;
 
 /*
 try {
@@ -35,8 +34,8 @@ class DB {
 			$connection = new PDO('mysql:host='.DATABASE_SETTING_HOSTNAME.';dbname='.DATABASE_SETTING_DBNAME.';charset=utf8;', DATABASE_SETTING_USER, DATABASE_SETTING_PASSWORD);
 			return $connection;
 		} catch (PDOException $e) {
-			$SN->AddErr();
-			$SN->ExplainLastError($e->getMessage());
+			SN::NewErr();
+			SN::ExplainLast($e->getMessage());
 			return false;
 		}
 	}

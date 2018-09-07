@@ -1,5 +1,7 @@
 :root {
-	--siteWidth: 1140px;
+	--oneRow: 48px;
+	--onePad: 16px;
+	--siteWidth: 1136px;
 	--logoResLink: url('/res/ui/app-logo.png');
 }
 
@@ -13,6 +15,7 @@
 	width: 100%;
 	max-width: var(--siteWidth);
 	margin: 0 auto;
+	box-sizing: border-box;
 }
 
 .pageWrap .header .header-logo-text {
@@ -37,13 +40,16 @@
 }
 
 .pageWrap .header > .header-body.compact {
-	height: 44px;
+	height: 48px;
+	box-sizing: border-box;
+	
+	border-bottom: 1px solid #d3d3d3;
 }
 
 .pageWrap .header > .header-body.compact .logo-image {
-	height: 44px;
-	width: 44px;
-	background-size: 40px 40px;
+	height: 48px;
+	width: 48px;
+	background-size: 42px 42px;
 }
 
 .pageWrap .header > .header-body.compact > .menu-list {
@@ -64,7 +70,7 @@
 }
 
 .pageWrap .header > .header-body.compact > .menu-list > .san-link > a {
-	line-height: 44px;
+	line-height: 48px;
 }
 
 .pageWrap .layout {

@@ -1,9 +1,20 @@
 AddDefaultCharset utf-8
 
+<Files *.php>
+	Order Deny,Allow
+	Deny from all
+#	Allow from 127.0.0.1
+</Files>
+
 <FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
-	Order deny,allow
+	Order Deny,Allow
 	Deny from all
 </FilesMatch>
+
+<Files ~ "(index|r)\.(ph?p)$">
+	Order Allow,Deny
+	Allow from all
+</Files>
 
 RewriteEngine On
 #RewriteCond %{HTTPS} off
@@ -12,7 +23,6 @@ RewriteEngine On
 #RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^get/(.*)$ r.php?r=$1 [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
