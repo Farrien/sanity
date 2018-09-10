@@ -8,6 +8,7 @@ $SN->helper('Parser');
 $SN->helper('JSON');
 $SN->helper('Configurator');
 
+$SN->ext('server/load/component/View');
 $SN->ext('server/load/http/Constructor');
 $SN->ext('server/load/http/Queries');
 $SN->ext('server/load/Permission');

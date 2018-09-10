@@ -63,8 +63,7 @@ if (isset($_GET['ownp'])) {
 }
 
 # Checking VC-part file
-$CONTROLLER_FILE_NAME = $ROUT_P . '-vc.php';
-$vc_path = CONTROLLER_DIR . $CONTROLLER_FILE_NAME;
+$vc_path = CONTROLLER_DIR . $ROUT_P . '-vc.php';
 if (file_exists($vc_path)) {
 	$vc_result = require_once $vc_path;
 }
@@ -83,7 +82,12 @@ if (true) {
 	if ($SN->GetErrors()) {
 		$SN->PrintErrors();
 	} else {
-		include_once $requestPage;
+		if ($vc_result instanceof Superior\Component\View) {
+			$extractedVariablesCount = extract($vc_result->vars(), EXTR_OVERWRITE);
+			include_once $vc_result->getPath();
+		} else {
+			include_once $requestPage;
+		}
 	}
 
 	if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_FOOTER;

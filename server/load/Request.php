@@ -1,6 +1,7 @@
 <?php
 namespace Superior;
 
+use SN\Management as SN;
 use Exception;
 use Superior\Http\Queries;
 use Superior\Http\Constructor;
@@ -37,16 +38,13 @@ class Request {
 	}
 	
 	public function r($row) {
-		$answer = false;
-		try {
-			if (isset(static::$constructor->get()->$row) || property_exists(static::$constructor->get(), $row)) {
-				$answer = static::$constructor->get()->$row;
-			}
-		} catch (Exception $e) {
+		if (isset(static::$constructor->get()->$row) || property_exists(static::$constructor->get(), $row)) {
+			return static::$constructor->get()->$row;
+		} else {
 			SN::NewErr();
-			SN::ExplainLast($e->getMessage());
+			SN::ExplainLast('Request augmentation is missing. Trying to get properties will provide an error. Please use special methods to verify augmentation before using it.');
 		}
-		return $answer;
+		return false;
 	}
 	
 	static public function Data() {

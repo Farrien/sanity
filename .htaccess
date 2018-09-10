@@ -6,7 +6,7 @@ AddDefaultCharset utf-8
 #	Allow from 127.0.0.1
 </Files>
 
-<FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
+<FilesMatch "(?i)((\.tpl|\.html|\.ini|\.log|(?<!robots)\.txt))">
 	Order Deny,Allow
 	Deny from all
 </FilesMatch>

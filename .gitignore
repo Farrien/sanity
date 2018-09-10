@@ -7,12 +7,12 @@ res/shop/
 user_section/
 
 composer.lock
+public/apartment.php
 public/apartments.php
 public/selection.php
 public/new_module.php
 public/documents.php
+vc/apartment-vc.php
 vc/apartments-vc.php
 vc/selection-vc.php
 vc/documents-vc.php
-_custom_app_bigd_strings.sql
-sanity_origin (1).sql
