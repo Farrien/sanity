@@ -1,0 +1,30 @@
+
+
+
+@media screen and (min-width: 992px) {
+	.module_item {
+		
+	}
+
+	.module_item .module_name {
+		padding: 8px 16px 0;
+		font-size: 100%;
+	}
+
+	.module_item .module_name a {
+		line-height: 16px;
+		display: block;
+	}
+
+	.module_item .module_name a:hover {
+		line-height: 16px;
+		display: block;
+	}
+
+	.module_item .module_author {
+		padding: 0 16px 8px;
+		font-size: 87.5%;
+		color: #999;
+	}
+
+}

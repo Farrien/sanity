@@ -9,6 +9,11 @@
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/sn-design.css">
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/mypanel/panel.css">
 	
+	<?$css_path = '/client/mypanel--' . $RO['SECTION'] . '.css';
+	if (file_exists($_SERVER['DOCUMENT_ROOT'] . $css_path)) echo '<link rel="stylesheet" type="text/css" media="all" href="//' . $_SERVER['HTTP_HOST'] . $css_path . '">';
+	?>
+	
+	
 	<!-- App Icon -->
 	<link rel="icon" href="//<?=$_SERVER['HTTP_HOST']?>/res/ui/favicon.ico" type="image/x-icon">
 	<link rel="shortcut icon" href="//<?=$_SERVER['HTTP_HOST']?>/res/ui/favicon.ico" type="image/x-icon">
