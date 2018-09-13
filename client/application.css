@@ -235,7 +235,7 @@ button.xver:hover {
 	padding: 0 12px;
 	font-size: 12px;
 	position: absolute;
-	top: calc(50% - 12px);
+	bottom: -12px;
 }
 
 .shop-shopping-goods .shop-shipping-goods-item .product_cover:before {

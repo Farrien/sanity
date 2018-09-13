@@ -12,7 +12,7 @@
 		<div class="PanelUI-Menu">
 			<div class="">
 				<nav class="PanelUI-Navigation">
-					<a class="selected" href="/mypanel/">Главная</a>
+					<a href="/mypanel/">Главная</a>
 					<a href="/mypanel/">Статистика</a>
 					<a href="/mypanel/">Настройки</a>
 				</nav>

@@ -325,6 +325,29 @@ a:hover .KV-Step .KV-Row:only-child {
 	align-items: center;
 }
 
+.product-info-quantity {
+	font-weight: 700;
+	border-radius: 4px;
+	line-height: 24px;
+	padding: 0 0 0 20px;
+	position: relative;
+}
+
+.product-info-quantity:before {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 0;
+	top: 4px;
+	background-image: url('/res/ui/box_icon.png');
+	background-position: 0 center;
+	background-size: 16px;
+	background-repeat: no-repeat;
+	border-radius: 4px;
+}
+
 .product-info-cost {
 	background-color: var(--brandColor);
 	color: #fff;

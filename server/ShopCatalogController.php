@@ -21,6 +21,11 @@ class ShopCatalogClass Extends BaseController {
 		if (isset($this->C_QUERY['category'])) {
 			$cat = (int) prepareString($this->C_QUERY['category']);
 		}
+		
+		if (isset($this->C_QUERY['context']) && $this->C_QUERY['context'] != '' && mb_strlen($this->C_QUERY['context']) > 2) {
+			$context = (string) prepareString($this->C_QUERY['context']);
+		}
+		
 		function getCategoryDepends($cat_id, &$arr) {
 			global $pdo_db;
 			$q = $pdo_db->prepare('SELECT id FROM subjects WHERE parent_subject=?');
@@ -31,6 +36,7 @@ class ShopCatalogClass Extends BaseController {
 				getCategoryDepends($f['id'], $arr);
 			}
 		}
+		
 		$conditionCategory = '';
 		if ($cat) {
 			$CategoryDepends = [];
@@ -42,8 +48,14 @@ class ShopCatalogClass Extends BaseController {
 			$conditionCategory .= ')';
 		}
 		
+		$conditionSearch = '';
+		if ($context) {
+			$conditionSearch = ' AND product_name LIKE "%' . $context . '%"';
+		}
+		
 		$Products = [];
-		$q = $this->DB->prepare('SELECT id, cover_image, quantity, product_name, cost FROM shop_goods WHERE id!=0 ' . $conditionCategory . ' ORDER BY ' . $sort_rows[$sort] . ', product_name ASC');
+		$sql = 'SELECT id, cover_image, quantity, product_name, cost FROM shop_goods WHERE id!=0 ' . $conditionCategory . $conditionSearch . ' ORDER BY ' . $sort_rows[$sort] . ', product_name ASC';
+		$q = $this->DB->prepare($sql);
 		$q->execute();
 		while ($f = $q->fetch(2)) {
 			if ($f['cover_image'] == '') {
@@ -58,7 +70,9 @@ class ShopCatalogClass Extends BaseController {
 		}
 		
 		$j['list'] = $Products;
+	#	$j['query'] = $sql;
 		if (count($Products) > 0) return $j;
+	#	return $j['query'];
 		return false;
 	}
 }

@@ -7,7 +7,7 @@ defined('SN_Start') or die('Access denied.');?>
 
 	<script type="text/javascript">
 		var _cLocation = 'login';
-		var utiTime = <?=$globalTime?>;
+		var utiTime = <?=$_SERVER['REQUEST_TIME']?>;
 		if (mr.HttpGet()['act'] === 'signup') {
 			mr.Dom(function() {
 				ToggleFormFrames();
@@ -29,11 +29,12 @@ defined('SN_Start') or die('Access denied.');?>
 					<a href="/" class="handle-parent">на главную</a>
 				</div>
 				<div class="LoginForm">
+					<!--
 					<div class="logo-position">
 						<div class="logo-image"></div>
 					</div>
-					<div class="_formIcon">
-					</div>
+					-->
+					<div class="_formIcon"></div>
 					<div id="FrameLoginForm">
 						<form id="AuthForm" method="POST">
 							<input type="hidden" name="sign_in" value="1" />

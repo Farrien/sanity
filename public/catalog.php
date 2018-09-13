@@ -1,6 +1,3 @@
-<?
-# Destroy the call if this file called directly
-defined('SN_Start') or die('Access denied.');?>
 <script>
 	g_sortType = <?=SHOP_SORT_VALUE?>;
 </script>
@@ -26,7 +23,7 @@ defined('SN_Start') or die('Access denied.');?>
 			<div class="shop-listing-control">
 				<div id="shop-listing-control">
 					<div>
-						<input type="text" class="xver asSearch clean" placeholder="Поиск по товарам">
+						<input type="text" class="xver asSearch clean" oninput="sn.shop.changeCategory(this)" placeholder="Поиск по товарам">
 					</div>
 					<div class="shop-sort-toggle-wrapper">
 						<div class="helper-text">Сортировка:</div>

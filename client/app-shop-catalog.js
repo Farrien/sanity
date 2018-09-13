@@ -1,5 +1,6 @@
 var g_sortType = 1,
-	g_category = null;
+	g_category = null,
+	g_searchWord = '';
 
 sn.shop.SortBy = function(id) {
 	g_sortType = id;
@@ -14,8 +15,14 @@ sn.shop.SelectCategory = function(cat) {
 	return false;
 }
 
+sn.shop.changeCategory = function(context) {
+	g_searchWord = context.value;
+	this.DrawProducts();
+	return false;
+}
+
 sn.shop.DrawProducts = function() {
-	mr.Query('../get/ShopCatalog/GetProducts', {category : g_category, sort : g_sortType}, function(response) {
+	mr.Query('../get/ShopCatalog/GetProducts', {category : g_category, sort : g_sortType, context : g_searchWord}, function(response) {
 	//	console.log(response);
 		let r = JSON.parse(response);
 		if (r.result) {

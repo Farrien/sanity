@@ -1,4 +1,4 @@
-<?
+<?php
 use Helper\Userthings as Userthings;
 use Helper\Database as Database;
 
@@ -19,4 +19,3 @@ class WorkerAdsClass Extends BaseController {
 	}
 
 }
-?>

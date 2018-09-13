@@ -7,9 +7,6 @@ defined('SN_Start') or die('Access denied.');
 <head>
 	<?include_once TEMPLATES_DIR . DESIGN_TEMPLATE . 'page_parts/head.tpl'?>
 
-	<script type="text/javascript">
-		var utiTime = <?=$globalTime?>;
-	</script>
 </head>
 <body>
 	<div class="pageWrap">

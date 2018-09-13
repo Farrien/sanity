@@ -32,8 +32,9 @@ if (DEBUG_R_CLASS) {
 	error_reporting(E_ALL);
 }
 
-
+/*
 require_once './server/model/ModelSource.php';
+*/
 
 class Rout {
 	private $R_ACT = null;
