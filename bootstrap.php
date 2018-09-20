@@ -15,12 +15,6 @@ spl_autoload_register(function($class) {
 	}
 });
 
-#$SN->ext('server/load/component/View');
-#$SN->ext('server/load/http/Constructor');
-#$SN->ext('server/load/http/Queries');
-$SN->ext('server/load/Permission');
-#$SN->ext('server/load/Request');
-#$SN->ext('server/load/Response');
-#$SN->ext('server/load/Router');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/server/load/Permission.php';
 
-$lang = $SN->ext('support/lang/ru-RU');
+$lang = require_once $_SERVER['DOCUMENT_ROOT'] . '/support/lang/ru-RU.php';

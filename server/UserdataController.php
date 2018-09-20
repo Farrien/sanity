@@ -102,7 +102,10 @@ class UserdataClass Extends BaseController {
 	}
 	
 	public function Signin() {
-		if (empty($this->C_QUERY['authLogin']) || $this->C_QUERY['sign_in'] != 1 || empty($this->C_QUERY['authPass'])) return false;
+		if (empty($this->C_QUERY['authLogin']) 
+		 || $this->C_QUERY['sign_in'] != 1
+		 || empty($this->C_QUERY['authPass'])) return false;
+			
 		$login = prepareString($this->C_QUERY['authLogin']);
 		$login = preg_replace('/(\+7|\+8)/', '8', $login, 1);
 		if (!preg_match('/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/', $login)) return false;

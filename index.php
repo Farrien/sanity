@@ -7,11 +7,13 @@ header('Cache-Control: no-cache, no-store, no-transform');
 header('Access-Control-Max-Age: 10');
 header('Access-Control-Allow-Methods: POST, GET');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With');
+
 if ($_GET['show_errors']) {
 	ini_set('display_startup_errors', '1');
 	ini_set('display_errors', '1');
 	error_reporting(E_ALL);
 }
+
 $ScriptStartTime = microtime(true);
 const SN_Start = true;
 $perm = false;
@@ -22,7 +24,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/base.php';
 use SN\Management as SN;
 $SN = new SN;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/general_classes.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php';
 
 $request = new Superior\Request;
 $get = $request::Data();

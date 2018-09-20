@@ -12,17 +12,17 @@ function getCorrectPHPSELF () {
 | Prepared often useful functions
 |--------------------------------------------------------------------------
 */
-function redirect($str = '/') {
+function redirect($str = '') {
 	if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||  isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
 		$protocol = 'https://';
 	} else {
 		$protocol = 'http://';
 	}
 	header('HTTP/1.1 301 Moved Permanently');
-	header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . $str);
+	$str = trim($str, '/');
+	header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . '/' . $str);
 	exit;
 }
-#--------------------------------------------------------------------------
 
 function CheckAccount() {
 	global $pdo_db;

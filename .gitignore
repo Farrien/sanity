@@ -4,9 +4,12 @@ res/cache/apartments/
 res/docs/
 res/docs/apartments/
 res/shop/
+res/ui/promo/
+res/promo/
 user_section/
 
 composer.lock
+public/includes/
 public/apartment.php
 public/apartments.php
 public/selection.php
@@ -16,3 +19,6 @@ vc/apartment-vc.php
 vc/apartments-vc.php
 vc/selection-vc.php
 vc/documents-vc.php
+client/promo.css
+vc/promo-vc.php
+public/promo.php

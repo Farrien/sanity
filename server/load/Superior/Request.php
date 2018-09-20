@@ -2,7 +2,6 @@
 namespace Superior;
 
 use SN\Management as SN;
-use Exception;
 use Superior\Http\Queries;
 use Superior\Http\Constructor;
 
@@ -62,4 +61,35 @@ class Request {
 	public function getCurrentPage() {
 		return static::$requested_page;
 	}
+	
+	/*
+	Request::Require() позволяет включать дополнительные параметры в URL как обязательные. 
+		@param augmentationName		|| Название аугментации в виде строки или регулярного выражения
+		@param defaultValue			|| 
+		
+		
+		@return 
+		@return redirect
+	*/
+	static public function Require($augName, \Closure $callback = NULL, $defaultValue = 0) {
+		if ($augName == '' || is_null($augName)) return true;
+		
+		$flag = true;
+		if (static::$constructor->isAugmentsPresent()) {
+			$s = static::$constructor->getAugments()->{0};
+			if ($s == $augName) {
+				$flag = false;
+			}
+		}
+		
+		if ($flag) {
+			if ($callback) {
+				$callback();
+			} else {
+				return redirect(static::$requested_page . '/' . $augName);
+			}
+		}
+		
+	}
+	
 }
