@@ -2,8 +2,6 @@
 
 namespace SN;
 
-use Exception;
-
 class Management {
 	private static $errorsCount;
 	private static $errorExplanations;
@@ -42,16 +40,16 @@ class Management {
 				global $pdo_db;
 				require_once $file;
 			}
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->AddErr();
 			$this->ExplainLastError($e->getMessage());
 		}
 	}
 	
-	private function FindHelper($SupportName) {
+	private function FindHelper($SupportName) : string {
 		$path = $_SERVER['DOCUMENT_ROOT'] . '/support/' . $SupportName . '.php';
 		if (!file_exists($path)) {
-			throw new Exception(__CLASS__ . ' — Support file "' . basename($SupportName) . '" not found.');
+			throw new \Exception(__CLASS__ . ' — Support file "' . basename($SupportName) . '" not found.');
 		}
 		return $path;
 	}
@@ -115,11 +113,11 @@ class Management {
 		static::$errorExplanations[static::$errorsCount] = $str;
 	}
 	
-	public function GetErrors() {
+	public function GetErrors() : int {
 		return static::$errorsCount;
 	}
 	
-	public function PrintErrors() {
+	public function PrintErrors() : void {
 		global $lang;
 		echo '<div style="font-family: monospace;">';
 		echo $lang['#SN_Errors_TotalCount'] . ' — ' . static::$errorsCount, "\n\r<br>";
@@ -127,6 +125,5 @@ class Management {
 			echo "[$k] ", $v, "\n\r<br>";
 		}
 		echo '</div>';
-		return;
 	}
 }

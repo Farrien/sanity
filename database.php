@@ -1,4 +1,5 @@
 <?php
+
 use SN\Management as SN;
 
 /*
@@ -9,7 +10,7 @@ try {
 	$SN->ExplainLastError($e->getMessage());
 }*/
 
-$DatabaseParams = [
+$databaseParams = [
 	'host'			=> DATABASE_SETTING_HOSTNAME,
 	'port'			=> DATABASE_SETTING_HOSTPORT,
 	'database'		=> DATABASE_SETTING_DBNAME,
@@ -17,9 +18,16 @@ $DatabaseParams = [
 	'password'		=> DATABASE_SETTING_PASSWORD,
 ];
 
+/*
+*	Initializing
+*/
+
 new DB();
-/* For old usage */
-$pdo_db = DB::getPDO();
+
+/*
+*	For old usage 
+*/
+$pdo_db = DB::PDO();
 
 class DB {
 	static private $db;

@@ -1,30 +1,26 @@
 <?php
-header('HTTP/1.1 200 OK');
-header('Content-Type: text/html');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Credentials: true');
-header('Cache-Control: no-cache, no-store, no-transform');
-header('Access-Control-Max-Age: 10');
-header('Access-Control-Allow-Methods: POST, GET');
-header('Access-Control-Allow-Headers: Origin, X-Requested-With');
 
-if ($_GET['show_errors']) {
+/*
+*
+*	Прописывать в аргументах
+*
+*/
+if (isset($_GET['show_errors']) && $_GET['show_errors']==1) {
 	ini_set('display_startup_errors', '1');
 	ini_set('display_errors', '1');
 	error_reporting(E_ALL);
 }
 
-$ScriptStartTime = microtime(true);
-const SN_Start = true;
+define('SN_Start', microtime(true));
 $perm = false;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/base.php';
+require_once 'vendor/autoload.php';
+require_once 'base.php';
 
-use SN\Management as SN;
-$SN = new SN;
+#use SN as SN;
+$SN = new SN\Management;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php';
+require_once 'bootstrap.php';
 
 $request = new Superior\Request;
 $get = $request::Data();
@@ -32,12 +28,16 @@ $get = $request::Data();
 $router = new Superior\Router($request);
 $SN->ext('web/routes');
 
-$SN->ext('settings');
 $SN->ext('database');
 $SN->ext('util');
 $SN->ext('permission-control');
 
-require_once './forso.php';
+/*
+*
+*	Необходимо избавиться от этого
+*
+*/
+include 'forso.php';
 
 $PageTitle = $lang['error'];
 
@@ -71,7 +71,7 @@ if (file_exists($vc_path)) {
 }
 
 if (is_array($vc_result)) {
-	header('Content-Type: application/json');
+	header('Content-Type: application/json; charset=utf-8');
 	if (!$SN->GetErrors()) {
 		echo json_encode($vc_result);
 		exit;

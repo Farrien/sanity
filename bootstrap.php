@@ -1,4 +1,5 @@
 <?php
+
 $SN->helper('Userthings');
 $SN->helper('Data');
 $SN->helper('Tasks');
@@ -15,6 +16,13 @@ spl_autoload_register(function($class) {
 	}
 });
 
+use Helper\Configurator;
+Configurator::initConfig('app_config.ini');
+
+define('TEMPLATES_DIR', $_SERVER['DOCUMENT_ROOT'] . '/templates/');
+define('CONTROLLER_DIR', $_SERVER['DOCUMENT_ROOT'] . '/vc/');
+define('VIEW_DIR', $_SERVER['DOCUMENT_ROOT'] . '/public/');
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/server/load/Permission.php';
 
-$lang = require_once $_SERVER['DOCUMENT_ROOT'] . '/support/lang/ru-RU.php';
+$lang = require_once $_SERVER['DOCUMENT_ROOT'] . '/support/lang/' . SITE_LANG . '-' . mb_strtoupper(SITE_LANG) . '.php';

@@ -1,5 +1,7 @@
-<?
+<?php
+
 use Helper\Userthings\Userthings;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$response = array();
 	if (isset($_POST['shared_login'])) {
@@ -12,4 +14,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	
 	if (count($response) > 0) die(cyrJson(json_encode($response)));
 }
-?>
