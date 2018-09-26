@@ -1,13 +1,12 @@
 <?php
-# Prevent access from direct calls
-defined('SN_Start') or header('HTTP/1.1 404 Not Found');
 
-Abstract class MyPanelController {
+abstract class MyPanelController {
 	protected $data = [];
 	protected $request = [];
 	public $pageTitle = 'Default title';
 	protected $output = 'index';
 	protected $model;
+	
 	function __construct($req) {
 		$this->request = $req;
 	}

@@ -32,28 +32,6 @@ class Management {
 		return require_once $path;
 	}
 	
-	public function helper($helperName) {
-		try {
-			$file = $this->FindHelper($helperName);
-			if ($file) {
-				global $USER;
-				global $pdo_db;
-				require_once $file;
-			}
-		} catch (\Exception $e) {
-			$this->AddErr();
-			$this->ExplainLastError($e->getMessage());
-		}
-	}
-	
-	private function FindHelper($SupportName) : string {
-		$path = $_SERVER['DOCUMENT_ROOT'] . '/support/' . $SupportName . '.php';
-		if (!file_exists($path)) {
-			throw new \Exception(__CLASS__ . ' — Support file "' . basename($SupportName) . '" not found.');
-		}
-		return $path;
-	}
-	
 	public function widget($widgetName) {
 		global $USER;
 		global $pdo_db;

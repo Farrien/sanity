@@ -19,7 +19,7 @@ defined('SN_Start') or die('Access denied.');?>
 				<div class="product-info-price"><?=$Product['cost']?> ₽</div>
 				<div class="product-info-order">
 					<div class="order-by-phone">
-						<button class="xver" style="width: 200px;" onclick="addToBasket(<?=$productID?>);">Добавить в корзину</button>
+						<button class="xver" style="width: 200px;" onclick="addToBasket(<?=$productID?>);"><?=$lang['add_to_cart']?></button>
 					</div>
 				</div>
 			</div>
@@ -72,12 +72,13 @@ defined('SN_Start') or die('Access denied.');?>
 		<?}?>
 	</div>
 	
+
 	<?if (SHOP_SHOW_RELATED_PRODUCTS) {?>
 	<div class="PageHeader shop-product-head">Другие товары</div>
 	<div class="shop-related">
 		<?foreach ($RelatedProducts AS $v) {?>
 		<div class="shop-related-item">
-			<a href="/product/?id=<?=$v['id']?>">
+			<a href="/product/<?=$v['id']?>">
 				<div class="related-item-photo" style="background-image: url('/res/<?=$v['cover_image']?>');"></div>
 				<div class="related-item-name"><?=$v['product_name']?></div>
 				<div class="related-item-cost"><?=$v['cost']?> ₽</div>
@@ -94,7 +95,7 @@ function addToBasket(product_id) {
 	mr.Dom(t).SetTxt('Добавлено');
 	sn.shop.addToOrder(product_id);
 	mr.Timers.CreateTimer(1.0, function() {
-		mr.Dom(t).SetTxt('Добавить в корзину');
+		mr.Dom(t).SetTxt('<?=$lang['add_to_cart']?>');
 	});
 }
 </script>

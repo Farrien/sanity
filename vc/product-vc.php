@@ -1,6 +1,12 @@
-<?
-# Destroy the call if this file called directly
-defined('SN_Start') or die('Access denied.');
+<?php
+
+use SN\Management as SN;
+use Helper\Users;
+
+if ($request->hasAugments()) {
+	$augs = $request->augments();
+	$_GET['id'] = $augs->{0};
+}
 
 $productID = (int) $_GET['id'];
 $q = $pdo_db->prepare('SELECT product_name, quantity, category_id, cost, cover_image, added_time FROM shop_goods WHERE id=?');
@@ -8,9 +14,9 @@ $q->execute(array($productID));
 $Product = $q->fetch(2);
 
 if ($Product) {
-	$PageTitle = 'Купить ' . $Product['product_name'];
+	$PageTitle = $lang['#page_title_shop_product_prefix'] . $Product['product_name'];
 	
-	if ($Product['cover_image'] == '') {
+	if ($Product['cover_image'] === '') {
 		$Product['cover_image'] = 'ui/no-photo-big-alt.png';
 	} else {
 		$Product['cover_image'] = 'shop/' . $Product['cover_image'];
@@ -23,7 +29,7 @@ if ($Product) {
 		$RelatedProducts = [];
 		$q = $pdo_db->query('SELECT id, product_name, cost, cover_image FROM shop_goods WHERE id!=' . $productID . ' ORDER BY RAND() LIMIT 4');
 		while ($f = $q->fetch(2)) {
-			if ($f['cover_image'] == '') {
+			if ($f['cover_image'] === '') {
 				$f['cover_image'] = 'ui/no-photo-big-alt.png';
 			} else {
 				$f['cover_image'] = 'shop/' . $f['cover_image'];
@@ -44,24 +50,25 @@ if ($Product) {
 	while ($f = $q->fetch(2)) {
 		$f['description'] = nl2br(prepareString($f['review']));
 		if ($f['owner_id'] == NULL) {
-			$f['reviewer'] = 'Пользователь удален';
+			$f['reviewer'] = $lang['user_deleted'];
 		} else {
-			$f['reviewer'] = Helper\Users\Users::getName($f['owner_id']);
+			$f['reviewer'] = Helper\Users::getName($f['owner_id']);
 		}
 		$Review[] = $f;
 	}
 } else {
-	$SN->AddErr();
-	$SN->ExplaneLastError('Такого товара не существует.');
+	SN::NewErr();
+	SN::ExplainLast($lang['missing_product']);
 }
 
 function buildCategoryBreadCrumb($cat_id, &$arr) {
-	if ($cat_id !== NULL) {
+	$_fn = __FUNCTION__;
+	if (!is_null($cat_id)) {
 		$breadcrumb = [];
 		global $pdo_db;
 		$q = $pdo_db->query('SELECT subject_name, parent_subject FROM subjects WHERE id=' . $cat_id);
 		$f = $q->fetch(2);
-		if ($f['parent_subject']) buildCategoryBreadCrumb($f['parent_subject'], $arr);
+		if ($f['parent_subject']) $_fn($f['parent_subject'], $arr);
 		$arr[] = $f;
 	}
 	return false;

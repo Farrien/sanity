@@ -1,21 +1,13 @@
 <?php
 $sanityACT = $_REQUEST['r'];
 
-const SN_Start = true;
+define('SN_Start', microtime(true));
 
-require_once './base.php';
+require_once 'vendor/autoload.php';
+require_once 'base.php';
 
-use SN\Management;
-$SN = new Management;
-
-$SN->helper('Userthings');
-$SN->helper('Data');
-$SN->helper('Tasks');
-$SN->helper('Users');
-$SN->helper('Wallet');
-$SN->helper('Parser');
-$SN->helper('JSON');
-$SN->helper('Configurator');
+$SN = new SN\Management;
+require_once 'bootstrap.php';
 
 $SN->ext('settings');
 $SN->ext('database');
@@ -31,10 +23,6 @@ if ($sanityACT == 'ShopBasket/ConvertProducts' || $sanityACT == 'ShopCatalog/Get
 if (DEBUG_R_CLASS) {
 	error_reporting(E_ALL);
 }
-
-/*
-require_once './server/model/ModelSource.php';
-*/
 
 class Rout {
 	private $R_ACT = null;
@@ -117,7 +105,7 @@ class Rout {
 	}
 }
 
-Abstract Class BaseController {
+abstract Class BaseController {
 	protected $C_QUERY;
 	protected $DB;
 	protected $CurrentUserID;

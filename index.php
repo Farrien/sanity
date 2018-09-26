@@ -17,7 +17,6 @@ $perm = false;
 require_once 'vendor/autoload.php';
 require_once 'base.php';
 
-#use SN as SN;
 $SN = new SN\Management;
 
 require_once 'bootstrap.php';
