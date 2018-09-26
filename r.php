@@ -4,10 +4,9 @@ $sanityACT = $_REQUEST['r'];
 define('SN_Start', microtime(true));
 
 require_once 'vendor/autoload.php';
-require_once 'base.php';
+require_once 'bootstrap.php';
 
 $SN = new SN\Management;
-require_once 'bootstrap.php';
 
 $SN->ext('settings');
 $SN->ext('database');

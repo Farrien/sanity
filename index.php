@@ -15,11 +15,10 @@ define('SN_Start', microtime(true));
 $perm = false;
 
 require_once 'vendor/autoload.php';
-require_once 'base.php';
+require_once 'bootstrap.php';
 
 $SN = new SN\Management;
 
-require_once 'bootstrap.php';
 
 $request = new Superior\Request;
 $get = $request::Data();

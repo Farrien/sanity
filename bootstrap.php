@@ -14,6 +14,6 @@ define('TEMPLATES_DIR', $_SERVER['DOCUMENT_ROOT'] . '/templates/');
 define('CONTROLLER_DIR', $_SERVER['DOCUMENT_ROOT'] . '/vc/');
 define('VIEW_DIR', $_SERVER['DOCUMENT_ROOT'] . '/public/');
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/server/load/Permission.php';
+require_once 'server/load/Permission.php';
 
-$lang = require_once $_SERVER['DOCUMENT_ROOT'] . '/support/lang/' . SITE_LANG . '-' . mb_strtoupper(SITE_LANG) . '.php';
+$lang = require_once 'support/lang/' . SITE_LANG . '.php';

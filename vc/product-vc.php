@@ -9,7 +9,7 @@ if ($request->hasAugments()) {
 }
 
 $productID = (int) $_GET['id'];
-$q = $pdo_db->prepare('SELECT product_name, quantity, category_id, cost, cover_image, added_time FROM shop_goods WHERE id=?');
+$q = DB::PDO()->prepare('SELECT product_name, quantity, category_id, cost, cover_image, added_time FROM shop_goods WHERE id=?');
 $q->execute(array($productID));
 $Product = $q->fetch(2);
 
@@ -27,7 +27,7 @@ if ($Product) {
 	
 	if (SHOP_SHOW_RELATED_PRODUCTS) {
 		$RelatedProducts = [];
-		$q = $pdo_db->query('SELECT id, product_name, cost, cover_image FROM shop_goods WHERE id!=' . $productID . ' ORDER BY RAND() LIMIT 4');
+		$q = DB::PDO()->query('SELECT id, product_name, cost, cover_image FROM shop_goods WHERE id!=' . $productID . ' ORDER BY RAND() LIMIT 4');
 		while ($f = $q->fetch(2)) {
 			if ($f['cover_image'] === '') {
 				$f['cover_image'] = 'ui/no-photo-big-alt.png';
@@ -39,17 +39,17 @@ if ($Product) {
 	}
 	
 	$ProductDesc = [];
-	$q = $pdo_db->query('SELECT title, description FROM shop_product_description WHERE product_id=' . $productID);
+	$q = DB::PDO()->query('SELECT title, description FROM shop_product_description WHERE product_id=' . $productID);
 	while ($f = $q->fetch(2)) {
 		$f['description'] = nl2br(prepareString($f['description']));
 		$ProductDesc[] = $f;
 	}
 	
 	$Review = [];
-	$q = $pdo_db->query('SELECT owner_id, review, added_time FROM shop_product_reviews WHERE product_id=' . $productID);
+	$q = DB::PDO()->query('SELECT owner_id, review, added_time FROM shop_product_reviews WHERE product_id=' . $productID);
 	while ($f = $q->fetch(2)) {
 		$f['description'] = nl2br(prepareString($f['review']));
-		if ($f['owner_id'] == NULL) {
+		if (is_null($f['owner_id'])) {
 			$f['reviewer'] = $lang['user_deleted'];
 		} else {
 			$f['reviewer'] = Helper\Users::getName($f['owner_id']);
@@ -65,8 +65,7 @@ function buildCategoryBreadCrumb($cat_id, &$arr) {
 	$_fn = __FUNCTION__;
 	if (!is_null($cat_id)) {
 		$breadcrumb = [];
-		global $pdo_db;
-		$q = $pdo_db->query('SELECT subject_name, parent_subject FROM subjects WHERE id=' . $cat_id);
+		$q = DB::PDO()->query('SELECT subject_name, parent_subject FROM subjects WHERE id=' . $cat_id);
 		$f = $q->fetch(2);
 		if ($f['parent_subject']) $_fn($f['parent_subject'], $arr);
 		$arr[] = $f;
