@@ -11,7 +11,7 @@ class Response {
 		if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/public/' . $path)) {
 			return new View($path, $variables);
 		}
-		return [];
+		static::Status()->setStatusCode(500);
 		return false;
 	}
 	

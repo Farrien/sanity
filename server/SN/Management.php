@@ -56,13 +56,12 @@ class Management {
 	
 	public function RegisterScriptDuration() {
 		global $pdo_db;
-		global $ScriptStartTime;
 		$mt = microtime(true);
-		$d = $mt - $ScriptStartTime;
+		$d = $mt - SN_Start;
 		if ($d >= 0.75 && $pdo_db) {
 			$q = $pdo_db->prepare('INSERT INTO app_script_length_stats (s_request, s_mt, i_request_time) VALUES(?, ?, ?)');
 			$q->execute(array(
-				$_SERVER['PHP_SELF'] . ' -- ' . $_SERVER['QUERY_STRING'],
+				$_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'],
 				$d,
 				$_SERVER['REQUEST_TIME']
 			));

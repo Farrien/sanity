@@ -1,15 +1,16 @@
-
-	<meta charset="utf-8">
-	<meta name="Description" content="<?=SITE_NAME?>">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<base href="/" />
-	<meta property="og:image" content="" />
-	<meta property="og:title" content="" />
-	<meta property="og:description" content="" />
-	
 	<title><?=$PageTitle?> | <?=SITE_NAME?></title>
+
+	<base href="/">
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="author" content="<?=OWNER_NAME?>">
+	<meta name="description" content="<?=SITE_NAME?>">
+	<meta name="keywords" content="">
+	<meta property="og:site_name" content="<?=SITE_NAME?>">
+	<meta property="og:image" content="//<?=$_SERVER['HTTP_HOST']?>/res/ui/app-logo-solid-dark.png">
+	<meta property="og:title" content="<?=SITE_NAME?> — <?=$PageTitle?>">
+	<meta property="og:description" content="">
+	<meta property="og:type" content="website">
 
 	<!-- Manifest -->
 	<!--<link rel="manifest" href="manifest.json">-->
@@ -29,7 +30,6 @@
 	<!-- App Styles -->
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/sn-design.css">
 	<link rel="stylesheet" type="text/css" media="all" href="//<?=$_SERVER['HTTP_HOST']?>/client/application.css">
-
 
 	<!-- App Icon -->
 	<link rel="icon" href="//<?=$_SERVER['HTTP_HOST']?>/res/ui/favicon.ico" type="image/x-icon">

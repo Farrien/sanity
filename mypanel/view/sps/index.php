@@ -15,7 +15,7 @@ defined('SN_Start') or die('Access denied.');?>
 	</form>
 
 	<div class="data-box-field">
-		<a class="ui-mypanel-link" href="#" onclick="local_action_save_strings(); return false;">Сохранить изменения</a>
+		<a href="#" class="ui-mypanel-link" onclick="local_action_save_strings(); return false;">Сохранить изменения</a>
 	</div>
 	<div class="data-box-explanation">
 		Сохраняет все затронутые элементы.
@@ -38,7 +38,6 @@ defined('SN_Start') or die('Access denied.');?>
 		</div>
 	</form>
 
-
 	<div class="data-box-field">
 		<a class="ui-mypanel-link" href="#" onclick="local_action_add_htag(); return false;">Добавить</a>
 	</div>
@@ -54,6 +53,7 @@ function local_action_save_strings() {
 	});
 	return false;
 }
+
 function local_action_add_htag() {
 	mr.SendForm('?act=core/sps/add', '#sps-add-form', function(r) {
 	//	console.log(r);

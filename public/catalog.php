@@ -1,6 +1,7 @@
 <script>
 	g_sortType = <?=SHOP_SORT_VALUE?>;
 </script>
+
 <div>
 	<div class="StaticContainer">
 		<div class="st rows3">
@@ -9,7 +10,7 @@
 					<div class="text-bl">Категории</div>
 				</div>
 				
-				<?=ShowCategories( $CategoriesTree );?>
+				<?=ShowCategories($CategoriesTree);?>
 				
 				<div class="shop-sidebar-items">
 					<div class="shop-sidebar-item">
@@ -42,7 +43,7 @@
 			<div class="shop-focus-listing">
 				<div class="shop-shopping-goods">
 					<?foreach ($Products AS $v) {?>
-					<div class="shop-shipping-goods-item">
+					<div class="shop-shipping-goods-item <?if ($v['unavailable']) echo 'unavailable';?>">
 						<a href="/product/?id=<?=$v['id']?>">
 							<?if ($v['unavailable']) {?>
 							<div class="product_unavaulable">
@@ -53,6 +54,9 @@
 							<div class="product_name"><?=$v['product_name']?></div>
 							<div class="product_price"><?=$v['cost']?> ₽</div>
 						</a>
+						<div class="shop-goods-item-bottom-items">
+							<div class="shop-goods-item-buy-button" onclick="addToBasket(<?=$v['id']?>);">Купить</div>
+						</div>
 					</div>
 					<?}?>
 				</div>
@@ -60,6 +64,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
 /* Скроллинг меню */
 if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
@@ -82,5 +87,12 @@ if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
 			rsbmE2.DelClass('floatingMenu');
 		}
 	});
+}
+
+function addToBasket(product_id) {
+	let t = event.target;
+	mr.Dom(t).SetTxt('Добавлено');
+	sn.shop.addToOrder(product_id);
+	mr.Dom(t).NewClass('added-to-cart');
 }
 </script>

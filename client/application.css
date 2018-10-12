@@ -182,10 +182,68 @@ button.xver:hover {
 	border-left: 1px solid #d3d3d3;
 }
 
+.shop-goods-item-bottom-items {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	padding: 12px 0;
+}
+
+.shop-goods-item-buy-button {
+	font-family: 'SanFranciscoDisplay';
+	font-size: 15px;
+	font-weight: 500;
+	letter-spacing: .02em;
+	background: transparent;
+	color: #ff2142;
+	position: relative;
+	text-transform: uppercase;
+	display: inline-block;
+	line-height: 22px;
+	cursor: pointer;
+	border: 1px solid #000;
+	padding: 0 24px 0 8px;
+	box-sizing: border-box;
+}
+
+.shop-goods-item-buy-button:hover {
+	background-color: #ff2142;
+	color: #fff;
+}
+
+.shop-goods-item-buy-button.added-to-cart {
+	opacity: .6;
+	pointer-events: none;
+	background-color: #ff2142;
+	border-color: #ff2142;
+	color: #fff;
+	padding: 0 8px;
+	transition: 100ms all linear;
+}
+
+.shop-goods-item-buy-button.added-to-cart:after {
+	content: none;
+}
+
+.shop-goods-item-buy-button:hover:after {
+	border-left-color: #fff;
+}
+
+.shop-goods-item-buy-button:after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    bottom: calc(50% - 4px);
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid #ff2142;
+}
+
 .shop-shopping-goods {
 	display: flex;
 	flex-wrap: wrap;
-	
 }
 
 .shop-shopping-goods .shop-shipping-goods-item {
@@ -196,7 +254,14 @@ button.xver:hover {
 	color: #444;
 	text-align: center;
 	position: relative;
+	padding-bottom: 24px;
 }
+
+.shop-shopping-goods .shop-shipping-goods-item.unavailable {
+	
+}
+
+.shop-shopping-goods .shop-shipping-goods-item a {display: block;}
 
 .shop-shopping-goods .shop-shipping-goods-item .product_cover {
 	width: 100%;

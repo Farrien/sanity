@@ -2,14 +2,6 @@
 
 use SN\Management as SN;
 
-/*
-try {
-	$pdo_db = new PDO('mysql:host='.DATABASE_SETTING_HOSTNAME.';dbname='.DATABASE_SETTING_DBNAME.';charset=utf8;', DATABASE_SETTING_USER, DATABASE_SETTING_PASSWORD);
-} catch (PDOException $e) {
-	$SN->AddErr();
-	$SN->ExplainLastError($e->getMessage());
-}*/
-
 $databaseParams = [
 	'host'			=> DATABASE_SETTING_HOSTNAME,
 	'port'			=> DATABASE_SETTING_HOSTPORT,

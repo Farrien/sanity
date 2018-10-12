@@ -9,10 +9,7 @@ class Constructor {
 	public $request;
 	public $augments = NULL;
 	
-	function __construct(Request $request, Array $request_array) {
-	#	remove a router's helper
-	#	unset($request_array['p']);
-		
+	function __construct(Array $request_array) {
 		$this->request = (object) $request_array;
 	}
 	

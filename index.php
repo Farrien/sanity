@@ -1,8 +1,7 @@
 <?php
-
 /*
 *
-*	Прописывать в аргументах
+*	Вывод ошибок
 *
 */
 if (isset($_GET['show_errors']) && $_GET['show_errors']==1) {
@@ -17,29 +16,32 @@ $perm = false;
 require_once 'vendor/autoload.php';
 require_once 'bootstrap.php';
 
-$SN = new SN\Management;
-
+use SN\Management as SN;
+$SN = new SN;
 
 $request = new Superior\Request;
 $get = $request::Data();
 
+/*
 $router = new Superior\Router($request);
-$SN->ext('web/routes');
+require_once 'web/routes.php';
+*/
 
 $SN->ext('database');
 $SN->ext('util');
 $SN->ext('permission-control');
 
-/*
-*
-*	Необходимо избавиться от этого
-*
-*/
-include 'forso.php';
-
 $PageTitle = $lang['error'];
 
-# Simple fake routing
+use Superior\ControllerHandler as Handler;
+Handler::register($request);
+$SN->ext('web/handles');
+
+/*
+*
+*	Simple fake routing
+*
+*/
 if (empty($_REQUEST['p'])) {
 	$_REQUEST['p'] = 'index';
 }
@@ -48,11 +50,15 @@ if (empty($ROUT_P) || !isset($ROUT_P)) $ROUT_P = 'index';
 $requestPage = VIEW_DIR . $ROUT_P . '.php';
 
 if (!is_file($requestPage)) {
-	$SN->AddErr();
-	$SN->ExplainLastError('Page not found.');
+	SN::NewErr();
+	SN::ExplainLast('Page not found.');
 }
 
-# Checking access permissions
+/*
+*
+*	Check if a user has permissions to visit a targeted page
+*
+*/
 Permission::init($USER['privileges']);
 $SN->ext('web/access');
 
@@ -62,8 +68,13 @@ if (isset($_GET['ownp'])) {
 	define('OwnOrigin', true);
 }
 
-# Checking VC-part file
+/*
+*
+*	Check if a VC-part file exists
+*
+*/
 $vc_path = CONTROLLER_DIR . $ROUT_P . '-vc.php';
+$vc_result = false;
 if (file_exists($vc_path)) {
 	$vc_result = require_once $vc_path;
 }
@@ -72,10 +83,39 @@ if (is_array($vc_result)) {
 	header('Content-Type: application/json; charset=utf-8');
 	if (!$SN->GetErrors()) {
 		echo json_encode($vc_result);
-		exit;
+		die;
 	}
 }
-if (true) {
+
+use Superior\Response;
+if (Handler::hasController()) {
+	$controllerInstance = new Handler::$cm[0];
+	$methodName = Handler::$cm[1];
+	$return = $controllerInstance->$methodName();
+	
+	$headerCode = Response::Status()->getStatusCode();
+
+	if ($return) {
+		header($_SERVER['SERVER_PROTOCOL'] . ' ' . $headerCode);
+		if ($return instanceof Superior\Component\View) {
+			header('Content-Type: text/html; charset=utf-8');
+			$extractedVariablesCount = extract($return->vars(), EXTR_OVERWRITE);
+			include $return->getPath();
+		}
+		if (is_array($return)) {
+			header('Content-Type: application/json; charset=utf-8');
+			echo json_encode($return);
+		}
+		if (is_string($return)) {
+			header('Content-Type: text/plain; charset=utf-8');
+			echo $return;
+		}
+	} else {
+		header($_SERVER['SERVER_PROTOCOL'] . ' 500');
+	}
+	
+	die;
+} else {
 	header('Content-Type: text/html; charset=utf-8');
 	if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_HEADER;
 

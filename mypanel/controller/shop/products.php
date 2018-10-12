@@ -22,6 +22,7 @@ class ShopProductsController extends MyPanelController {
 		$this->data['quantity'] = $product['quantity'];
 		$this->data['category'] = $product['category_id'];
 		$this->data['cost'] = $product['cost'];
+		$this->data['source_photo'] = $product['cover_image'];
 		
 		$this->SetTitle('Создание/изменение товара');
 		$this->SetOutput('product_form');

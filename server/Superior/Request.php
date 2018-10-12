@@ -19,7 +19,7 @@ class Request {
 	}
 	
 	private function reg() {
-		return new Constructor($this, $_REQUEST);
+		return new Constructor($_REQUEST);
 	}
 	
 	public function method() {

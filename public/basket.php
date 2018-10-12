@@ -38,7 +38,7 @@ mr.Query('../get/ShopBasket/ConvertProducts', {items : sn.shop.orders.getItem('b
 
 function registerOrder() {
 	sn.shop.completeOrder();
-	location.href = '/orders/';
+//	location.href = '/orders/';
 }
 
 function removeBasket() {

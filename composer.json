@@ -1,6 +1,7 @@
 {
 	"require": {
 		"php":">=5.3.0",
-		"setasign/fpdi-tcpdf": "2.0"
+		"setasign/fpdi-tcpdf": "2.0",
+		"nesbot/carbon": "^2.3"
 	}
 }

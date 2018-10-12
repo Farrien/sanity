@@ -9,7 +9,7 @@ defined('SN_Start') or die('Access denied.');?>
 
 <div class="PageHeader"><?=$PageTitle?></div>
 
-<div>
+<div class="WhiteBlock VerticalSpaces">
 	<form id="shop-product-form">
 		<input type="hidden" name="product_id" value="<?=$id?>">
 		<div class="data-box-field">
@@ -33,9 +33,19 @@ defined('SN_Start') or die('Access denied.');?>
 			<input type="text" name="product_cost" value="<?=$cost?>">
 		</div>
 	</form>
+
+	<div class="field-space"></div>
+	
+	<div class="data-box-choose-photo">
+		<div class="data-thumbnail-preview">
+			<img src="/res/shop/<?=$source_photo?>">
+		</div>
+		<div class="FileForm" p-name="product_photo" p-accept="image/jpeg,image/png"></div>
+	</div>
+	
+	<div class="field-space"></div>
 </div>
 
-<div class="field-space"></div>
 
 <script>
 function local_action_1() {

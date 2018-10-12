@@ -26,6 +26,7 @@ return [
 	*
 	*/
 	'#page_title_index'							=> 'Главная',
+	'#page_title_account'						=> 'Настройки',
 	'#page_title_shop_product_prefix'			=> 'Купить ',
 	'#page_title_catalog'						=> 'Каталог товаров'
 ];

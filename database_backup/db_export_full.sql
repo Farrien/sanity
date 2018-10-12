@@ -1,9 +1,8 @@
 -- phpMyAdmin SQL Dump
 -- version 4.7.7
 -- https://www.phpmyadmin.net/
---
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 31 2018 г., 16:18
+-- Время создания: Окт 12 2018 г., 09:18
 -- Версия сервера: 5.6.38
 -- Версия PHP: 7.2.0
 
@@ -18,60 +17,27 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
 -- База данных: `sanity_origin`
---
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `#custom_app_bigd_strings`
---
 
-CREATE TABLE `#custom_app_bigd_strings` (
+-- `custom_app_bigd_strings`
+
+CREATE TABLE `custom_app_bigd_strings` (
   `id` int(20) NOT NULL,
   `unique_name` varchar(128) NOT NULL,
   `string_value` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Дамп данных таблицы `#custom_app_bigd_strings`
---
 
-INSERT INTO `#custom_app_bigd_strings` (`id`, `unique_name`, `string_value`) VALUES
-(1, 'greetings', 'Удобные выступы'),
-(2, 'welcome_text', 'Добро Пожаловать в Сити-17!');
+INSERT INTO `custom_app_bigd_strings` (`id`, `unique_name`, `string_value`) VALUES
+(1, 'greetings', 'Hello world!'),
+(2, 'welcome_text', 'Welcome!');
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `#custom_table_performers_requests`
---
 
-CREATE TABLE `#custom_table_performers_requests` (
-  `id` int(20) NOT NULL,
-  `performer_phone` varchar(20) NOT NULL,
-  `performer_mail` varchar(128) DEFAULT NULL,
-  `performer_name` varchar(64) NOT NULL,
-  `performer_secondname` varchar(64) NOT NULL,
-  `request_message` text NOT NULL,
-  `added_time` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `#custom_table_performers_requests`
---
-
-INSERT INTO `#custom_table_performers_requests` (`id`, `performer_phone`, `performer_mail`, `performer_name`, `performer_secondname`, `request_message`, `added_time`) VALUES
-(7, '89869761198', 'g-alb-ert@yandex.ru', 'Albert', 'Shtern', 'Это тестовый запрос. IT-услуги', '1528448631'),
-(8, '89174672350', 'chulpan@ya.ru', 'Чулпан', 'Шамсиева', 'Парикмахерское искусство', '1531113239'),
-(9, '89377584433', 's-dinar@mail.ru', 'Динар', 'Шамсиев', 'Ремонт телефонов', '1531114239');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `app_script_length_stats`
---
+-- `app_script_length_stats`
 
 CREATE TABLE `app_script_length_stats` (
   `id` int(20) NOT NULL,
@@ -80,22 +46,9 @@ CREATE TABLE `app_script_length_stats` (
   `i_request_time` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `app_script_length_stats`
---
 
-INSERT INTO `app_script_length_stats` (`id`, `s_request`, `s_mt`, `i_request_time`) VALUES
-(1, '/index.php -- p=apartments', '0.81742286682129', 1535101538),
-(2, '/index.php -- ', '1.1189458370209', 1535345104),
-(3, '/index.php -- ', '1.521436214447', 1535452825),
-(4, '/index.php -- ', '3.5909669399261', 1535603990),
-(5, '/index.php -- p=account&augmentation=', '1.2292830944061', 1535717827);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `app_stats`
---
+-- `app_stats`
 
 CREATE TABLE `app_stats` (
   `id` int(20) NOT NULL,
@@ -106,11 +59,33 @@ CREATE TABLE `app_stats` (
   `i_userid` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `messages`
---
+
+-- `custom_app_bigd_construction_progress`
+
+CREATE TABLE `custom_app_bigd_construction_progress` (
+  `id` int(11) NOT NULL,
+  `photo_path` varchar(128) DEFAULT NULL,
+  `thumbnail_path` varchar(128) DEFAULT NULL,
+  `year` int(4) NOT NULL DEFAULT '2017',
+  `month` int(2) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Дамп данных таблицы `custom_app_bigd_construction_progress`
+
+INSERT INTO `custom_app_bigd_construction_progress` (`id`, `photo_path`, `thumbnail_path`, `year`, `month`) VALUES
+(1, '78592b315b7f9f6300ecfa3f78d2864f-v1538723151_.jpg', '78592b315b7f9f6300ecfa3f78d2864f-v1538723151_thumbnail.jpg', 2018, 10),
+(2, 'b8e3d00c1640b5c8dd66d5f20f8163e0-v1538657562_.jpg', 'b8e3d00c1640b5c8dd66d5f20f8163e0-v1538657562_thumbnail.jpg', 2018, 10),
+(3, 'b094a9caf25d570ade9b17f346095009-v1538657564_.jpg', 'b094a9caf25d570ade9b17f346095009-v1538657564_thumbnail.jpg', 2018, 10),
+(4, 'd6e1141be1a3afa0ab94e8790fc76f25-v1538657565_.jpg', 'd6e1141be1a3afa0ab94e8790fc76f25-v1538657565_thumbnail.jpg', 2018, 10),
+(5, 'b521bd09bf11373d0a43c40e20146104-v1538728430_.jpg', 'b521bd09bf11373d0a43c40e20146104-v1538728430_thumbnail.jpg', 0, 0),
+(6, 'c41435d3175588b62486c924d05cf4c2-v1538728466_.jpg', 'c41435d3175588b62486c924d05cf4c2-v1538728466_thumbnail.jpg', 0, 0),
+(7, '15c8196d1a80e3f8f5b377399661410c-v1538728500_.jpg', '15c8196d1a80e3f8f5b377399661410c-v1538728500_thumbnail.jpg', 2018, 1),
+(8, 'd2e7ea719518c43e55507634092fea3d-v1538728547_.jpg', 'd2e7ea719518c43e55507634092fea3d-v1538728547_thumbnail.jpg', 2018, 2);
+
+
+
+-- `messages`
 
 CREATE TABLE `messages` (
   `id` int(20) NOT NULL,
@@ -122,22 +97,18 @@ CREATE TABLE `messages` (
   `msg_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `pages_categories`
---
+
+-- `pages_categories`
 
 CREATE TABLE `pages_categories` (
   `id` int(20) NOT NULL,
   `category_name` varchar(256) DEFAULT 'Без названия'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `pages_content`
---
+
+-- `pages_content`
 
 CREATE TABLE `pages_content` (
   `id` int(20) NOT NULL,
@@ -147,11 +118,9 @@ CREATE TABLE `pages_content` (
   `added_time` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `people`
---
+
+-- `people`
 
 CREATE TABLE `people` (
   `id` int(20) NOT NULL,
@@ -164,18 +133,14 @@ CREATE TABLE `people` (
   `added_time` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Дамп данных таблицы `people`
---
 
 INSERT INTO `people` (`id`, `login`, `pass`, `pass_updated_time`, `name`, `second_name`, `permissionGroup`, `added_time`) VALUES
-(1, '80000000000', '12e8cca497f6ae82de94496b8fe83644', 0, 'Admin', '', 2, 0);
+(1, '80000000000', '6becc52ee8703d6b8130b9b7e2046a0c', 1538540657, 'Admin', '', 2, 0);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `sanity_apps_table_modules`
---
+
+-- `sanity_apps_table_modules`
 
 CREATE TABLE `sanity_apps_table_modules` (
   `id` int(11) NOT NULL,
@@ -184,19 +149,18 @@ CREATE TABLE `sanity_apps_table_modules` (
   `require_vc` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Дамп данных таблицы `sanity_apps_table_modules`
---
 
 INSERT INTO `sanity_apps_table_modules` (`id`, `link_name`, `module_author`, `require_vc`) VALUES
 (1, 'new_module', 'Farrien', 0),
-(2, 'selection', 'The Big D', 0);
+(2, 'selection', 'The Big D', 0),
+(3, 'documents', 'Farrien', 0),
+(4, 'apartment', 'Big D', 0),
+(5, 'apartments', 'Big D', 0);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `sanity_prop_apps`
---
+
+-- `sanity_prop_apps`
 
 CREATE TABLE `sanity_prop_apps` (
   `id` int(20) NOT NULL,
@@ -206,9 +170,7 @@ CREATE TABLE `sanity_prop_apps` (
   `sort` int(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Дамп данных таблицы `sanity_prop_apps`
---
 
 INSERT INTO `sanity_prop_apps` (`id`, `app_name`, `app_tech_path`, `app_icon_img`, `sort`) VALUES
 (1, 'Настройки', 'settings/index', 'ui/Settings-2-icon.png', -1),
@@ -216,7 +178,7 @@ INSERT INTO `sanity_prop_apps` (`id`, `app_name`, `app_tech_path`, `app_icon_img
 (3, 'Управление SMS', 'sms/index', 'ui/sms_icon.png', -1),
 (4, 'Пользователи', 'users/search', NULL, -1),
 (5, 'Управление хранилищем', 'cloud/index', 'ui/cloud_icon.png', -1),
-(6, 'Single Page Builder', NULL, NULL, -1),
+(6, 'Товары', 'shop/products', NULL, 0),
 (7, 'Почта', NULL, NULL, -1),
 (8, 'Файлы', 'files/main', 'ui/icon-files.png', -1),
 (9, 'Категории услуг', NULL, NULL, -1),
@@ -225,13 +187,12 @@ INSERT INTO `sanity_prop_apps` (`id`, `app_name`, `app_tech_path`, `app_icon_img
 (12, 'Статистика', NULL, NULL, -1),
 (13, 'Обновления', 'settings/updates', 'ui/updates.png', -1),
 (14, 'Расширения', 'modules/main', NULL, 0),
-(15, 'Строки', 'sps/main', NULL, 0);
+(15, 'Строки', 'sps/main', NULL, 0),
+(16, 'ЖК | Ход строительства', 'bigd/construction', NULL, 0);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `shop_callback_requests`
---
+
+-- `shop_callback_requests`
 
 CREATE TABLE `shop_callback_requests` (
   `id` int(20) NOT NULL,
@@ -241,9 +202,7 @@ CREATE TABLE `shop_callback_requests` (
   `added_time` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Дамп данных таблицы `shop_callback_requests`
---
 
 INSERT INTO `shop_callback_requests` (`id`, `product_id`, `client_phone`, `ip_addr`, `added_time`) VALUES
 (1, 16, '89174672350', '192.0.0.1', 1532083250),
@@ -256,11 +215,9 @@ INSERT INTO `shop_callback_requests` (`id`, `product_id`, `client_phone`, `ip_ad
 (8, 16, '899992290000', '192.0.0.1', 1532083556),
 (9, 16, '89174672350', '127.0.0.1', 1532084194);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `shop_goods`
---
+
+-- `shop_goods`
 
 CREATE TABLE `shop_goods` (
   `id` int(20) NOT NULL,
@@ -275,23 +232,66 @@ CREATE TABLE `shop_goods` (
   `updated_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Дамп данных таблицы `shop_goods`
---
 
 INSERT INTO `shop_goods` (`id`, `product_name`, `articul`, `quantity`, `stock_status`, `category_id`, `cost`, `cover_image`, `added_time`, `updated_time`) VALUES
 (1, 'Шампунь &quot;Trichup&quot; - с кератином 200мл', 8471, 1, 1, 3, '269.00', 'agquNZpbybg.jpg', 0, 0),
 (2, 'Шампунь &quot;Trichup&quot; - с кератином 200мл', 8472, 1, 1, 3, '269.00', '7hENNVZQ1-A.jpg', 0, 1533656755),
-(3, 'Шампунь &quot;Trichup&quot; - против выпадения волос 200мл', 8463, 10, 1, 3, '269.00', '', 0, 1533656741),
-(4, 'Шампунь &quot;Trichup&quot; - против выпадения волос 200мл', 8461, 10, 1, 3, '269.00', '', 0, 1533656729),
-(5, 'Жидкое мыло &quot;Silk&quot; - Pearl glow (ОАЭ) 500мл', 8515, 10, 1, 5, '179.00', '', 0, 1533656747),
-(6, 'Уригамма &quot;Мойра&quot;', NULL, 0, 1, NULL, '0.00', '', 1533656521, 1533656594);
+(3, 'Шампунь &quot;Trichup&quot; - против выпадения волос 200мл', 8463, 10, 1, 3, '269.00', 'LSvtb7cpehw.jpg', 0, 1533656741),
+(4, 'Шампунь &quot;Trichup&quot; - против выпадения волос 200мл', 8461, 10, 1, 3, '269.00', 'C5BQzAop4jY.jpg', 0, 1533656729),
+(5, 'Жидкое мыло &quot;Silk&quot; - Pearl glow (ОАЭ) 500мл', 8515, 10, 1, 5, '179.00', 'jU0djHrlaJY.jpg', 0, 1533656747),
+(6, 'Шампунь Vatika - Black seed (с черным тмином) 200мл', 8547, 1, 1, 3, '220.00', 'd7FPOJN4CXg.jpg', 1533656521, 1538385667),
+(7, 'Шампунь &quot;Vatika Lemon and Yoghurt&quot; - против перхоти | Лимон и Йогурт 200мл', 8963, 10, 1, 3, '549.00', 'H11sfBl7LX8.jpg', 1536832163, 0),
+(8, 'Жидкое мыло Silk - Cherry Blossom (ОАЭ) 500мл', 8514, 1, 1, 5, '179.00', '37GGnhVvpTI.jpg', 1536835626, 0),
+(9, 'Жидкое мыло Silk - Sea minerals (ОАЭ) 500мл', 8511, 1, 1, 5, '179.00', 'FZLf5LJuESc.jpg', 1538313560, 1538385670),
+(10, 'Жидкое мыло Silk - Natural Olive (ОАЭ) 500мл', 8516, 1, 1, 5, '179.00', 'nTUK0Rz08Is.jpg', 1538313595, 1538385688),
+(11, 'Жидкое мыло Silk - Velvety Peach (ОАЭ) 500мл', 8513, 1, 1, 5, '179.00', 'HAKBbfs6Dks.jpg', 1538313671, 1538385680),
+(12, 'Жидкое мыло Silk - Midnight orchid (ОАЭ) 500мл', 8512, 1, 1, 5, '179.00', 'IGJA9PoFmDE.jpg', 1538313685, 1538385672),
+(13, 'Шампунь &quot;Trichup&quot; - с черным тмином 200мл', 8462, 15, 1, 3, '269.00', 'K-yb5JuHAFk.jpg', 1538313712, 1539151418),
+(14, 'Свободная ячейка', 1, 0, 1, 3, '269.00', '', 1538313767, 0),
+(15, NULL, NULL, 0, 1, NULL, '0.00', '', 1538569987, 0),
+(16, NULL, NULL, 0, 1, NULL, '0.00', '', 1538569999, 0);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `shop_product_description`
---
+
+-- `shop_orders`
+
+CREATE TABLE `shop_orders` (
+  `id` int(20) NOT NULL,
+  `client_id` int(20) DEFAULT NULL,
+  `client_phone` varchar(64) DEFAULT NULL,
+  `added_time` int(20) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Дамп данных таблицы `shop_orders`
+
+INSERT INTO `shop_orders` (`id`, `client_id`, `client_phone`, `added_time`) VALUES
+(1, 1, '', 0),
+(2, 1, NULL, 1538552487),
+(3, 1, NULL, 10000),
+(4, 1, NULL, 1538552548);
+
+
+
+-- `shop_order_product_dependency`
+
+CREATE TABLE `shop_order_product_dependency` (
+  `id` int(20) NOT NULL,
+  `product_id` int(20) DEFAULT NULL,
+  `order_id` int(20) DEFAULT NULL,
+  `count` int(20) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Дамп данных таблицы `shop_order_product_dependency`
+
+INSERT INTO `shop_order_product_dependency` (`id`, `product_id`, `order_id`, `count`) VALUES
+(8, 6, 4, 2),
+(9, 12, 4, 1),
+(10, 12, 1, 1);
+
+
+
+-- `shop_product_description`
 
 CREATE TABLE `shop_product_description` (
   `id` int(20) NOT NULL,
@@ -301,11 +301,9 @@ CREATE TABLE `shop_product_description` (
   `tags` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `shop_product_reviews`
---
+
+-- `shop_product_reviews`
 
 CREATE TABLE `shop_product_reviews` (
   `id` int(20) NOT NULL,
@@ -315,11 +313,14 @@ CREATE TABLE `shop_product_reviews` (
   `added_time` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
+-- Дамп данных таблицы `shop_product_reviews`
 
---
--- Структура таблицы `site_reviews`
---
+INSERT INTO `shop_product_reviews` (`id`, `product_id`, `owner_id`, `review`, `added_time`) VALUES
+(1, 1, 1, '', 100000);
+
+
+
+-- `site_reviews`
 
 CREATE TABLE `site_reviews` (
   `id` int(20) NOT NULL,
@@ -329,11 +330,9 @@ CREATE TABLE `site_reviews` (
   `added_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `subjects`
---
+
+-- `subjects`
 
 CREATE TABLE `subjects` (
   `id` int(20) NOT NULL,
@@ -342,9 +341,7 @@ CREATE TABLE `subjects` (
   `visible` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Дамп данных таблицы `subjects`
---
 
 INSERT INTO `subjects` (`id`, `subject_name`, `parent_subject`, `visible`) VALUES
 (1, 'Косметика', NULL, 1),
@@ -353,11 +350,9 @@ INSERT INTO `subjects` (`id`, `subject_name`, `parent_subject`, `visible`) VALUE
 (4, 'Парфюмерия', NULL, 1),
 (5, 'Жидкое мыло', NULL, 1);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `subjects_dependency`
---
+
+-- `subjects_dependency`
 
 CREATE TABLE `subjects_dependency` (
   `id` int(20) NOT NULL,
@@ -366,11 +361,9 @@ CREATE TABLE `subjects_dependency` (
   `active` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `wallet_history`
---
+
+-- `wallet_history`
 
 CREATE TABLE `wallet_history` (
   `id` int(20) NOT NULL,
@@ -382,11 +375,9 @@ CREATE TABLE `wallet_history` (
   `added_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `wallet_info`
---
+
+-- `wallet_info`
 
 CREATE TABLE `wallet_info` (
   `id` int(20) NOT NULL,
@@ -395,292 +386,228 @@ CREATE TABLE `wallet_info` (
   `last_update_time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Индексы сохранённых таблиц
---
 
---
--- Индексы таблицы `#custom_app_bigd_strings`
---
+-- `#custom_app_bigd_strings`
 ALTER TABLE `#custom_app_bigd_strings`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_name` (`unique_name`);
 
---
--- Индексы таблицы `#custom_table_performers_requests`
---
-ALTER TABLE `#custom_table_performers_requests`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `app_script_length_stats`
---
+-- `app_script_length_stats`
 ALTER TABLE `app_script_length_stats`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `app_stats`
---
+-- `app_stats`
 ALTER TABLE `app_stats`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `messages`
---
+-- `custom_app_bigd_construction_progress`
+ALTER TABLE `custom_app_bigd_construction_progress`
+  ADD PRIMARY KEY (`id`);
+
+-- `messages`
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
   ADD KEY `receiver_hookup` (`receiver_hookup`),
   ADD KEY `vision_flag` (`vision_flag`);
 
---
--- Индексы таблицы `pages_categories`
---
+-- `pages_categories`
 ALTER TABLE `pages_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
---
--- Индексы таблицы `pages_content`
---
+-- `pages_content`
 ALTER TABLE `pages_content`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_id` (`category_id`);
 
---
--- Индексы таблицы `people`
---
+-- `people`
 ALTER TABLE `people`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`) USING BTREE;
 
---
--- Индексы таблицы `sanity_apps_table_modules`
---
+-- `sanity_apps_table_modules`
 ALTER TABLE `sanity_apps_table_modules`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `link_name` (`link_name`);
 
---
--- Индексы таблицы `sanity_prop_apps`
---
+-- `sanity_prop_apps`
 ALTER TABLE `sanity_prop_apps`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `app_name` (`app_name`),
   ADD KEY `app_icon_img` (`app_icon_img`);
 
---
--- Индексы таблицы `shop_callback_requests`
---
+-- `shop_callback_requests`
 ALTER TABLE `shop_callback_requests`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `shop_goods`
---
+-- `shop_goods`
 ALTER TABLE `shop_goods`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_id` (`category_id`);
 
---
--- Индексы таблицы `shop_product_description`
---
+-- `shop_orders`
+ALTER TABLE `shop_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `client` (`client_id`);
+
+-- `shop_order_product_dependency`
+ALTER TABLE `shop_order_product_dependency`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product` (`product_id`),
+  ADD KEY `order` (`order_id`);
+
+-- `shop_product_description`
 ALTER TABLE `shop_product_description`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`),
   ADD KEY `title` (`title`);
 
---
--- Индексы таблицы `shop_product_reviews`
---
+-- `shop_product_reviews`
 ALTER TABLE `shop_product_reviews`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
 
---
--- Индексы таблицы `site_reviews`
---
+-- `site_reviews`
 ALTER TABLE `site_reviews`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`) USING BTREE,
   ADD KEY `author_id` (`author_id`);
 
---
--- Индексы таблицы `subjects`
---
+-- `subjects`
 ALTER TABLE `subjects`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`) USING BTREE;
 
---
--- Индексы таблицы `subjects_dependency`
---
+-- `subjects_dependency`
 ALTER TABLE `subjects_dependency`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`),
   ADD KEY `owner_id` (`owner_id`),
   ADD KEY `subject_id` (`subject_id`);
 
---
--- Индексы таблицы `wallet_history`
---
+-- `wallet_history`
 ALTER TABLE `wallet_history`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `wallet_info`
---
+-- `wallet_info`
 ALTER TABLE `wallet_info`
   ADD PRIMARY KEY (`id`);
 
---
 -- AUTO_INCREMENT для сохранённых таблиц
---
 
---
 -- AUTO_INCREMENT для таблицы `#custom_app_bigd_strings`
---
 ALTER TABLE `#custom_app_bigd_strings`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT для таблицы `#custom_table_performers_requests`
---
-ALTER TABLE `#custom_table_performers_requests`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- AUTO_INCREMENT для таблицы `app_script_length_stats`
---
 ALTER TABLE `app_script_length_stats`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- AUTO_INCREMENT для таблицы `app_stats`
---
 ALTER TABLE `app_stats`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
+-- AUTO_INCREMENT для таблицы `custom_app_bigd_construction_progress`
+ALTER TABLE `custom_app_bigd_construction_progress`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 -- AUTO_INCREMENT для таблицы `messages`
---
 ALTER TABLE `messages`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- AUTO_INCREMENT для таблицы `pages_categories`
---
 ALTER TABLE `pages_categories`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- AUTO_INCREMENT для таблицы `pages_content`
---
 ALTER TABLE `pages_content`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- AUTO_INCREMENT для таблицы `people`
---
 ALTER TABLE `people`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
 -- AUTO_INCREMENT для таблицы `sanity_apps_table_modules`
---
 ALTER TABLE `sanity_apps_table_modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
 -- AUTO_INCREMENT для таблицы `sanity_prop_apps`
---
 ALTER TABLE `sanity_prop_apps`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
---
 -- AUTO_INCREMENT для таблицы `shop_callback_requests`
---
 ALTER TABLE `shop_callback_requests`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
---
 -- AUTO_INCREMENT для таблицы `shop_goods`
---
 ALTER TABLE `shop_goods`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
---
+-- AUTO_INCREMENT для таблицы `shop_orders`
+ALTER TABLE `shop_orders`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+-- AUTO_INCREMENT для таблицы `shop_order_product_dependency`
+ALTER TABLE `shop_order_product_dependency`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 -- AUTO_INCREMENT для таблицы `shop_product_description`
---
 ALTER TABLE `shop_product_description`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- AUTO_INCREMENT для таблицы `shop_product_reviews`
---
 ALTER TABLE `shop_product_reviews`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
 -- AUTO_INCREMENT для таблицы `site_reviews`
---
 ALTER TABLE `site_reviews`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- AUTO_INCREMENT для таблицы `subjects`
---
 ALTER TABLE `subjects`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
 -- AUTO_INCREMENT для таблицы `subjects_dependency`
---
 ALTER TABLE `subjects_dependency`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- AUTO_INCREMENT для таблицы `wallet_history`
---
 ALTER TABLE `wallet_history`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- AUTO_INCREMENT для таблицы `wallet_info`
---
 ALTER TABLE `wallet_info`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
---
 -- Ограничения внешнего ключа сохраненных таблиц
---
 
---
 -- Ограничения внешнего ключа таблицы `pages_content`
---
 ALTER TABLE `pages_content`
   ADD CONSTRAINT `pages_content_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `pages_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
---
 -- Ограничения внешнего ключа таблицы `shop_goods`
---
 ALTER TABLE `shop_goods`
   ADD CONSTRAINT `shop_goods_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `subjects` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
---
+-- Ограничения внешнего ключа таблицы `shop_orders`
+ALTER TABLE `shop_orders`
+  ADD CONSTRAINT `shop_orders_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- Ограничения внешнего ключа таблицы `shop_order_product_dependency`
+ALTER TABLE `shop_order_product_dependency`
+  ADD CONSTRAINT `shop_order_product_dependency_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `shop_orders` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `shop_order_product_dependency_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `shop_goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
 -- Ограничения внешнего ключа таблицы `shop_product_reviews`
---
 ALTER TABLE `shop_product_reviews`
   ADD CONSTRAINT `shop_product_reviews_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `shop_goods` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
---
 -- Ограничения внешнего ключа таблицы `site_reviews`
---
 ALTER TABLE `site_reviews`
   ADD CONSTRAINT `site_reviews_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `people` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
---
 -- Ограничения внешнего ключа таблицы `subjects_dependency`
---
 ALTER TABLE `subjects_dependency`
   ADD CONSTRAINT `subjects_dependency_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `subjects_dependency_ibfk_2` FOREIGN KEY (`owner_id`) REFERENCES `people` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;

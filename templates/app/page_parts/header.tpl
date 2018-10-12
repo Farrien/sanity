@@ -5,7 +5,7 @@ defined('SN_Start') or die('Access denied.');
 <!DOCTYPE html>
 <html lang="<?=SITE_LANG?>">
 <head>
-	<?include_once TEMPLATES_DIR . DESIGN_TEMPLATE . 'page_parts/head.tpl'?>
+<?include_once TEMPLATES_DIR . DESIGN_TEMPLATE . 'page_parts/head.tpl'?>
 
 </head>
 <body>
@@ -19,16 +19,17 @@ defined('SN_Start') or die('Access denied.');
 				</a>
 			
 				<div class="menu-list">
+				
 				<?$menulist = include 'menu-list.php';
 				foreach ($menulist AS $link=>$name) {
 					$html = '<div class="san-link"><a href="' . $link . '">' . $name[1] . '</a></div>';
 					if ($perm) {
-						if ($name[0] >= 1) echo $html;
+						if ($name[0] >= 1) echo $html, PHP_EOL;
 					} else {
-						if ($name[0] != 1) echo $html;
+						if ($name[0] != 1) echo $html, PHP_EOL;
 					}
-				}
-				?>
+				}?>
+				
 				</div>
 			</div>
 			

@@ -19,9 +19,9 @@ function redirect($str = '') {
 		$protocol = 'http://';
 	}
 	header('HTTP/1.1 301 Moved Permanently');
-	$str = trim($str, '/');
+#	$str = trim($str, '/');
 	header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . '/' . $str);
-	exit;
+	die;
 }
 
 function CheckAccount() {

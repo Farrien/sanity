@@ -1,11 +1,49 @@
 mr.Dom(function() {
+	initFileForms();
 	initSelectForms();
 	initMaterialButtons();
 	initRangeForms();
 	initSpoilers();
 });
 
+function initFileForms() {
+	if (!document.querySelector('.FileForm')) return;
+	
+	var x = document.querySelectorAll('.FileForm');
+	for (var i = 0; i < x.length; i++) {
+		x[i].innerHTML = '';
+		
+		let paramAccept = x[i].getAttribute('p-accept');
+		let paramName = x[i].getAttribute('p-name');
+		
+		let inputFile = document.createElement('input');
+		inputFile.setAttribute('type', 'file');
+		inputFile.setAttribute('name', paramName);
+		inputFile.setAttribute('class', 'FileForm_input');
+		inputFile.setAttribute('accept', paramAccept);
+		inputFile = x[i].insertBefore(inputFile, x[i].firstChild);
+		
+		let btn = document.createElement('div');
+		btn.setAttribute('class', 'FileForm_button');
+		btn.innerText = 'Upload a photo';
+		btn = x[i].insertBefore(btn, x[i].firstChild);
+		
+		let xi = x[i].querySelector('input[type="file"]')
+		btn.onclick = function() {
+			if (!xi) return;
+			xi.click();
+		};
+		
+		x[i].removeAttribute('p-accept');
+		x[i].removeAttribute('p-name');
+	}
+	
+	console.log('[SN Design] File forms are created.');
+}
+
 function initMaterialButtons() {
+	if (!document.querySelector('.button.xver.material')) return;
+	
 	var x, j, selElmnt, b, c;
 	x = document.querySelectorAll('button.xver.material');
 	for (var i = 0; i < x.length; i++) {
@@ -46,9 +84,12 @@ function initMaterialButtons() {
 			
 		};
 	}
+	console.log('[SN Design] Dynamic light buttons are created.');
 }
 
 function initSelectForms() {
+	if (!document.querySelector('.SelectForm')) return;
+	
 	var x, i, j, selElmnt, a, b, c;
 	x = document.getElementsByClassName("SelectForm");
 	for (i = 0; i < x.length; i++) {
@@ -102,9 +143,13 @@ function initSelectForms() {
 			this.parentNode.querySelectorAll('.Variables')[0].classList.toggle('select-hide');
 		};
 	}
+	
+	console.log('[SN Design] Select forms are created.');
 }
 
 function initRangeForms() {
+	if (!document.querySelector('.RangeForm')) return;
+	
 	var x = document.getElementsByClassName('RangeForm');
 	for (i = 0; i < x.length; i++) {
 		let xrf_vn = x[i].querySelector('.RangeForm_valueNode');
@@ -132,9 +177,13 @@ function initRangeForms() {
 			});
 		}
 	}
+	
+	console.log('[SN Design] Range forms are created.');
 }
 
 function initSpoilers() {
+	if (!document.querySelector('.Spoiler')) return;
+	
 	let x = document.querySelectorAll('.Spoiler');
 	for (var i = 0; i < x.length; i++) {
 		let s = x[i];
@@ -151,6 +200,8 @@ function initSpoilers() {
 			}
 		}
 	}
+	
+	console.log('[SN Design] Spoilers are created.');
 }
 
 function closeAllSelect(elmnt) {

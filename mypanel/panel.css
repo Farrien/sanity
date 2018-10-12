@@ -217,6 +217,8 @@ a:hover .KV-Step .KV-Row:only-child {
 }
 .ui-mypanel-link.flag-back:after {transform: rotate(50deg);}
 
+
+
 .data-box-field {
 	background-color: #fff;
 	border: 1px solid var(--grey-bg);
@@ -370,6 +372,23 @@ a:hover .KV-Step .KV-Row:only-child {
 }
 
 @media screen and (min-width: 768px) {
+	
+	.data-box-choose-photo {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 16px;
+	}
+	
+	.data-box-choose-photo .data-thumbnail-preview {
+		
+	}
+	
+	.data-box-choose-photo .data-thumbnail-preview img {
+		display: block;
+		max-width: 100px;
+		max-height: 100px;
+	}
 	
 	.data-box-textareas {
 		box-sizing: border-box;

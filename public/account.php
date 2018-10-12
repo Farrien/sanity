@@ -1,16 +1,3 @@
-<?
-if (empty($USER['id'])) die('Access denied.');
-
-$id = $USER['id'];
-use Helper\Users;
-use Helper\Userthings;
-$uName = Users::getName($id);
-$uLogin = Users::getLogin($id);
-$tcons = Userthings::GetPasswordChangeTime($id);
-$passwordChangeString = $tcons ? 'Обновлен ' . time_elapsed('@' . $tcons) : 'Никогда не обновлялся';
-
-$userSettings = Users::getPrivateSettings($USER['id']);
-?>
 <div class="primary">
 	<div class="clearFix">
 		<div class="floatContainer">
@@ -74,9 +61,7 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 						<div class="Section-ui-option-row">
 							<div class="__title">Уровень доступа</div>
 							<div class="__val">
-								<div class="ui-set-constant">
-									<?=$USER['privileges']?>
-								</div>
+								<div class="ui-set-constant"><?=$USER['privileges']?></div>
 							</div>
 						</div>
 						<div class="Section-ui-option-row">
@@ -152,6 +137,7 @@ $userSettings = Users::getPrivateSettings($USER['id']);
 		</div>
 	</div>
 </div>
+
 <script>
 SN.UI.ChangePassword = function() {
 	var t = mr.Dom(event.target);

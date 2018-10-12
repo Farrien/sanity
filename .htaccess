@@ -1,5 +1,8 @@
 AddDefaultCharset utf-8
 
+ErrorDocument 404 /errordocument/
+ErrorDocument 403 /errordocument/
+
 <Files *.php>
 	Order Deny,Allow
 	Deny from all

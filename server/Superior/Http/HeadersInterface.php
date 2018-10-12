@@ -3,13 +3,13 @@ namespace Superior\Http;
 
 class HeadersInterface {
 	static private $header = '';
-	static private $statusCode = '200';
+	static private $statusCode = 200;
 	
 	public function set($header) {
 		self::$header = $_SERVER['SERVER_PROTOCOL'] . ' ' . $header;
 	}
 	
-	public function setStatusCode($code) {
+	public function setStatusCode(int $code) {
 		self::$statusCode = $code;
 	}
 	

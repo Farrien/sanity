@@ -1,6 +1,4 @@
-<?
-# Destroy the call if this file called directly
-defined('SN_Start') or die('Access denied.');
+<?php
 
 class ShopBasketClass Extends BaseController {
 	public function ConvertProducts() {
@@ -51,11 +49,14 @@ class ShopBasketClass Extends BaseController {
 				if (--$flag) $_postWhere .= ' OR ';
 			}
 			
-			# Creating new unquie order
+			/*
+			*	Creating new unquie order
+			*/
 			$q = $this->DB->prepare('INSERT INTO shop_orders (client_id, client_phone, added_time) VALUES (?, ?, ?)');
+		//	return $q;
 			$q->execute([$this->CurrentUserID, NULL, $_SERVER['REQUEST_TIME']]);
 			$order_id = $this->DB->lastInsertId();
-			
+			return $order_id;
 			
 			foreach ($list AS $k=>$v) {
 				$q1 = $this->DB->prepare('INSERT INTO shop_order_product_dependency (product_id, order_id, count) VALUES (?, ?, ?)');
