@@ -10,7 +10,7 @@ defined('SN_Start') or die('Access denied.');?>
 <div class="PageHeader"><?=$PageTitle?></div>
 
 <div class="WhiteBlock VerticalSpaces">
-	<form id="shop-product-form">
+	<form id="shop-product-form" enctype="multipart/form-data">
 		<input type="hidden" name="product_id" value="<?=$id?>">
 		<div class="data-box-field">
 			<div class="input-placeholder">Артикуль</div>
@@ -32,17 +32,15 @@ defined('SN_Start') or die('Access denied.');?>
 			<div class="input-placeholder">Цена</div>
 			<input type="text" name="product_cost" value="<?=$cost?>">
 		</div>
+		<div class="field-space"></div>
+		<div class="data-box-choose-photo">
+			<div class="data-thumbnail-preview">
+				<img src="/res/shop/<?=$source_photo?>">
+			</div>
+			<div class="FileForm" p-name="product_photo" p-accept="image/jpeg,image/png"></div>
+		</div>
 	</form>
 
-	<div class="field-space"></div>
-	
-	<div class="data-box-choose-photo">
-		<div class="data-thumbnail-preview">
-			<img src="/res/shop/<?=$source_photo?>">
-		</div>
-		<div class="FileForm" p-name="product_photo" p-accept="image/jpeg,image/png"></div>
-	</div>
-	
 	<div class="field-space"></div>
 </div>
 
@@ -51,8 +49,8 @@ defined('SN_Start') or die('Access denied.');?>
 function local_action_1() {
 	let mw = '?act=core/shop/save';
 	mr.SendForm(mw, '#shop-product-form', function(r) {
-		location.href = '?act=shop/products';
-	//	console.log(r);
+	//	location.href = '?act=shop/products';
+		console.log(r);
 	});
 	return false;
 }

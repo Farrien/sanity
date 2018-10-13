@@ -6,6 +6,8 @@ res/docs/apartments/
 res/shop/
 res/ui/promo/
 res/promo/
+res/tests/
+res/test/
 user_section/
 
 composer.lock

@@ -1243,12 +1243,12 @@ button.whiteBlue {
 
 
 	.FileForm .FileForm_button {
-		
 		background-color: #fff;
 		color: var(--snBlue-color);
 		border: 2px solid var(--snBlue-color);
 		border-radius: 4px;
-		line-height: 32px;
+		line-height: 28px;
+		height: 32px;
 		box-sizing: border-box;
 		font-weight: 600;
 	}

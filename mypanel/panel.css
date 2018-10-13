@@ -377,7 +377,7 @@ a:hover .KV-Step .KV-Row:only-child {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 16px;
+		padding: 4px 16px;
 	}
 	
 	.data-box-choose-photo .data-thumbnail-preview {

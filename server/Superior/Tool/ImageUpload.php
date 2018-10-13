@@ -12,6 +12,27 @@ class ImageUpload {
 	static private $Path = '/';
 	
 	/*
+	*	
+	*/
+	static private $Salt = 'Good Luck';
+	
+	/*
+	*	Helper for re-creating images.
+	*/
+	static private $Gen = false;
+	
+	/*
+	*	...
+	*/
+	static public $ClonedImage;
+	static public $LastUploaded;
+	
+	/*
+	*	File size conditions
+	*/
+	static private $Size = ['min' => 512, 'max' => 2097152];
+	
+	/*
 	*	List of valid mime types
 	*/
 	static private $MIME_Types = array(
@@ -39,8 +60,15 @@ class ImageUpload {
 		self::$Path = $p;
 	}
 	
-	static public function Generator() {
-		
+	static public function setSalt($salt) {
+		self::$Salt = $salt;
+	}
+	
+	static public function Generator($source, $helper = null) {
+		if (is_string($source)) {
+			$source = new ImageResource($source, $helper);
+		}
+		return new ImageGenerator($source);
 	}
 	
 	/*
@@ -51,7 +79,9 @@ class ImageUpload {
 	*
 	*	@return	array	info about new name of uploaded image, dir where it was uploaded
 	*/
-	public function upload(array $file, bool $save_extension = true) {
+	static public function upload(array $file, bool $save_extension = true) {
+		$path = self::$Path;
+		
 		if (!isset($file['error']) || is_array($file['error'])) {
 			throw new Exception('Image uploading provided an error.');
 		}
@@ -72,8 +102,8 @@ class ImageUpload {
 			throw new Exception('No image with given name uploaded.');
 		}
 		
-		$file_size_min = $this->size_min ?: 512; // 512b
-		$file_size_max = $this->size_max ?: 2097152; // 2Mb
+		$file_size_min = self::$Size['min'] ?: 512; // 512b
+		$file_size_max = self::$Size['max'] ?: 2097152; // 2Mb
 		
 		if ($file_size_min > $file_size_max) {
 			throw new Exception('Invalid image size parameters.');
@@ -98,18 +128,25 @@ class ImageUpload {
 			throw new Exception('Uploaded image is damaged.');
 		}
 		
-		$generated_image = $this->generateImg($file);
-		$generated_name = $this->generateName($file);
+		/*
+		*	Check image
+		*/
+		$check = static::checkSource($file);
 		
-		move_uploaded_file($file['tmp_name'], $this->Path . $generated_name);
+		/*
+		*	Adding file extension to the generated name
+		*/
+		$generated_name = static::generateName($file['tmp_name']) . '.' . self::$MIME_Types[$check['mime']][2];
 		
-		$this->lastUploaded = $this->Path . $generated_name;
 		
-		return [
-			'name' => $generated_name,
-			'dir' => $this->Path,
-			'mimetype' => $this->mime
-		];
+		move_uploaded_file($file['tmp_name'], $path . $generated_name);
+		
+		self::$ClonedImage = $Path . $generated_name;
+		
+		
+		self::$LastUploaded = new ImageResource(self::$ClonedImage, $check['mime']);
+		
+		return static::Generator(self::$LastUploaded);
 	}
 	
 	/*
@@ -156,8 +193,10 @@ class ImageUpload {
 		
 	}
 	
-	public function generateImg($image) {
-		// Extracting mime type using getimagesize
+	public function checkSource($image) {
+		/*
+		*	Extracting mime type using getimagesize
+		*/
 		$image_info = getimagesize($image['tmp_name']);
 		if ($image_info === null) {
 			throw new Exception('Uploaded image has invalid size.');
@@ -178,38 +217,25 @@ class ImageUpload {
 			throw new Exception('Unable to generate new image from uploaded image.');
 		}
 
-		// Calling callback(if set) with path of image as a parameter
-		if ($callback !== null) {
-			$callback($reprocessed_image);
-		}
-
 		$image_to_file($reprocessed_image, $image['tmp_name']);
 
-		// Freeing up memory
+		/*
+		*	Freeing up memory
+		*/
 		imagedestroy($reprocessed_image);
 		
-		$this->mime = $mime_type;
+		return ['mime' => $mime_type];
 	}
 	
-	public function generateName($image, $any_word = '') {
-		$salt = $this->salt ?: 'ImageUploadDefaultSalt';
+	static public function generateName($base_word, $any_word = '') {
+		$salt = self::$Salt ?: 'ImageUploadDefaultSalt';
 		
-		$name_water = mb_strtolower($image['tmp_name']) . $_SERVER['REQUEST_TIME'] . $salt;
+		$name_water = mb_strtolower($base_word) . $_SERVER['REQUEST_TIME'] . $salt;
 		
 		$generated = hash_hmac('md5', $name_water, $salt);
 		
-		$generated .= '-v' . $_SERVER['REQUEST_TIME'] . '_' . $any_word;
-		
-		/*
-		*	Adding file extension to the generated name
-		*/
-		$generated .= '.' . self::$MIME_Types[$this->mime][2];
+		$generated .= '-v' . $_SERVER['REQUEST_TIME'] . $any_word;
 		
 		return $generated;
 	}
 }
-
-/*
-*	ImageUpload::Generator()->
-*	ImageUpload::upload($_FILES['pic'], true)->createThumbnail();
-*/
