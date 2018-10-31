@@ -31,6 +31,4 @@ defined('SN_Start') or die('Access denied.');?>
 	text-align: center;
 }
 
-
-
 </style>

@@ -73,41 +73,48 @@ input[type="checkbox"]:disabled {
 }
 
 button {
-	background-color: #ffffff;
 	border: none;
-	border-radius: 4px;
-	box-shadow: inset 0px 0px 0px rgba(0,0,0,0), 0px 4px 4px rgba(0,0,0,0.24), 0 0 4px rgba(0,0,0,0.16);
 	box-sizing: border-box;
-	color: #212121;
 	cursor: pointer;
 	font-size: 13px;
 	font-weight: 600;
-	margin: 0 auto;
-	overflow: hidden;
 	position: relative;
-	text-transform: uppercase;
-	transition: 300ms ease-out;
 	width: 100%;
-	max-width: 240px;
 	height: 32px;
 }
 
-button:hover {
+button:disabled {
+	cursor: no-drop;
+}
+
+button.pack8YCrQDvNgwYsZ_Aq9uUI5PCA {
+	text-transform: uppercase;
+	transition: 300ms ease-out;
+	color: #212121;
+	margin: 0 auto;
+	overflow: hidden;
+	max-width: 240px;
+	background-color: #ffffff;
+	border-radius: 4px;
+	box-shadow: inset 0px 0px 0px rgba(0,0,0,0), 0px 4px 4px rgba(0,0,0,0.24), 0 0 4px rgba(0,0,0,0.16);
+	
+}
+
+button.pack8YCrQDvNgwYsZ_Aq9uUI5PCA:hover {
 	box-shadow: inset 0px 0px 0px rgba(0,0,0,0), 0px 2px 2px rgba(0,0,0,0.24);
 }
 
-button:active {
+button.pack8YCrQDvNgwYsZ_Aq9uUI5PCA:active {
 	box-shadow: inset 4px 4px 8px rgba(0,0,0,0.24), 0px 2px 2px rgba(0,0,0,0.0);
 }
 
-button:disabled {
+button.pack8YCrQDvNgwYsZ_Aq9uUI5PCA:disabled {
 	background-color: #f2f2f2;
 	color: #999;
-	cursor: no-drop;
 	box-shadow: inset 0px 0px 0px rgba(0,0,0,0), 0px 2px 2px rgba(0,0,0,0.24);
 }
 
-button:disabled:hover {
+button.pack8YCrQDvNgwYsZ_Aq9uUI5PCA:disabled:hover {
 	box-shadow: none !important;
 }
 
@@ -152,7 +159,7 @@ p {
 	-webkit-margin-after: 0;
 	margin: 0;
 	padding: 1px 0;
-	margin: 8pt 0 8pt;
+	margin: 8px;
 }
 
 p:first-child {
@@ -164,9 +171,14 @@ span {
 }
 
 ul, ol {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 	-webkit-margin-before: 0;
 	-webkit-margin-after: 0;
 	-webkit-padding-start: 0;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
 }
 
 ul.items-list {
@@ -192,10 +204,6 @@ ul.list li {
 }
 
 ul.v-menu {
-	margin: 0;
-	list-style-type: none;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
 	overflow: hidden;
 }
 
@@ -449,7 +457,7 @@ body.popbox-opened-state {
 }
 
 .PageHeader + .PageInner {
-	padding-top: 16pt;
+	padding-top: 16px;
 }
 
 .mobile-pads {
@@ -840,7 +848,7 @@ button.xsimple:disabled:hover {color: #999;}
 }
 	
 .sidePads {
-	padding-bottom: 8pt;
+	padding-bottom: 8px;
 }
 	
 .sidePads:last-child {
@@ -849,7 +857,7 @@ button.xsimple:disabled:hover {color: #999;}
 
 .nicePads {
 	box-sizing: border-box;
-	padding: 0 8pt 8pt;
+	padding: 0 8px 8px;
 }
 
 .nicePads.slighter {
@@ -862,7 +870,7 @@ button.xsimple:disabled:hover {color: #999;}
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	padding: 0 16pt;
+	padding: 0 16px;
 	box-sizing: border-box;
 	font-size: 16px;
 	line-height: 150%;
@@ -926,15 +934,15 @@ button.xsimple:disabled:hover {color: #999;}
 }
 
 .littleSpace {
-	padding: 8pt 0 0 !important;
+	padding: 8px 0 0 !important;
 }
 
 .littleSpace.double {
-	padding: 16pt 0 0 !important;
+	padding: 16px 0 0 !important;
 }
 
 .VerticalSpace {
-	padding: 16pt 0;
+	padding: 16px 0;
 }
 
 .sectionName {
@@ -959,7 +967,7 @@ button.xsimple:disabled:hover {color: #999;}
 	word-wrap: break-word;
 	min-height: 24px;
 	line-height: 24px;
-	padding-bottom: 16pt;
+	padding-bottom: 16px;
 }
 
 .Pages-Content {
@@ -972,10 +980,10 @@ button.xsimple:disabled:hover {color: #999;}
 	letter-spacing: -0.1px;
 }
 
-.Pages-Content p {text-indent: 16pt;}
-.Pages-Content p:last-child {margin-bottom: 16pt;}
+.Pages-Content p {text-indent: 16px;}
+.Pages-Content p:last-child {margin-bottom: 16px;}
 .Pages-Content ul, .Pages-Content ol {
-	margin-left: 16pt;
+	margin-left: 16px;
 }
 
 .Pages-Content a {
@@ -1137,7 +1145,7 @@ button.xsimple:disabled:hover {color: #999;}
 	
 	
 
-	p {margin: 12px 0 12px;}
+	p {margin: 12px 0;}
 
 	.Pages-Content p {text-indent: 16px;}
 	.Pages-Content p:last-child {margin-bottom: 24px;}

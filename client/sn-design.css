@@ -1038,8 +1038,9 @@ label.xver:last-child span.for-xver {
 }
 
 button.xver.material {
+	overflow: hidden;
 	position: relative;
-	transition: 200ms box-shadow ease;
+	transition: 200ms box-shadow ease, 250ms background linear;
 	box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 2px 2px rgba(0,0,0,0.08), -4px 4px 6px rgba(0,0,0,0.12), 4px 4px 6px rgba(0,0,0,0.12);
 }
 
@@ -1303,6 +1304,7 @@ button.whiteBlue {
 
 	button.xver.material:active {
 		box-shadow: 0 2px 2px rgba(0,0,0,0.24), 0 2px 1px rgba(0,0,0,0.16), 0px 2px 3px rgba(0,0,0,0.16), 0px 2px 3px rgba(0,0,0,0.16);
+		background-color: #000066;
 	}
 
 	button.xver.material .light, button.xver.material .lightCenter {
@@ -1334,13 +1336,15 @@ button.whiteBlue {
 	}
 
 	button.xver.material:active .light {
-		background-color: rgba(0,0,0,0.24);
+	/*	background-color: rgba(0,0,0,0.24);*/
 		transition: 200ms background linear, 200ms opacity ease, 150ms transform ease;
+		transform: scale(0.65);
 	}
 
 	button.xver.material:active .lightCenter {
-		background-color: rgba(0,0,0,0.32);
+	/*	background-color: rgba(0,0,0,0.32);*/
 		transition: 200ms background linear, 200ms opacity ease, 150ms transform ease;
+		transform: scale(0.85);
 	}
 	
 	.RangeForm .RangeForm_input input[type="range"]::-webkit-slider-thumb {

@@ -42,10 +42,11 @@ function initFileForms() {
 }
 
 function initMaterialButtons() {
-	if (!document.querySelector('.button.xver.material')) return;
-	
 	var x, j, selElmnt, b, c;
 	x = document.querySelectorAll('button.xver.material');
+	
+	if (!x) return;
+	
 	for (var i = 0; i < x.length; i++) {
 		x[i].innerHTML = '<div class="inner">' + x[i].innerHTML + '</div>';
 		

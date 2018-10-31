@@ -1,1 +1,0 @@
-<meta shttp-equiv='refresh' content='0; url=your_redirect_page.html'/>

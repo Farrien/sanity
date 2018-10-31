@@ -94,7 +94,7 @@ if (Handler::hasController()) {
 	$return = $controllerInstance->$methodName();
 	
 	$headerCode = Response::Status()->getStatusCode();
-
+	
 	if ($return) {
 		header($_SERVER['SERVER_PROTOCOL'] . ' ' . $headerCode);
 		if ($return instanceof Superior\Component\View) {
