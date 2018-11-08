@@ -242,7 +242,11 @@ function makeShort($str, $l = 100) {
 
 }
 
-// FROM https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
+/*
+*
+*	FROM https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago
+*
+*/
 function time_elapsed($time, $full = false) {
 	date_default_timezone_set('UTC');
 	$now = new DateTime;

@@ -87,13 +87,30 @@ if (is_array($vc_result)) {
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 use Superior\Response;
 if (Handler::hasController()) {
 	$controllerInstance = new Handler::$cm[0];
 	$methodName = Handler::$cm[1];
 	$return = $controllerInstance->$methodName();
-	
-	$headerCode = Response::Status()->getStatusCode();
 	
 	if ($return) {
 		header($_SERVER['SERVER_PROTOCOL'] . ' ' . $headerCode);
@@ -133,4 +150,3 @@ if (Handler::hasController()) {
 	if (!$OwnOrigin) include_once TEMPLATES_DIR . DESIGN_TEMPLATE . TPL_PAGE_FOOTER;
 	$SN->RegisterScriptDuration();
 }
-#echo (microtime(true) - $ScriptStartTime);

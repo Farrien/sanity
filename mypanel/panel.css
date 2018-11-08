@@ -51,6 +51,16 @@ body.grey {background-color: #f2f2f2;}
 	padding-top: calc((100vw - (64px * 4)) / 5);*/
 }
 
+.uip-AppsList h1 {
+	line-height: 1;
+	height: 0;
+	font-size: 16px;
+	font-weight: 600;
+	display: block;
+	margin-left: -32px;
+	overflow: visible;
+}
+
 .uip-AppsRow {
 	display: flex;
 	justify-content: space-evenly;
@@ -224,7 +234,7 @@ a:hover .KV-Step .KV-Row:only-child {
 	border: 1px solid var(--grey-bg);
 	border-width: 1px 0;
 	position: relative;
-	height: 38px;
+	box-sizing: border-box;
 }
 
 .data-box-field + .data-box-field {
@@ -279,6 +289,14 @@ a:hover .KV-Step .KV-Row:only-child {
 }
 
 .data-box-field input[type="text"]:focus {background-color: #f2f2f2;}
+
+.data-box-field textarea {
+	border: none;
+	line-height: 24px;
+	padding: 7px 16px;
+	font-family: 'SanFranciscoText', 'SanFranciscoDisplay';
+	letter-spacing: -.02em;
+}
 
 .data-box-field input[type="checkbox"] {
 	position: absolute;
@@ -369,6 +387,37 @@ a:hover .KV-Step .KV-Row:only-child {
 }
 .data-box-textareas .data-box-textbox {
 	margin: 8px 0;
+}
+
+.items-listing {
+	background-color: var(--grey-bg);
+	padding: 1px 0;
+}
+
+.items-listing .listing-item {
+	background-color: #fff;
+	margin: 1px 0;
+}
+
+.items-listing .listing-item:first-child {
+	margin-top: 0;
+}
+
+.items-listing .listing-item:last-child {
+	margin-bottom: 0;
+}
+
+.items-listing .listing-item .item-link {
+	line-height: 40px;
+	font-size: 16px;
+}
+
+.items-listing .listing-item a:hover .item-link {
+	color: var(--snBlue-color);
+}
+
+.item-link.naturalize {
+	padding: 0 16px;
 }
 
 @media screen and (min-width: 768px) {

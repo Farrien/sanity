@@ -7,8 +7,8 @@ abstract class MyPanelController {
 	protected $output = 'index';
 	protected $model;
 	
-	function __construct($req) {
-		$this->request = $req;
+	function __construct() {
+		$this->request = $_REQUEST;
 	}
 	
 	public function data() {

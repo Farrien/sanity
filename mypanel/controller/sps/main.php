@@ -1,6 +1,4 @@
-<?
-# Destroy the call if this file called directly
-defined('SN_Start') or die('Access denied.');
+<?php
 
 class SpsMainController extends MyPanelController {
 	public function start() {

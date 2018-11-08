@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <?include_once $_SERVER['DOCUMENT_ROOT'] . '/templates/SanityHeaderLayout.php';?>
+
 </head>
-<body <?echo $uniqueBGStyle ? 'class="grey"' : ''?>>
+<body>
 <div class="PanelPageWrap">
 	<div class="PanelSidebarNav">
 		<div class="LogoSpace">
@@ -27,15 +29,14 @@
 	</div>
 	<div class="uip-WindowSpace">
 		<div class="uip-TopPart">
-			<div class="uip-ScreenName"><?=$ScreenTitle?></div>
+			<div class="uip-ScreenName"><?=$PageTitle?></div>
 		</div>
 		<div class="PageContent">
 			<div class="ContentLayout">
-				<?
-				$extractedVariablesCount = extract($CONTROLLER->data(), EXTR_OVERWRITE);
-				$view = $_SERVER['DOCUMENT_ROOT'] . '/mypanel/view/' . $RO['SECTION'] . '/' . $CONTROLLER->view() . '.php';
-				include $view;
-				?>
+				<?$view = 'view/' . $RO['SECTION'] . '/' . $controllerInstance->view() . '.php';
+				if (file_exists($view)) {
+					include $view;
+				}?>
 			</div>
 		</div>
 	</div>

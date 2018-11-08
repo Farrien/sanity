@@ -16,7 +16,8 @@ $perm = false;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php';
 
-$SN = new SN\Management;
+use SN\Management as SN;
+$SN = new SN;
 
 $request = new Superior\Request;
 $get = $request::Data();
@@ -30,9 +31,34 @@ $SN->ext('database');
 $SN->ext('util');
 $SN->ext('permission-control');
 
-$ScreenTitle = APP_NAME;
+$PageTitle = APP_NAME;
 
-# Checking access permissions
+$SN->ext('server/load/MyPanelController');
+$SN->ext('server/load/MyPanelModel');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+*
+*	Check if a user has permissions to visit a targeted page
+*
+*/
 Permission::init($USER['privileges']);
 $SN->ext('web/access');
 
@@ -46,27 +72,26 @@ $RO['SECTION'] = strtolower($a1[0]);
 $RO['SCRIPT']= strtolower($a1[1]);
 $RO['ACTION']= $a1[2] ?: 'start';
 
-$SN->ext('server/load/MyPanelController');
-$SN->ext('server/load/MyPanelModel');
-$conSOURCE_ = $_SERVER['DOCUMENT_ROOT'] . '/mypanel/controller/' . $RO['SECTION'] . '/' . $RO['SCRIPT'] . '.php';
-if (file_exists($conSOURCE_)) {
-	require_once $conSOURCE_;
-	$classname = $RO['SECTION'] . $RO['SCRIPT'] . 'Controller';
+$ControllerSource = $_SERVER['DOCUMENT_ROOT'] . '/mypanel/controller/' . $RO['SECTION'] . '/' . $RO['SCRIPT'] . '.php';
+if (file_exists($ControllerSource)) {
+	require_once $ControllerSource;
+	$ClassName = $RO['SECTION'] . $RO['SCRIPT'] . 'Controller';
 	$METHOD = $RO['ACTION'];
-	$CONTROLLER = new $classname($_REQUEST, $pdo_db);
+	/*
+	$CONTROLLER = new $ClassName($_REQUEST);
 	if (is_callable(array($CONTROLLER, $METHOD))) {
 		$CONTROLLER->$METHOD($_REQUEST);
 		$ConIsPresent = true;
 		$useController = true;
 	}
-#	$PageTitle = $CONTROLLER->getTitle();
-	$PageTitle = $CONTROLLER->pageTitle;
+	*/
 } else {
 	header('HTTP/1.1 301 Moved Permanently');
 	header('Location: //' . $_SERVER['HTTP_HOST'] . '/mypanel/');
-	exit;
+	die;
 }
 
+/*
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	header('HTTP/1.1 200 OK');
 	header('Content-Type: text/html');
@@ -79,4 +104,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	if ($useController) {
 		include 'body.tpl';
 	}
+}
+*/
+
+use Superior\Response;
+if (file_exists($ControllerSource)) {
+	$ClassName = $RO['SECTION'] . $RO['SCRIPT'] . 'Controller';
+	$controllerInstance = new $ClassName;
+	$return = $controllerInstance->$METHOD();
+	
+	if ($return || is_null($return)) {
+		header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
+		if ($return instanceof MyPanelController || is_null($return)) {
+			header('Content-Type: text/html; charset=utf-8');
+			$PageTitle = $controllerInstance->pageTitle;
+			$extractedVariablesCount = extract($controllerInstance->data(), EXTR_OVERWRITE);
+			include 'body.tpl';
+		}
+		if (is_array($return)) {
+			header('Content-Type: application/json; charset=utf-8');
+			echo json_encode($return);
+		}
+		if (is_string($return)) {
+			header('Content-Type: text/plain; charset=utf-8');
+			echo $return;
+		}
+	} else {
+		header($_SERVER['SERVER_PROTOCOL'] . ' 500');
+	}
+	
+	die;
+} else {
+	header('HTTP/1.1 301 Moved Permanently');
+	header('Location: //' . $_SERVER['HTTP_HOST'] . '/mypanel/');
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	die;
 }
