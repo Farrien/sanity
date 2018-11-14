@@ -1,6 +1,7 @@
 <?php
 
 spl_autoload_register(function($class) {
+	$class = preg_replace('/\\\\/', '/', $class);
 	$file = $_SERVER['DOCUMENT_ROOT'] . '/server/' . $class . '.php';
 	if (is_readable($file)) {
 		require_once $file;

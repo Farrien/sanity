@@ -182,11 +182,29 @@ function GetTranslatedString($str, $add) {
 			'Авг',
 			'Сен',
 			'Окт',
-			'Нбр',
+			'Ноя',
 			'Дек',
 		);
 		return ($a[intval($add)-1]);
 	}
+}
+
+function GetMonthName($m) {
+	$a = array(
+		'Январь',
+		'Февраль',
+		'Март',
+		'Апрель',
+		'Май',
+		'Июнь',
+		'Июль',
+		'Август',
+		'Сентябрь',
+		'Октябрь',
+		'Ноябрь',
+		'Декабрь',
+	);
+	return ($a[intval($m)-1]);
 }
 
 function normalizeCost($i = '000') {

@@ -8,6 +8,7 @@ res/promo/
 res/tests/
 res/test/
 user_section/
+images/
 
 composer.lock
 client/promo.css

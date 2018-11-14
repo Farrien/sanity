@@ -30,7 +30,7 @@ class ImageUpload {
 	/*
 	*	File size conditions
 	*/
-	static private $Size = ['min' => 512, 'max' => 2097152];
+	static private $Size = ['min' => 512, 'max' => 4194304];
 	
 	/*
 	*	List of valid mime types
@@ -64,12 +64,6 @@ class ImageUpload {
 		self::$Salt = $salt;
 	}
 	
-	static public function Generator($source, $helper = null) {
-		if (is_string($source)) {
-			$source = new ImageResource($source, $helper);
-		}
-		return new ImageGenerator($source);
-	}
 	
 	/*
 	*	Main method to upload image (securely)
@@ -91,7 +85,7 @@ class ImageUpload {
 
 			case UPLOAD_ERR_NO_FILE : throw new Exception('Uploaded image not found.');
 
-			case UPLOAD_ERR_INI_SIZE : 
+			case UPLOAD_ERR_INI_SIZE : throw new Exception('Uploaded image is empty.');
 
 			case UPLOAD_ERR_FORM_SIZE : throw new Exception('Exceeded size of image.');
 
@@ -103,7 +97,7 @@ class ImageUpload {
 		}
 		
 		$file_size_min = self::$Size['min'] ?: 512; // 512b
-		$file_size_max = self::$Size['max'] ?: 2097152; // 2Mb
+		$file_size_max = self::$Size['max'] ?: 4194304; // 2Mb
 		
 		if ($file_size_min > $file_size_max) {
 			throw new Exception('Invalid image size parameters.');
@@ -136,17 +130,19 @@ class ImageUpload {
 		/*
 		*	Adding file extension to the generated name
 		*/
-		$generated_name = static::generateName($file['tmp_name']) . '.' . self::$MIME_Types[$check['mime']][2];
+		$base_hashed_name = static::generateName($file['tmp_name']);
+		$generated_name = $base_hashed_name . '.' . self::$MIME_Types[$check['mime']][2];
 		
 		
-		move_uploaded_file($file['tmp_name'], $path . $generated_name);
+		if (!move_uploaded_file($file['tmp_name'], $path . $generated_name)) {
+			throw new Exception('Unable to move uploaded image.');
+		}
 		
-		self::$ClonedImage = $Path . $generated_name;
+		self::$ClonedImage = $path . $generated_name;
 		
+		self::$LastUploaded = new ImageResource(self::$ClonedImage, $base_hashed_name, $path, $check['mime']);
 		
-		self::$LastUploaded = new ImageResource(self::$ClonedImage, $check['mime']);
-		
-		return static::Generator(self::$LastUploaded);
+		return new ImageGenerator(self::$LastUploaded);
 	}
 	
 	/*
@@ -154,17 +150,14 @@ class ImageUpload {
 	*	Use this method after upload method only to be safe
 	*
 	*/
-	public function createThumbnail($save_extension = true) {
+	static public function createThumbnail($width, $height, $save_extension = true) {
+		$generated_name = static::generateName($file, '_thumbnail');
 		
-		$generated_name = $this->generateName($file, 'thumbnail');
+		$im = self::$MIME_Types[self::$LastUploaded->mimetype][0](self::$LastUploaded->path);
 		
-		$im = self::$MIME_Types[$this->mime][0]($this->lastUploaded);
-		
-		$thumb_metric = 300; # px
+		$thumb_metric = 150;
 		$srcWidth = imagesx($im);
 		$srcHeight = imagesy($im);
-		
-	#	echo "Исходный размер {$srcWidth}x{$srcHeight}", "\n";
 		
 		$create = imagecreatetruecolor($thumb_metric, $thumb_metric);
 		
@@ -177,20 +170,14 @@ class ImageUpload {
 		if ($srcWidth == $srcHeight) 
 			imagecopyresampled($create, $im, 0, 0, 0, 0, $thumb_metric, $thumb_metric, $srcWidth, $srcWidth);
 		
-		imagejpeg($create, $this->Path . $generated_name, 90);
-	#	imagejpeg($im, $userdataPath.'original/compressed-'.$clearName.'.jpg', 50);
-		
+		imagejpeg($create, self::$Path . $generated_name . '.' . self::$MIME_Types[self::$LastUploaded->mimetype][2], 90);
 		imagedestroy($create);
-		# Удаление
-	#	unlink ($userdataPath.'original/up'.$clearName.'.jpg');
-	
-		return new ImageGenerator();
+		
 		return [
 			'name' => $generated_name,
-			'dir' => $this->Path,
-			'mimetype' => $this->mime
+			'dir' => self::$Path,
+			'mimetype' => self::$LastUploaded->mimetype
 		];
-		
 	}
 	
 	public function checkSource($image) {

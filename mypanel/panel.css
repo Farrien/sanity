@@ -187,6 +187,10 @@ a:hover .KV-Step .KV-Row:only-child {
 	padding: 0 8px;
 }
 
+.ui-mypanel-link.red-sense {
+	color: #cc3333;
+}
+
 .ui-mypanel-link {
 	display: inline-block;
 	color: var(--brandColor);
@@ -199,9 +203,6 @@ a:hover .KV-Step .KV-Row:only-child {
 	padding: 0 14px 0 0;
 	overflow: visible !important;
 	position: relative;
-}
-.ui-mypanel-link:hover {
-	color: var(--brandColor);
 }
 
 .ui-mypanel-link.flag-back {padding: 0 0 0 14px;}
@@ -394,6 +395,13 @@ a:hover .KV-Step .KV-Row:only-child {
 	padding: 1px 0;
 }
 
+.items-listing .empty-list {
+	background-color: #fff;
+	line-height: 40px;
+	padding: 0 16px;
+	color: rgba(0,0,0,0.5);
+}
+
 .items-listing .listing-item {
 	background-color: #fff;
 	margin: 1px 0;
@@ -421,6 +429,20 @@ a:hover .KV-Step .KV-Row:only-child {
 }
 
 @media screen and (min-width: 768px) {
+	.ui-mypanel-link {
+		transition: 100ms ease all;
+	}
+	.ui-mypanel-link.red-sense:hover {color: #cc3333;}
+	.ui-mypanel-link:hover {
+		color: var(--brandColor);
+		background-color: #f2f2f2;
+		transition: 300ms linear all;
+	}
+	.ui-mypanel-link:active {
+		color: #444;
+		background-color: #ccc;
+		transition: 500ms ease all;
+	}
 	
 	.data-box-choose-photo {
 		display: flex;
@@ -430,7 +452,11 @@ a:hover .KV-Step .KV-Row:only-child {
 	}
 	
 	.data-box-choose-photo .data-thumbnail-preview {
-		
+		width: 100px;
+		height: 100px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
 	}
 	
 	.data-box-choose-photo .data-thumbnail-preview img {

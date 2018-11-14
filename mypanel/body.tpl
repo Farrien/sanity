@@ -15,8 +15,6 @@
 			<div class="">
 				<nav class="PanelUI-Navigation">
 					<a href="/mypanel/">Главная</a>
-					<a href="/mypanel/">Статистика</a>
-					<a href="/mypanel/">Настройки</a>
 				</nav>
 			</div>
 		</div>
@@ -33,10 +31,12 @@
 		</div>
 		<div class="PageContent">
 			<div class="ContentLayout">
+			
 				<?$view = 'view/' . $RO['SECTION'] . '/' . $controllerInstance->view() . '.php';
 				if (file_exists($view)) {
 					include $view;
 				}?>
+				
 			</div>
 		</div>
 	</div>

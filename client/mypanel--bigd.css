@@ -1,0 +1,52 @@
+.construction-time-head {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 20px;
+	margin: 10px 0;
+	padding: 0 16px;
+}
+.construction-details {
+	padding: 8px 16px;
+}
+
+.construction-details .construction-details-wrap {
+	width: 100%;
+	display: flex;
+}
+
+.construction-details .construction-details-wrap .right-side-controls {
+	width: calc(100% - 72px);
+	box-sizing: border-box;
+	padding-left: 16px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	text-align: right;
+}
+
+.construction-details .construction-details-wrap .right-side-controls a {
+	display: block;
+	line-height: 24px;
+}
+
+
+a.red-sense {
+	color: #cc3333;
+}
+
+.construction-details .c-d-image {
+	width: 72px;
+	height: 72px;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 992px) {
+	
+
+	.construction-details .construction-details-wrap .right-side-controls a:hover {
+		text-decoration: underline;
+	}
+
+}

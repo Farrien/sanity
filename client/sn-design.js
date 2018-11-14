@@ -15,12 +15,14 @@ function initFileForms() {
 		
 		let paramAccept = x[i].getAttribute('p-accept');
 		let paramName = x[i].getAttribute('p-name');
+		let paramEventChange = x[i].getAttribute('p-action');
 		
 		let inputFile = document.createElement('input');
 		inputFile.setAttribute('type', 'file');
 		inputFile.setAttribute('name', paramName);
 		inputFile.setAttribute('class', 'FileForm_input');
 		inputFile.setAttribute('accept', paramAccept);
+		inputFile.setAttribute('onchange', paramEventChange);
 		inputFile = x[i].insertBefore(inputFile, x[i].firstChild);
 		
 		let btn = document.createElement('div');
