@@ -6,9 +6,12 @@ abstract class MyPanelController {
 	public $pageTitle = 'Default title';
 	protected $output = 'index';
 	protected $model;
+	protected $coreName;
+	protected $attachedAugment;
 	
 	function __construct() {
 		$this->request = $_REQUEST;
+		unset($this->request['act']);
 	}
 	
 	public function data() {
@@ -26,6 +29,8 @@ abstract class MyPanelController {
 			require_once $modelSOURCE;
 			$m = $a[0] . $a[1] . 'Model';
 			$this->model = new $m();
+		} else {
+			throw new \Exception('Model (in ' . $modelSOURCE . ') not found');
 		}
 	}
 	

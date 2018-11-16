@@ -70,8 +70,8 @@ $RO['ACT'] = trim(prepareString($_REQUEST['act']), '/');
 $ACT = explode('/', $RO['ACT']);
 $RO['SECTION']	= strtolower($ACT[0]);
 $RO['SCRIPT']	= strtolower($ACT[1]);
-$RO['ACTION']	= $ACT[2] ?: 'start';
-$_REQUEST['AUGMENT'] = strtolower($ACT[3]) ?: NULL;
+$RO['ACTION']	= isset($ACT[2]) ? strtolower($ACT[2]) : 'start';
+$_REQUEST['AUGMENT'] = isset($ACT[3]) ? strtolower($ACT[3]): NULL;
 
 $ControllerSource = $_SERVER['DOCUMENT_ROOT'] . '/mypanel/controller/' . $RO['SECTION'] . '/' . $RO['SCRIPT'] . '.php';
 if (file_exists($ControllerSource)) {

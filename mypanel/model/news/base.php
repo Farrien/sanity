@@ -1,8 +1,8 @@
 <?php
 
 class NewsBaseModel extends MyPanelModel {
-	public function add($title, $content, $short, $author = NULL) {
-		$q = $this->pdo->prepare('INSERT INTO `news` (title, content, short_desc, author_id, added_time) VALUES(?, ?, ?, ?, ?)');
+	public function add($title, $content, $short, $photo = NULL, $author = NULL) {
+		$q = $this->pdo->prepare('INSERT INTO `news` (title, content, short_desc, author_id, image_res, added_time) VALUES(?, ?, ?, ?, ?, ?)');
 		
 		try {
 			$this->pdo->beginTransaction();
@@ -11,6 +11,7 @@ class NewsBaseModel extends MyPanelModel {
 				prepareString($content),
 				prepareString($short),
 				$author,
+				$photo,
 				$_SERVER['REQUEST_TIME']
 			]);
 			$this->pdo->commit();
@@ -19,22 +20,42 @@ class NewsBaseModel extends MyPanelModel {
 		}
 	}
 	
-	public function update($id, $title, $content, $short, $author = NULL) {
-		$q = $this->pdo->prepare('UPDATE `news` SET title=?, content=?, short_desc=?, author_id=?, updated_time=? WHERE id=?');
-		
-		try {
-			$this->pdo->beginTransaction();
-			$q->execute([
-				prepareString($title),
-				prepareString($content),
-				prepareString($short),
-				(int) $author,
-				$_SERVER['REQUEST_TIME'],
-				$id
-			]);
-			$this->pdo->commit();
-		} catch (Exception $e) {
-			$this->pdo->rollBack();
+	public function update($id, $title, $content, $short, $photo = NULL, $author = NULL) {
+		if (is_null($photo)) {
+			$q = $this->pdo->prepare('UPDATE `news` SET title=?, content=?, short_desc=?, author_id=?, updated_time=? WHERE id=?');
+			
+			try {
+				$this->pdo->beginTransaction();
+				$q->execute([
+					prepareString($title),
+					prepareString($content),
+					prepareString($short),
+					(int) $author,
+					$_SERVER['REQUEST_TIME'],
+					$id
+				]);
+				$this->pdo->commit();
+			} catch (Exception $e) {
+				$this->pdo->rollBack();
+			}
+		} else {
+			$q = $this->pdo->prepare('UPDATE `news` SET title=?, content=?, short_desc=?, author_id=?, updated_time=?, image_res=? WHERE id=?');
+			
+			try {
+				$this->pdo->beginTransaction();
+				$q->execute([
+					prepareString($title),
+					prepareString($content),
+					prepareString($short),
+					(int) $author,
+					$_SERVER['REQUEST_TIME'],
+					$photo,
+					$id
+				]);
+				$this->pdo->commit();
+			} catch (Exception $e) {
+				$this->pdo->rollBack();
+			}
 		}
 	}
 	

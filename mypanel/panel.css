@@ -187,11 +187,11 @@ a:hover .KV-Step .KV-Row:only-child {
 	padding: 0 8px;
 }
 
-.ui-mypanel-link.red-sense {
+.ui-mypanel-link.red-sense, .ui-mypanel-a.red-sense {
 	color: #cc3333;
 }
 
-.ui-mypanel-link {
+.ui-mypanel-link, .ui-mypanel-a {
 	display: inline-block;
 	color: var(--brandColor);
 	background: none;
@@ -263,7 +263,7 @@ a:hover .KV-Step .KV-Row:only-child {
 	color: #444;
 }
 
-.data-box-field a {
+.data-box-field a, .ui-mypanel-a {
 	display: block;
 	font-size: 100%;
 	font-weight: 400;
@@ -273,6 +273,9 @@ a:hover .KV-Step .KV-Row:only-child {
 	line-height: 38px;
 	white-space: nowrap;
 }
+
+.ui-mypanel-a {padding: 0;}
+
 .data-box-field a:before {right: 16px; bottom: calc(50% + 2px);}
 .data-box-field a:after {right: 16px; bottom: calc(50% - 2px);}
 
@@ -420,25 +423,45 @@ a:hover .KV-Step .KV-Row:only-child {
 	font-size: 16px;
 }
 
-.items-listing .listing-item a:hover .item-link {
-	color: var(--snBlue-color);
-}
-
 .item-link.naturalize {
 	padding: 0 16px;
 }
 
+.listing-item .user-item {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 16px;
+	font-size: 16px;
+}
+
+.user-item .user-photo {
+	height: 40px;
+	width: 40px;
+	background-size: cover;
+	background-position: center;
+	border-radius: 4px;
+}
+
+.listing-item .any-id-item .item-id {
+	line-height: 40px;
+	background-color: #f5f3f8;
+	width: 40px;
+	text-align: center;
+	font-size: 16px;
+	overflow: hidden;
+}
+
 @media screen and (min-width: 768px) {
-	.ui-mypanel-link {
+	.ui-mypanel-link, .ui-mypanel-a {
 		transition: 100ms ease all;
 	}
-	.ui-mypanel-link.red-sense:hover {color: #cc3333;}
-	.ui-mypanel-link:hover {
+	.ui-mypanel-link.red-sense:hover, .ui-mypanel-a.red-sense:hover {color: #cc3333;}
+	.ui-mypanel-link:hover, .ui-mypanel-a:hover {
 		color: var(--brandColor);
 		background-color: #f2f2f2;
 		transition: 300ms linear all;
 	}
-	.ui-mypanel-link:active {
+	.ui-mypanel-link:active, .ui-mypanel-a:active {
 		color: #444;
 		background-color: #ccc;
 		transition: 500ms ease all;
@@ -583,6 +606,15 @@ a:hover .KV-Step .KV-Row:only-child {
 		text-align: left;
 		padding-left: 32px;
 		color: #999;
+	}
+	
+	.CompanyLogo {
+		background-image: url('/res/ui/company-logo.svg');
+		background-repeat: no-repeat;
+		background-size: contain;
+		width: 100%;
+		height: 24px;
+		margin: 10px 0;
 	}
 	
 	.uip-TopPart {display: none;}

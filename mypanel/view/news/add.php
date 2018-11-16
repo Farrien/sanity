@@ -1,6 +1,7 @@
 <div class="PageHeader"><?=$PageTitle?></div>
 <div class="WhiteBlock VerticalSpaces">
 	<form id="form-news-add">
+	
 	<?foreach ($input_rows as $v) {
 		if ($v['type'] == 'textarea') {?>
 		
@@ -17,6 +18,12 @@
 		
 		<?}
 	}?>
+	
+		<div class="data-box-choose-photo">
+			<div id="flag-thumb-preview" class="data-thumbnail-preview" style="background-image: url('<?=$photo_res?>');"></div>
+			<div class="FileForm" p-action="setPreview('#flag-thumb-preview', this);" p-name="row_photo" p-accept="image/jpeg,image/png"></div>
+		</div>
+	
 	</form>
 	<div class="field-space"></div>
 	<div class="data-box-field">
@@ -62,4 +69,16 @@ function local_action_1() {
 }
 
 <?}?>
+
+function setPreview(preview_container, input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		
+		reader.onload = function(e) {
+			mr.Dom(preview_container).Object.style.backgroundImage = 'url(' + e.target.result + ')';
+		}
+		
+		reader.readAsDataURL(input.files[0]);
+	}
+}
 </script>

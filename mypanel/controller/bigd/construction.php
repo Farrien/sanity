@@ -1,6 +1,6 @@
 <?php
 
-use Superior\Tool\ImageUpload;;
+use Superior\Tool\ImageUpload;
 
 class BigdConstructionController extends MyPanelController {
 	public function start() {
@@ -31,7 +31,7 @@ class BigdConstructionController extends MyPanelController {
 		$m = $_REQUEST['p_month'] ?: date("n");
 		$y = $_REQUEST['p_year'] ?: date("Y");
 
-		ImageUpload::setPath('/images/construction-progress/', true);
+		ImageUpload::setPath('/images/construction/', true);
 		ImageUpload::setSalt(ENC_SALT);
 		$Image = ImageUpload::upload($_FILES['p_file']);
 		$thumb = $Image->createThumbnail(300, 300)->lastThumb;

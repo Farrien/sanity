@@ -1,8 +1,9 @@
 <?php
 
+use Superior\Tool\ImageUpload;
+
 class NewsMainController extends MyPanelController {
 	public function start() {
-		$this->Model('News/News');
 		$this->pageTitle = 'Новости';
 		
 		$this->Model('News/Base');
@@ -39,6 +40,8 @@ class NewsMainController extends MyPanelController {
 			]
 		];
 		
+		$this->data['photo_res'] = '/res/ui/no-photo-big.png';
+		
 		$this->data['update_state'] = false;
 		if (isset($this->request['AUGMENT'])) {
 			$aug = (int) $this->request['AUGMENT'];
@@ -46,6 +49,7 @@ class NewsMainController extends MyPanelController {
 				$this->Model('News/Base');
 				$m = $this->model->get($aug);
 				if ($m) {
+					$this->data['photo_res'] = $m['image_res'] ? '/images/news/' . $m['image_res'] : '/res/ui/no-photo-big.png';
 					$this->data['input_rows'][0]['value'] = $m['title'];
 					$this->data['input_rows'][1]['value'] = $m['content'];
 					$this->data['input_rows'][2]['value'] = $m['short_desc'];
@@ -79,9 +83,19 @@ class NewsMainController extends MyPanelController {
 		
 		if ($threshold >= 3) return false;
 		
+		
+
+		
 		if (empty($this->request['row_author']) || $this->request['row_author'] == '') $this->request['row_author'] = NULL;
 		
-		$this->model->add($this->request['row_title'], $this->request['row_content'], $this->request['row_short_desc'], $this->request['row_author']);
+		$photo = NULL;
+		if ($_FILES['row_photo']['error'] == 0) {
+			ImageUpload::setPath('/images/news/', true);
+			ImageUpload::setSalt(ENC_SALT);
+			$photo = ImageUpload::upload($_FILES['row_photo'])->getOriginalImageName();
+		}
+		
+		$this->model->add($this->request['row_title'], $this->request['row_content'], $this->request['row_short_desc'], $photo, $this->request['row_author']);
 		
 		return true;
 	}
@@ -101,8 +115,15 @@ class NewsMainController extends MyPanelController {
 		if (empty($this->request['row_short_desc'])) $this->request['row_short_desc'] = '';
 		
 		if (empty($this->request['row_author'])) $this->request['row_author'] = NULL;
+		
+		$photo = NULL;
+		if ($_FILES['row_photo']['error'] == 0) {
+			ImageUpload::setPath('/images/news/', true);
+			ImageUpload::setSalt(ENC_SALT);
+			$photo = ImageUpload::upload($_FILES['row_photo'])->getOriginalImageName();
+		}
 
-		$this->model->update($target_id, $this->request['row_title'], $this->request['row_content'], $this->request['row_short_desc'], $this->request['row_author']);
+		$this->model->update($target_id, $this->request['row_title'], $this->request['row_content'], $this->request['row_short_desc'], $photo, $this->request['row_author']);
 		
 		return true;
 	}

@@ -28,16 +28,16 @@
 <div class="PageHeader">Список фотографий</div>
 <div class="WhiteBlock VerticalSpaces">
 
-	<?$currentYear = '';
-	$currentMonth = '';
+	<?$crntYear = '';
+	$crntMon = '';
 	foreach ($construction_pics AS $v) {?>
 	
-	<?if ($currentMonth != $v['month'] && $currentMonth != '') {?></div><?}?>
+	<?if ($crntMon != $v['month'] && $crntMon != '') echo '</div>';?>
 	
-	<?if ($currentYear != $v['year']) {
-	$currentYear = $v['year'];?><div class="construction-time-head"><?=$v['year']?></div><?}
-	if ($currentMonth != $v['month']) {
-	$currentMonth = $v['month'];?>
+	<?if ($crntYear != $v['year']) {
+	$crntYear = $v['year'];?><div class="construction-time-head"><?=$v['year']?></div><?}
+	if ($crntMon != $v['month']) {
+	$crntMon = $v['month'];?>
 	
 	<div class="construction-time-head"><?=GetMonthName($v['month'])?></div>
 	<div class="items-listing">

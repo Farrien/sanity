@@ -14,7 +14,7 @@
 		foreach($news as $v) {?>
 
 		<div class="listing-item">
-			<a href="?act=news/main/info/<?=$v['id']?>">
+			<a href="?act=news/main/info/<?=$v['id']?>" class="ui-mypanel-a">
 				<div class="item-link naturalize"><?=$v['title']?></div>
 			</a>
 		</div>

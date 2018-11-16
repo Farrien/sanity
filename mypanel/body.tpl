@@ -18,12 +18,14 @@
 				</nav>
 			</div>
 		</div>
-			<div class="SanityVersion">
-				ver. <?=PATCH_VER?><br>
-				<?=PATCH_NAME?><br>
-				<?=$_SERVER['HTTP_HOST']?><br>
-				<?=APP_NAME?><br>
-			</div>
+		<div class="SanityVersion">
+			ver. <?=PATCH_VER?><br>
+			<?=PATCH_NAME?><br>
+			<?=$_SERVER['HTTP_HOST']?><br>
+			<?=APP_NAME?><br>
+			
+			<div class="CompanyLogo"></div>
+		</div>
 	</div>
 	<div class="uip-WindowSpace">
 		<div class="uip-TopPart">
