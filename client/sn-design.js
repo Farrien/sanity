@@ -16,6 +16,7 @@ function initFileForms() {
 		let paramAccept = x[i].getAttribute('p-accept');
 		let paramName = x[i].getAttribute('p-name');
 		let paramEventChange = x[i].getAttribute('p-action');
+		let paramBtnTxt = x[i].getAttribute('p-text');
 		
 		let inputFile = document.createElement('input');
 		inputFile.setAttribute('type', 'file');
@@ -27,7 +28,7 @@ function initFileForms() {
 		
 		let btn = document.createElement('div');
 		btn.setAttribute('class', 'FileForm_button');
-		btn.innerText = 'Upload a photo';
+		btn.innerText = paramBtnTxt ? paramBtnTxt : 'Upload a photo';
 		btn = x[i].insertBefore(btn, x[i].firstChild);
 		
 		let xi = x[i].querySelector('input[type="file"]')

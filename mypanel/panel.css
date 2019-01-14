@@ -451,6 +451,24 @@ a:hover .KV-Step .KV-Row:only-child {
 	overflow: hidden;
 }
 
+.banks-listing {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.banks-listing .bank-item {
+	padding: 8px;
+}
+
+.bank-cover {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100px;
+	padding-bottom: 100%;
+}
+
 @media screen and (min-width: 768px) {
 	.ui-mypanel-link, .ui-mypanel-a {
 		transition: 100ms ease all;
@@ -465,6 +483,13 @@ a:hover .KV-Step .KV-Row:only-child {
 		color: #444;
 		background-color: #ccc;
 		transition: 500ms ease all;
+	}
+	
+	.data-box-choose-file {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 8px 16px;
 	}
 	
 	.data-box-choose-photo {

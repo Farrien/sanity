@@ -64,8 +64,6 @@ class NewsMainController extends MyPanelController {
 	}
 	
 	public function post() {
-		$this->Model('News/Base');
-		
 		$threshold = 0;
 		
 		if (empty($this->request['row_title'])) {
@@ -83,9 +81,6 @@ class NewsMainController extends MyPanelController {
 		
 		if ($threshold >= 3) return false;
 		
-		
-
-		
 		if (empty($this->request['row_author']) || $this->request['row_author'] == '') $this->request['row_author'] = NULL;
 		
 		$photo = NULL;
@@ -95,6 +90,7 @@ class NewsMainController extends MyPanelController {
 			$photo = ImageUpload::upload($_FILES['row_photo'])->getOriginalImageName();
 		}
 		
+		$this->Model('News/Base');
 		$this->model->add($this->request['row_title'], $this->request['row_content'], $this->request['row_short_desc'], $photo, $this->request['row_author']);
 		
 		return true;

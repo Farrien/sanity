@@ -11,6 +11,8 @@
 	<meta property="og:title" content="<?=SITE_NAME?> — <?=$PageTitle?>">
 	<meta property="og:description" content="">
 	<meta property="og:type" content="website">
+	
+	<link rel="canonical" href="<?=$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>"/>
 
 	<!-- Manifest -->
 	<!--<link rel="manifest" href="manifest.json">-->

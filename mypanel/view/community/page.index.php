@@ -14,7 +14,6 @@
 				</div>
 				<div><?=$v['name']?></div>
 				<div><?=$v['when_joined']?></div>
-				<div></div>
 			</div>
 		</div>
 	

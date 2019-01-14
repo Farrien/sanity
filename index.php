@@ -42,6 +42,12 @@ $SN->ext('web/handles');
 *	Simple fake routing
 *
 */
+if ($_SERVER['REQUEST_URI'] == '/index/' || $_SERVER['REQUEST_URI'] == '/index.php' || $_SERVER['REQUEST_URI'] == '//') {
+	header('HTTP/1.1 301 Moved Permanently');
+	header('Location: /');
+	die;
+}
+
 if (empty($_REQUEST['p'])) {
 	$_REQUEST['p'] = 'index';
 }
