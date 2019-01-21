@@ -63,7 +63,7 @@ class Request {
 	}
 	
 	/*
-	Request::Require() позволяет включать дополнительные параметры в URL как обязательные. 
+		Request::Require() позволяет включать дополнительные параметры в URL как обязательные. 
 		@param augmentationName		|| Название аугментации в виде строки или регулярного выражения
 		@param defaultValue			|| 
 		
@@ -90,6 +90,14 @@ class Request {
 			}
 		}
 		
+	}
+	
+	static public function CheckAugments() {
+		return static::$constructor->isAugmentsPresent();
+	}
+	
+	static public function GetAugments() {
+		return static::$constructor->getAugments();
 	}
 	
 }
